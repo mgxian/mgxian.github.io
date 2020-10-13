@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://mgxian.dev/posts/56/</loc>
+    
+    <lastmod>2020-10-13T09:52:13.798Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://mgxian.dev/posts/55/</loc>
     
     <lastmod>2020-02-19T03:28:00.410Z</lastmod>
@@ -30,14 +37,14 @@
   </url>
   
   <url>
-    <loc>https://mgxian.dev/tags/index.html</loc>
+    <loc>https://mgxian.dev/categories/index.html</loc>
     
     <lastmod>2019-12-08T08:10:24.732Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://mgxian.dev/categories/index.html</loc>
+    <loc>https://mgxian.dev/tags/index.html</loc>
     
     <lastmod>2019-12-08T08:10:24.732Z</lastmod>
     
@@ -135,14 +142,14 @@
   </url>
   
   <url>
-    <loc>https://mgxian.dev/posts/45/</loc>
+    <loc>https://mgxian.dev/posts/23/</loc>
     
     <lastmod>2019-12-08T08:10:24.679Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://mgxian.dev/posts/23/</loc>
+    <loc>https://mgxian.dev/posts/45/</loc>
     
     <lastmod>2019-12-08T08:10:24.679Z</lastmod>
     
@@ -184,14 +191,14 @@
   </url>
   
   <url>
-    <loc>https://mgxian.dev/posts/48/</loc>
+    <loc>https://mgxian.dev/posts/43/</loc>
     
     <lastmod>2019-12-08T08:10:24.662Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://mgxian.dev/posts/43/</loc>
+    <loc>https://mgxian.dev/posts/48/</loc>
     
     <lastmod>2019-12-08T08:10:24.662Z</lastmod>
     
@@ -331,13 +338,6 @@
   </url>
   
   <url>
-    <loc>https://mgxian.dev/posts/8/</loc>
-    
-    <lastmod>2019-12-08T08:10:24.621Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://mgxian.dev/posts/11/</loc>
     
     <lastmod>2019-12-08T08:10:24.621Z</lastmod>
@@ -345,9 +345,9 @@
   </url>
   
   <url>
-    <loc>https://mgxian.dev/posts/49/</loc>
+    <loc>https://mgxian.dev/posts/8/</loc>
     
-    <lastmod>2019-12-08T08:10:24.620Z</lastmod>
+    <lastmod>2019-12-08T08:10:24.621Z</lastmod>
     
   </url>
   
@@ -359,14 +359,21 @@
   </url>
   
   <url>
-    <loc>https://mgxian.dev/posts/28/</loc>
+    <loc>https://mgxian.dev/posts/49/</loc>
+    
+    <lastmod>2019-12-08T08:10:24.620Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://mgxian.dev/posts/17/</loc>
     
     <lastmod>2019-12-08T08:10:24.619Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://mgxian.dev/posts/17/</loc>
+    <loc>https://mgxian.dev/posts/28/</loc>
     
     <lastmod>2019-12-08T08:10:24.619Z</lastmod>
     
