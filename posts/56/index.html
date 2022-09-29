@@ -93,20 +93,20 @@
 
 
 
-<meta name="description" content="本篇文章主要介绍了我们在生产环境使用 Istio 碰到的坑">
+<meta name="description" content="我们从迁移服务到 Istio 到现在稳定运行已经有半年时间。虽然在使用 Istio 的过程中，整体过程还算顺利，但是我们还是碰到了一些大大小小的问题，我们把这些问题以及解决方法做一个总结，希望能帮助到有意愿使用 Istio 的团队和个人。 我们碰到的 Istio 使用问题：  k8s 中 service 的命名端口问题 gRPC 服务端使用 TLS 证书问题 服务没有监听 127.0.0.1问题">
 <meta name="keywords" content="service mesh,istio">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Istio 上线可能会遇到的坑总结">
 <meta property="og:url" content="https://mgxian.dev/posts/56/index.html">
 <meta property="og:site_name" content="mgxian&#39;s blog">
-<meta property="og:description" content="本篇文章主要介绍了我们在生产环境使用 Istio 碰到的坑">
+<meta property="og:description" content="我们从迁移服务到 Istio 到现在稳定运行已经有半年时间。虽然在使用 Istio 的过程中，整体过程还算顺利，但是我们还是碰到了一些大大小小的问题，我们把这些问题以及解决方法做一个总结，希望能帮助到有意愿使用 Istio 的团队和个人。 我们碰到的 Istio 使用问题：  k8s 中 service 的命名端口问题 gRPC 服务端使用 TLS 证书问题 服务没有监听 127.0.0.1问题">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://mgxian.dev/posts/56/Istio-上线可能会遇到的坑总结/mesh-traffic.png">
-<meta property="og:updated_time" content="2020-10-13T09:52:13.798Z">
+<meta property="og:image" content="https://mgxian.dev/posts/56/mesh-traffic.png">
+<meta property="og:updated_time" content="2020-10-14T04:30:44.418Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Istio 上线可能会遇到的坑总结">
-<meta name="twitter:description" content="本篇文章主要介绍了我们在生产环境使用 Istio 碰到的坑">
-<meta name="twitter:image" content="https://mgxian.dev/posts/56/Istio-上线可能会遇到的坑总结/mesh-traffic.png">
+<meta name="twitter:description" content="我们从迁移服务到 Istio 到现在稳定运行已经有半年时间。虽然在使用 Istio 的过程中，整体过程还算顺利，但是我们还是碰到了一些大大小小的问题，我们把这些问题以及解决方法做一个总结，希望能帮助到有意愿使用 Istio 的团队和个人。 我们碰到的 Istio 使用问题：  k8s 中 service 的命名端口问题 gRPC 服务端使用 TLS 证书问题 服务没有监听 127.0.0.1问题">
+<meta name="twitter:image" content="https://mgxian.dev/posts/56/mesh-traffic.png">
 
 
 
@@ -410,14 +410,26 @@
       
 
       
-        <p>本篇文章主要介绍了我们在生产环境使用 Istio 碰到的坑</p>
+        <p>我们从迁移服务到 Istio 到现在稳定运行已经有半年时间。虽然在使用 Istio 的过程中，整体过程还算顺利，但是我们还是碰到了一些大大小小的问题，我们把这些问题以及解决方法做一个总结，希望能帮助到有意愿使用 Istio 的团队和个人。</p>
+<p>我们碰到的 Istio 使用问题：</p>
+<ul>
+<li>k8s 中 service 的命名端口问题</li>
+<li>gRPC 服务端使用 TLS 证书问题</li>
+<li>服务没有监听 127.0.0.1问题</li>
+<li>HTTP 1.0 协议问题</li>
+<li>由 keepalive 导致的偶发 503</li>
+<li>Proxy 与应用的启动顺序不固定</li>
+<li>路由域名冲突问题</li>
+<li>Istio 导致 PV 挂载问题</li>
+<li>Headless 服务问题</li>
+</ul>
 <a id="more"></a>
 <h3 id="k8s-中-service-的命名端口问题"><a href="#k8s-中-service-的命名端口问题" class="headerlink" title="k8s 中 service 的命名端口问题"></a>k8s 中 service 的命名端口问题</h3><p>service 使用命名端口<br><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Service</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">my-service</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line"><span class="attr">  selector:</span></span><br><span class="line"><span class="attr">    app:</span> <span class="string">MyApp</span></span><br><span class="line"><span class="attr">  ports:</span></span><br><span class="line"><span class="attr">    - name:</span> <span class="string">http</span></span><br><span class="line"><span class="attr">      protocol:</span> <span class="string">TCP</span></span><br><span class="line"><span class="attr">      port:</span> <span class="number">80</span></span><br><span class="line"><span class="attr">      targetPort:</span> <span class="number">9376</span></span><br></pre></td></tr></table></figure></p>
 <p>Istio 实现了 HTTP 和 HTTP2 流量的自动探测，当服务没有使用命名端口时候，并且开启了流量自动探测功时（默认开启），Istio 可以进行自动的流量探测来识别协议。但是如果你使用了命名端口，但是指定错了协议，那就会导致服务无法正常访问，通常会得到 connection reset 的错误。</p>
 <p>具体支持协议的类型，以及自动探测相关文档可以参考<a href="https://istio.io/latest/docs/ops/configuration/traffic-management/protocol-selection/" target="_blank" rel="noopener">Istio 协议选择</a></p>
 <h3 id="gRPC-服务端使用-TLS-问题"><a href="#gRPC-服务端使用-TLS-问题" class="headerlink" title="gRPC 服务端使用 TLS 问题"></a>gRPC 服务端使用 TLS 问题</h3><p>当你有服务使用 gRPC 协议并且使用 TLS 证书时，你需要把服务的协议类型命名为 https 或者 tls ，而不能直接使用 grpc ，具体问题可参考<a href="https://github.com/istio/istio/issues/16282#issuecomment-665349098" target="_blank" rel="noopener">Istio issue</a> </p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Service</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">my-grpc-service-with-tls</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line"><span class="attr">  selector:</span></span><br><span class="line"><span class="attr">    app:</span> <span class="string">MyApp</span></span><br><span class="line"><span class="attr">  ports:</span></span><br><span class="line"><span class="attr">    - name:</span> <span class="string">https</span></span><br><span class="line"><span class="attr">      protocol:</span> <span class="string">TCP</span></span><br><span class="line"><span class="attr">      port:</span> <span class="number">80</span></span><br><span class="line"><span class="attr">      targetPort:</span> <span class="number">9376</span></span><br></pre></td></tr></table></figure>
-<h3 id="服务没有监听-127-0-0-1-问题"><a href="#服务没有监听-127-0-0-1-问题" class="headerlink" title="服务没有监听 127.0.0.1 问题"></a>服务没有监听 127.0.0.1 问题</h3><p><img src="/posts/56/./Istio-上线可能会遇到的坑总结/mesh-traffic.png" alt=""></p>
+<h3 id="服务没有监听-127-0-0-1-问题"><a href="#服务没有监听-127-0-0-1-问题" class="headerlink" title="服务没有监听 127.0.0.1 问题"></a>服务没有监听 127.0.0.1 问题</h3><p><img src="/posts/56/mesh-traffic.png" alt=""></p>
 <p>如上图所示，当服务 A 访问服务 B 时，实际上流量是先达到服务 A 的 Proxy 上的，然后再到服务 B 的 Proxy 上的，然后服务 B 上的 Proxy 会访问本地 127.0.0.1 地址对应的端口。如果服务 B 没有监听 127.0.0.1 地址上的对应端口，就会导致服务 B 无法自动被访问，出现 connection refused 的情况。</p>
 <p>迁移 zookeeper 或者 redis 到 Istio 中时，就会碰到类似问题，官方有专门的<a href="https://istio.io/latest/faq/applications/#redis" target="_blank" rel="noopener">FAQ 说明</a></p>
 <h3 id="HTTP-1-0-协议问题"><a href="#HTTP-1-0-协议问题" class="headerlink" title="HTTP 1.0 协议问题"></a>HTTP 1.0 协议问题</h3><p>由于 Istio 不支持 HTTP 1.0 版本的协议，所以当客户端在 Istio 集群中使用 HTTP 1.0 协议时，就会出现无法正常访问的情况。比如当使用 Nginx 作了代理时，默认情况下会使用 HTTP 1.0 协议，访问 Nginx 时，就会出现 503 无法正常访问的情况。具体问题可见<a href="https://istio.io/v1.1/help/ops/traffic-management/troubleshooting/#envoy-won-t-connect-to-my-http-1-0-service" target="_blank" rel="noopener">官方帮助文档</a></p>
@@ -431,6 +443,9 @@
 <h3 id="路由域名冲突问题"><a href="#路由域名冲突问题" class="headerlink" title="路由域名冲突问题"></a>路由域名冲突问题</h3><p>某些版本的 Istio 当出现域名冲突时，会停止更新路由，导致路由不正常，集群无法正常提供服务。比如当配置了相同域名的 service 和 serviceentry 时</p>
 <h3 id="Istio-导致-PV-挂载问题"><a href="#Istio-导致-PV-挂载问题" class="headerlink" title="Istio 导致 PV 挂载问题"></a>Istio 导致 PV 挂载问题</h3><p>在 Istio 1.5 版本之后，加入了<a href="https://istio.io/latest/docs/ops/best-practices/security/#configure-third-party-service-account-tokens" target="_blank" rel="noopener">third party service account tokens</a> 来增强 Proxy 到控制平面的认证。但是由于<a href="https://github.com/kubernetes/kubernetes/issues/57923" target="_blank" rel="noopener">k8s 的 bug</a> ，导致 Istio 使用了另一个方式绕过这个 bug ，但是这就导致了另外一个问题。由于使用 fsGroup ，会导致每次挂载 PV 时，都要修改整个 PV 中的文件权限，当文件比较多时，就可能会导致挂载超时，无法成功挂载 PV，问题可见<a href="https://github.com/istio/istio/issues/22025" target="_blank" rel="noopener">Istio issue</a>。不管使用的是<code>third-party-jwt</code>还是<code>first-party-jwt</code>，都会有该问题。</p>
 <p>我之前的解决方案是使用<code>first-party-jwt</code>，并且注释了 Istio 代码中强制插入 fsGroup 的代码，重新编译了 pilot 镜像，替换了官方的镜像。</p>
+<h3 id="Headless-服务问题"><a href="#Headless-服务问题" class="headerlink" title="Headless 服务问题"></a>Headless 服务问题</h3><p>Istio 默认情况下会开启服务间的兼容模式的 mTLS，即服务可以支持 mTLS 的方式访问，也可以使用 plain 流量访问。当两个服务服务都部署在 Istio 集群中时，会默认使用 mTLS 方式访问，当 Istio 集群中服务访问没有部署在 Istio 集群中的服务时，默认使用 plain 流量访问。但是由于 Istio 1.6 之前的版本对于 headless 服务支持不够完善，导致部署在 Istio 集群中的服务无法访问没有部署在 Istio 集群中的 headless 服务，访问时会出现 connection reset 的错误。排查后发现是由于 Istio 把集群中访问 headless 服务的路由规则设置成了只使用 mTLS 方式访问，所以导致了访问 Istio 集群外的 headless 服务出现问题。</p>
+<p>具体分析可见<a href="https://cloud.tencent.com/developer/article/1700748" target="_blank" rel="noopener">Istio 运维实战系列（2）：让人头大的『无头服务』-上</a></p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>以上这些问题都是我们在生产环境碰到的问题，有一些是我们自己的使用方式问题，还有一些是 Istio 自身的问题，甚至还有一些是 k8s 的问题，不过我们都找到了还不错的解决方法，希望以后 Istio 能越来越好用稳定。</p>
 
       
     </div>
@@ -484,6 +499,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/57/" rel="prev" title="对软件开发中需求的思考">
+                对软件开发中需求的思考 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -555,7 +574,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">56</span>
+                <span class="site-state-item-count">57</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -623,7 +642,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#k8s-中-service-的命名端口问题"><span class="nav-number">1.</span> <span class="nav-text">k8s 中 service 的命名端口问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gRPC-服务端使用-TLS-问题"><span class="nav-number">2.</span> <span class="nav-text">gRPC 服务端使用 TLS 问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#服务没有监听-127-0-0-1-问题"><span class="nav-number">3.</span> <span class="nav-text">服务没有监听 127.0.0.1 问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP-1-0-协议问题"><span class="nav-number">4.</span> <span class="nav-text">HTTP 1.0 协议问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#由-keepalive-导致的偶发-503"><span class="nav-number">5.</span> <span class="nav-text">由 keepalive 导致的偶发 503</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Proxy-与应用的启动顺序不固定"><span class="nav-number">6.</span> <span class="nav-text">Proxy 与应用的启动顺序不固定</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#路由域名冲突问题"><span class="nav-number">7.</span> <span class="nav-text">路由域名冲突问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Istio-导致-PV-挂载问题"><span class="nav-number">8.</span> <span class="nav-text">Istio 导致 PV 挂载问题</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#k8s-中-service-的命名端口问题"><span class="nav-number">1.</span> <span class="nav-text">k8s 中 service 的命名端口问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gRPC-服务端使用-TLS-问题"><span class="nav-number">2.</span> <span class="nav-text">gRPC 服务端使用 TLS 问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#服务没有监听-127-0-0-1-问题"><span class="nav-number">3.</span> <span class="nav-text">服务没有监听 127.0.0.1 问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP-1-0-协议问题"><span class="nav-number">4.</span> <span class="nav-text">HTTP 1.0 协议问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#由-keepalive-导致的偶发-503"><span class="nav-number">5.</span> <span class="nav-text">由 keepalive 导致的偶发 503</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Proxy-与应用的启动顺序不固定"><span class="nav-number">6.</span> <span class="nav-text">Proxy 与应用的启动顺序不固定</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#路由域名冲突问题"><span class="nav-number">7.</span> <span class="nav-text">路由域名冲突问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Istio-导致-PV-挂载问题"><span class="nav-number">8.</span> <span class="nav-text">Istio 导致 PV 挂载问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Headless-服务问题"><span class="nav-number">9.</span> <span class="nav-text">Headless 服务问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">10.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>
@@ -646,7 +665,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2020</span>
+  <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
