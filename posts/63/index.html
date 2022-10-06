@@ -77,7 +77,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="sre,sli,slo,error budget," />
+  <meta name="keywords" content="develop,agile," />
 
 
 
@@ -93,18 +93,100 @@
 
 
 
-<meta name="description" content="衡量指标 可用性：成功请求数 / 总请求数 P90响应时间：服务的请求响应时间90线 P99响应时间：服务的请求响应时间99线 只有以上指标全部满足，本周期内的服务稳定性才算达成 指标计算规则 可用性 对于一般基于 HTTP 协议的服务，采用 HTTP 响应码来作为衡量可用性的指标，响应码由 Istio 统一收集，计算公式如下： 可用性 = 非5xx响应码请求总数 / 总请求数 对于其他特殊服务，">
-<meta name="keywords" content="sre,sli,slo,error budget">
+<meta name="description" content="起步 概览 什么是用户故事 用户故事描述了对用户、系统或者软件购买者有价值的功能，用户故事由三个方面组成 书面的故事描述，用来做计划和作为提示 有关故事的对话，用于具体描述故事细节 验收测试，用于表达故事细节且可用于确定故事如何才算完成   3C 卡片（card） 对话（conversation） 确认（confirmation）   卡片代表客户需求而不是记录需求，卡片包含故事的文字描述，然而">
+<meta name="keywords" content="develop,agile">
 <meta property="og:type" content="article">
-<meta property="og:title" content="服务稳定性衡量指标">
+<meta property="og:title" content="用户故事与敏捷方法">
 <meta property="og:url" content="https://mgxian.dev/posts/63/index.html">
 <meta property="og:site_name" content="mgxian&#39;s blog">
-<meta property="og:description" content="衡量指标 可用性：成功请求数 / 总请求数 P90响应时间：服务的请求响应时间90线 P99响应时间：服务的请求响应时间99线 只有以上指标全部满足，本周期内的服务稳定性才算达成 指标计算规则 可用性 对于一般基于 HTTP 协议的服务，采用 HTTP 响应码来作为衡量可用性的指标，响应码由 Istio 统一收集，计算公式如下： 可用性 = 非5xx响应码请求总数 / 总请求数 对于其他特殊服务，">
+<meta property="og:description" content="起步 概览 什么是用户故事 用户故事描述了对用户、系统或者软件购买者有价值的功能，用户故事由三个方面组成 书面的故事描述，用来做计划和作为提示 有关故事的对话，用于具体描述故事细节 验收测试，用于表达故事细节且可用于确定故事如何才算完成   3C 卡片（card） 对话（conversation） 确认（confirmation）   卡片代表客户需求而不是记录需求，卡片包含故事的文字描述，然而">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2022-10-06T08:53:06.230Z">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/7bab9a51-3c50-44e0-868b-18a42bcca16c-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/205cf7cf-ff80-4a74-aaf9-f82b0bff7bfe-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/4e34f0ea-0812-48f3-afbd-4fb7d007b5a0-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/64b7ddaa-b027-44b5-9931-59b1c3f9b788-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/cab21d15-c2a0-47b5-a936-3f1079d2cd00-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/56f984f0-677f-4c5c-9466-476ceb7d65d3-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/b5d91fb0-b5dd-4ca4-bed2-263d775e2700-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/7b9b5371-d485-4b46-b6ad-fbf66be540d5-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/93a2e0d9-69f2-4a7a-8103-a80629dd01d1-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/8265c353-e3cc-4f43-8a56-cbffc71f6084-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/14eae139-4f60-4092-bbc7-cd0bdfb02dd8-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/0c9a2522-92cd-4482-a3a6-099682e4a6c0-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/f70f4b55-77c4-43a9-8fea-199fe59dbc2a-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/4000e168-d934-4dec-ba37-9c55b12d19dc-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/3cc905a5-8d73-48f8-89eb-c29cca7a7231-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/a9f03d23-214f-48b6-a3b4-7086d403c45e-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/105523a8-bc93-4b7e-9846-9cc668758abf-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/87636b74-6526-42e9-bf7d-62d11d148c37-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/f5f182a1-ad27-4952-b82f-7edb4789a439-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/bc65f823-2b39-4d9c-940e-29e8d1e94237-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/b34c91b5-260e-42a6-bde6-02b129ad6184-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/83f37da2-3758-4727-bf26-55d996ccbcec-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/d3e3a857-1342-432d-b9ad-22b6c419f0fa-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/111c6322-7c83-4904-882c-8c23d4ad4bb2-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/71e393d2-4b9d-4a10-99c7-a29b537e8854-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/37222145-da98-45aa-bd14-78427cfd957a-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/8f1da66d-d864-4f03-87ed-c1e929171f9e-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/3efb8982-2180-4934-9e9f-c9926b062d70-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/83c3ab64-3e2d-46bd-ad4d-73417cc90b74-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/c8f9d849-f65e-4feb-a741-d9ba1986eda6-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/e1b4161d-10cb-4a42-97c4-179d6bfca3de-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/decc3937-60a2-45e7-8f8a-977e57f8fd15-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/79b9f2a3-a78c-4486-b381-6381b5ed9297-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/bed94cb1-e5ad-4234-a7ac-41e843dbb88f-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/b06c0491-4a60-49ff-88c6-670c0035a9ce-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/a95bccdb-af52-4514-996b-676783f060d8-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/188215a4-82b9-4315-a180-d4fc47f0b038-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/9c5af194-9590-42b7-a372-0e2ba26854db-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/f2aa8615-1d86-4f75-ac09-de6a08b33817-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/621b2ed1-227f-4c1e-ab01-ed83ff261621-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/48c94269-00d6-422c-81f1-9a959d5c5ca6-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/0195b1ae-166f-4f51-9435-12b1a0757c48-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/870f62d8-d6b2-41ff-9c9b-d9cf83984d76-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/d915ccce-4d7b-4fb3-b9fa-14d443031573-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/78823ae3-c3ee-4d00-a1eb-89f62767279f-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/67a34783-b1f7-4930-82f7-82dcdcbe7007-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/1fd36441-ccba-4d2c-98e4-975d47a354e2-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/9b6458d9-5c89-447c-a47f-05b17ff60c42-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/5eeae64e-32c0-4989-954f-31d608369a2d-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/f5c2ec16-0c98-45ce-93ac-e30e688530e1-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/8b918011-fa63-40ac-845f-5e13eaa637a7-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/d02198aa-85c2-4776-9d55-24e3c758f808-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/c40bcf83-1df2-4f80-9052-5947f1f6b7e9-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/16e88c68-2d68-44d4-b3b6-062aaf1fac35-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/c6c44786-f20b-4ae8-87c1-82645ac8ef9e-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/0f11bd20-43a0-450e-8121-727a780e8df4-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/37dfeef2-73b7-4567-a55a-94f7be35eeae-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/5d741c75-3329-4ea5-bcfd-0e87c7b73f2c-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/54eab900-ba95-4d29-8dde-f62d85339369-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/2ab59b17-640b-47ae-8470-22ec493629c3-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/6d6187f3-18b7-4e5c-800e-f41a904aaad7-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/4476e49c-c9de-4372-b06f-f431efadad1e-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/32e789d5-c791-4637-ae4c-071331089ec4-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/63964ffc-458a-4940-94eb-1f6ba6f00507-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/238d2805-0c4a-4b56-987b-94dd447ca4e3-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/13ea6fcb-77e3-44ca-95b7-34108631202d-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/cc2e0284-903e-43d5-abeb-d32b8539f9f1-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/4a712b2e-3b0e-4f30-af43-03d48060c165-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/ca1fe4e0-1139-41db-9912-6f96cd95b50d-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/e6ebc20d-a608-41d7-9c14-3dfac809a8ad-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/4e484ef4-05e5-4537-8406-96cef2c78bd6-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/1db51f03-29c8-4b07-b46c-f994598f9e5a-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/aab3e284-5a50-4196-bccf-cd6dde31e08d-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/04411caa-8f63-4773-a31f-cefbea20a8de-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/83b9f8b3-fe59-41ee-af87-259887f9c1e2-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/573f5be1-3256-403b-9a51-44c5f0ad519e-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/6ef2b859-4567-4190-b6b9-0b5acb1f4fdc-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/d386eaa0-7dfd-4d2c-a7f1-71f39ab1c73b-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/4b0966d3-4d3f-4048-851a-3cc456912e83-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/40b83906-8cce-4d5c-b624-abc444af86be-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/7089c3fb-de4f-4dbd-a057-b8d804e9559e-156946.jpg">
+<meta property="og:updated_time" content="2022-10-06T10:46:30.900Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="服务稳定性衡量指标">
-<meta name="twitter:description" content="衡量指标 可用性：成功请求数 / 总请求数 P90响应时间：服务的请求响应时间90线 P99响应时间：服务的请求响应时间99线 只有以上指标全部满足，本周期内的服务稳定性才算达成 指标计算规则 可用性 对于一般基于 HTTP 协议的服务，采用 HTTP 响应码来作为衡量可用性的指标，响应码由 Istio 统一收集，计算公式如下： 可用性 = 非5xx响应码请求总数 / 总请求数 对于其他特殊服务，">
+<meta name="twitter:title" content="用户故事与敏捷方法">
+<meta name="twitter:description" content="起步 概览 什么是用户故事 用户故事描述了对用户、系统或者软件购买者有价值的功能，用户故事由三个方面组成 书面的故事描述，用来做计划和作为提示 有关故事的对话，用于具体描述故事细节 验收测试，用于表达故事细节且可用于确定故事如何才算完成   3C 卡片（card） 对话（conversation） 确认（confirmation）   卡片代表客户需求而不是记录需求，卡片包含故事的文字描述，然而">
+<meta name="twitter:image" content="https://api2.mubu.com/v3/document_image/7bab9a51-3c50-44e0-868b-18a42bcca16c-156946.jpg">
 
 
 
@@ -138,7 +220,7 @@
 
 
 
-  <title>服务稳定性衡量指标 | mgxian's blog</title>
+  <title>用户故事与敏捷方法 | mgxian's blog</title>
   
 
 
@@ -328,7 +410,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">服务稳定性衡量指标</h2>
+          <h2 class="post-title" itemprop="name headline">用户故事与敏捷方法</h2>
         
 
         <div class="post-meta">
@@ -363,8 +445,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/运维/" itemprop="url" rel="index">
-                    <span itemprop="name">运维</span>
+                  <a href="/categories/开发/" itemprop="url" rel="index">
+                    <span itemprop="name">开发</span>
                   </a>
                 </span>
 
@@ -397,29 +479,701 @@
       
 
       
-        <p>衡量指标</p>
-<p>可用性：成功请求数 / 总请求数</p>
-<p>P90响应时间：服务的请求响应时间90线</p>
-<p>P99响应时间：服务的请求响应时间99线</p>
-<p>只有以上指标全部满足，本周期内的服务稳定性才算达成</p>
-<p>指标计算规则</p>
-<p>可用性</p>
-<p>对于一般基于 HTTP 协议的服务，采用 HTTP 响应码来作为衡量可用性的指标，响应码由 Istio 统一收集，计算公式如下：</p>
-<p>可用性 = 非5xx响应码请求总数 / 总请求数</p>
-<p>对于其他特殊服务，可能需要服务主动暴露相关指标，然后监控系统收集处理</p>
-<p>P90响应时间</p>
-<p>通过使用 Istio 提供的响应时间指标，统计计算 P90 响应时间，由于 Prometheus 的指标问题，得到的 P90 可能不是非常的精确，但是不影响指标计算</p>
-<p>P99响应时间</p>
-<p>与计算 P90 响应时间类似</p>
-<p>衡量周期</p>
-<p>服务稳定性会定期评估，一般会每1周，每4周各进行评估一次</p>
-<p>注意事项</p>
-<p>服务响应码</p>
-<p>当服务异常时或者强依赖的服务异常时，在响应请求时，请注意设置正确的 5xx 响应码，而不要像正常的请求一样响应 2xx 响应码，这样会导致可用性计算不准确，监控系统无法及时发现问题，无法及时报警，只能等到用户投诉反馈才能发现问题</p>
-<p>附录</p>
-<p>Google 服务稳定性常用指标标准</p>
-<p><a href="https://sre.google/workbook/slo-document/" target="_blank" rel="noopener">slo-document</a></p>
-<p><a href="https://sre.google/workbook/implementing-slos/" target="_blank" rel="noopener">implementing-slos</a></p>
+        <ul>
+<li>起步<ul>
+<li>概览<ul>
+<li>什么是用户故事<ul>
+<li>用户故事描述了对用户、系统或者软件购买者有价值的功能，用户故事由三个方面组成<ul>
+<li>书面的故事描述，用来做计划和作为提示</li>
+<li>有关故事的对话，用于具体描述故事细节</li>
+<li>验收测试，用于表达故事细节且可用于确定故事如何才算完成</li>
+</ul>
+</li>
+<li>3C<ul>
+<li>卡片（card）</li>
+<li>对话（conversation）</li>
+<li>确认（confirmation）</li>
+</ul>
+</li>
+<li>卡片代表客户需求而不是记录需求，卡片包含故事的文字描述，然而需求细节要在“对话”中获得，并在“确认”部分得以记录<a id="more"></a></li>
+<li>用户故事示例<ul>
+<li>用户故事只代表对用户有价值的功能<ul>
+<li>用户可以在网站发布简历</li>
+<li>用户可以搜索职位</li>
+<li>公司可以发布新职位</li>
+<li>用户可以限制浏览其简历的人</li>
+</ul>
+</li>
+<li>不理想的用户故事<ul>
+<li>这个软件用C++语言来编写</li>
+<li>程序将通过连接池连接到数据库</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>如果用户故事很大，我们称为史诗故事（Epic），史诗故事可以分解成小故事，例如：用户可以搜索工作，可以分解成如下几个小故事<ul>
+<li>用户可以通过地区、薪水范围、职位、公司名和发布日期之类的属性来搜索工作</li>
+<li>用户可以查看搜索结果中每个工作的信息</li>
+<li>用户可以查看发布工作的公司的详细信息</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>客户团队，客户编写用户故事<ul>
+<li>客户团队可以包括测试人员、产品经理、实际用户和交互设计师</li>
+</ul>
+</li>
+<li>规划发布和迭代<ul>
+<li>客户团队排列故事优先级，放入不同的迭代，进行发布</li>
+</ul>
+</li>
+<li>验收测试<ul>
+<li>衡量故事是否完成</li>
+</ul>
+</li>
+<li>用户故事强调口头沟通，鼓励推迟细节</li>
+<li>小结<img src="https://api2.mubu.com/v3/document_image/7bab9a51-3c50-44e0-868b-18a42bcca16c-156946.jpg" alt=""></li>
+</ul>
+</li>
+<li>编写故事<ul>
+<li>一个优秀的故事应该有如下特点（INVEST原则）<ul>
+<li>独立的（Independent)</li>
+<li>可讨论的（Negotiable）</li>
+<li>对用户或客户有价值的（Valuable）</li>
+<li>可估计的（Estimable）</li>
+<li>小的（Small）</li>
+<li>可测试的（Testable）</li>
+</ul>
+</li>
+<li>独立的<ul>
+<li>尽量避免故事的相互依赖，如果故事间有依赖会影响优先级评估以及故事评估</li>
+<li>如果故事有这依赖，可以做出如下调整<ul>
+<li>合并有依赖的故事</li>
+<li>用一个不同的维度去分割故事</li>
+</ul>
+</li>
+<li>示例：<ul>
+<li>故事<ul>
+<li>公司可以使用 Visa 信用卡对发布的职位进行付费</li>
+<li>公司可以使用万事达信用卡对发布的职位进行付费</li>
+<li>公司可以使用美国运通卡对发布的职位进行付费</li>
+</ul>
+</li>
+<li>假设开发支持第一种信用卡需要3天时间，然后支持第二种信用卡和第三种卡各需要1天时间，因为这些故事有依赖，不知道给每个故事估计多少时间，哪个故事应该是3天</li>
+<li>解决方法<ul>
+<li>合并3个故事为一个故事，合并后只需要5天，完全可行，如果合并后时间远远大于5天，那最好找另外一种维度重新划分故事</li>
+<li>重新划分故事<ul>
+<li>客户可以用一种信用卡支付</li>
+<li>客户可以用另外两种信用卡支付</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>可讨论的<ul>
+<li>故事卡是功能的简短描述，细节将在客户团队和开发团队的讨论中产生，故事卡的作用是提醒客户团队和开发团队在以后需要进行关于需求的对话，它并不是具体的需求本身，一些重要的细节可以记录在故事卡的背面<img src="https://api2.mubu.com/v3/document_image/205cf7cf-ff80-4a74-aaf9-f82b0bff7bfe-156946.jpg" alt=""><img src="https://api2.mubu.com/v3/document_image/4e34f0ea-0812-48f3-afbd-4fb7d007b5a0-156946.jpg" alt=""></li>
+<li>故事卡用于提醒开发人员和客户进行关于需求的讨论<img src="https://api2.mubu.com/v3/document_image/64b7ddaa-b027-44b5-9931-59b1c3f9b788-156946.jpg" alt=""><ul>
+<li>一两句短语，用来提醒开发人员和客户进行对话</li>
+<li>一些注释，用以表明在对话中亟待解决的问题</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>对用户或客户有价值的<ul>
+<li>用户是软件的使用者，客户是购买软件的人</li>
+<li>对客户有价值的故事，而对用户没有价值的故事<img src="https://api2.mubu.com/v3/document_image/cab21d15-c2a0-47b5-a936-3f1079d2cd00-156946.jpg" alt=""></li>
+<li>避免只对开发人员有用的故事<img src="https://api2.mubu.com/v3/document_image/56f984f0-677f-4c5c-9466-476ceb7d65d3-156946.jpg" alt=""></li>
+<li>更好的版本<img src="https://api2.mubu.com/v3/document_image/b5d91fb0-b5dd-4ca4-bed2-263d775e2700-156946.jpg" alt=""></li>
+<li>保证每个故事对客户或用户有价值的最好的方法是让客户来编写故事</li>
+</ul>
+</li>
+<li>可估计的<ul>
+<li>对开发人员来说，能估算故事的大小（至少猜一下），或者把故事变为可用代码的时间量是很重要的，一般有3个原因会导致故事不可估计<ul>
+<li>开发人员缺少领域知识<ul>
+<li>可以与客户一起讨论，没有必要理解所有细节，大概了解故事即可</li>
+</ul>
+</li>
+<li>开发人员缺少技术知识<ul>
+<li>先进行一个快速的探索（spike），然后再评估故事，一个故事变成两个故事，一个快速的探索故事（用来获取足够的信息）和一个故事（真正实现功能）</li>
+</ul>
+</li>
+<li>故事太大了<ul>
+<li>分解成小故事</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>小的<ul>
+<li>故事太大太小，都无助于制订计划</li>
+<li>史诗故事需要分解成更小的故事，合适的故事大小最终取决于团队，它的容量及所使用的技术</li>
+<li>分割故事<ul>
+<li>史诗故事通常分为以下两种<ul>
+<li>复合故事（compound story）</li>
+<li>复杂故事（complex story）</li>
+</ul>
+</li>
+<li>复合故事由多个小故事组成，比如“用户可以发布他的简历”。在做系统初始时，这个故事可能比较恰当，但当开发人员跟客户讨论时，他们发现发布简历包含以下几点<img src="https://api2.mubu.com/v3/document_image/7b9b5371-d485-4b46-b6ad-fbf66be540d5-156946.jpg" alt=""></li>
+<li>太小的故事<img src="https://api2.mubu.com/v3/document_image/93a2e0d9-69f2-4a7a-8103-a80629dd01d1-156946.jpg" alt=""></li>
+<li>合适的故事<img src="https://api2.mubu.com/v3/document_image/8265c353-e3cc-4f43-8a56-cbffc71f6084-156946.jpg" alt=""></li>
+<li>复合故事分解方法<ul>
+<li>按照创建、编辑、删除来分解</li>
+<li>按照数据边界来分解<img src="https://api2.mubu.com/v3/document_image/14eae139-4f60-4092-bbc7-cd0bdfb02dd8-156946.jpg" alt=""></li>
+</ul>
+</li>
+<li>复杂故事是本身就很大且不容易分解的故事，如果一个故事因为不确定性而复杂，可以将它分解成两个用户故事，一个做调研的故事和一个开发故事，可以考虑将两个故事放在不同的迭代里<img src="https://api2.mubu.com/v3/document_image/0c9a2522-92cd-4482-a3a6-099682e4a6c0-156946.jpg" alt=""></li>
+</ul>
+</li>
+<li>合并故事<ul>
+<li>合并非常的故事为一个故事，比如代码 bug、用户界面变更等</li>
+<li>合并成一个在半天或几天完成的故事中，然后命名，放入迭代</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>可测试的<ul>
+<li>故事必须是可以测试的，成功通过了测试可以证明开发人员正确地实现了故事，如果故事不能被测试，开发人员怎么知道他们什么时候才算完成了代码呢？</li>
+<li>只要有可能，尽量把测试自动化</li>
+<li>通常不可测试的故事发生在一些非功能需求上<img src="https://api2.mubu.com/v3/document_image/f70f4b55-77c4-43a9-8fea-199fe59dbc2a-156946.jpg" alt=""></li>
+<li>实际上总有小部分的测试是不能被自动化的</li>
+</ul>
+</li>
+<li>小结<img src="https://api2.mubu.com/v3/document_image/4000e168-d934-4dec-ba37-9c55b12d19dc-156946.jpg" alt=""></li>
+</ul>
+</li>
+<li>用户角色建模<ul>
+<li>不同的用户角色，可能有不同的使用需求</li>
+<li>角色建模步骤<ul>
+<li>通过头脑风暴，列出初始的用户集合</li>
+<li>整理最初的角色集合<img src="https://api2.mubu.com/v3/document_image/3cc905a5-8d73-48f8-89eb-c29cca7a7231-156946.jpg" alt=""></li>
+<li>整合角色<img src="https://api2.mubu.com/v3/document_image/a9f03d23-214f-48b6-a3b4-7086d403c45e-156946.jpg" alt=""></li>
+<li>提炼角色<img src="https://api2.mubu.com/v3/document_image/105523a8-bc93-4b7e-9846-9cc668758abf-156946.jpg" alt=""></li>
+</ul>
+</li>
+<li>两个额外技术<ul>
+<li>虚构人物</li>
+<li>极端人物</li>
+</ul>
+</li>
+<li>小结<img src="https://api2.mubu.com/v3/document_image/87636b74-6526-42e9-bf7d-62d11d148c37-156946.jpg" alt=""></li>
+</ul>
+</li>
+<li>搜集故事<ul>
+<li>方法<ul>
+<li>用户访谈<ul>
+<li>访问不同角色的用户</li>
+<li>开放的问题与背景无关的问题<ul>
+<li>封闭的问题让调查对象只能回答简单的是或否，没有余地去回答其他的东西</li>
+<li>背景无关的问题，这种问题没有暗含答案或喜好</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>问卷调查<ul>
+<li>使用静态的问卷不利于跟进后续问题</li>
+<li>简单的单向沟通和时间滞后</li>
+<li>不要作为搜集故事的主要方法</li>
+</ul>
+</li>
+<li>观察<ul>
+<li>观察用户使用软件的情况</li>
+<li>有时用户表达不清楚，只有通过观察才能发现</li>
+</ul>
+</li>
+<li>故事编写工作坊<ul>
+<li>故事编写工作坊是开发人员、用户、产品客户和其他对编写故事有帮助的人共同参加的会议</li>
+<li>参与人员编写尽可能多的故事，此时不对故事排优先级</li>
+<li>快速且最有效的故事收集方法</li>
+<li>简单原型<img src="https://api2.mubu.com/v3/document_image/f5f182a1-ad27-4952-b82f-7edb4789a439-156946.jpg" alt=""></li>
+<li>用户故事<img src="https://api2.mubu.com/v3/document_image/bc65f823-2b39-4d9c-940e-29e8d1e94237-156946.jpg" alt=""></li>
+<li>扔掉原型<img src="https://api2.mubu.com/v3/document_image/b34c91b5-260e-42a6-bde6-02b129ad6184-156946.jpg" alt=""></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>小结<img src="https://api2.mubu.com/v3/document_image/83f37da2-3758-4727-bf26-55d996ccbcec-156946.jpg" alt=""></li>
+</ul>
+</li>
+<li>与用户代理合作<ul>
+<li>可能的用户代理<ul>
+<li>用户的经理</li>
+<li>开发经理</li>
+<li>销售人员</li>
+<li>领域专家</li>
+<li>市场营销团队</li>
+<li>以前的用户</li>
+<li>客户</li>
+<li>培训师与技术支持</li>
+<li>业务分析师或系统分析师</li>
+</ul>
+</li>
+<li>什么情况与用户代理合作<ul>
+<li>能接触到用户但访问受限时</li>
+<li>实在不能接触到用户时</li>
+</ul>
+</li>
+<li>设立客户团队<ul>
+<li>在任何时候，实际用户总是优于用户代理，只要有可能，就要邀请实际用户到客户团队</li>
+<li>客户团队应该优势互补，加入不同的用户代理或实际用户</li>
+</ul>
+</li>
+<li>小结<img src="https://api2.mubu.com/v3/document_image/d3e3a857-1342-432d-b9ad-22b6c419f0fa-156946.jpg" alt=""></li>
+</ul>
+</li>
+<li>用户故事验收测试<ul>
+<li>在编写故事代码之前先写测试<ul>
+<li>通常写测试的时间<img src="https://api2.mubu.com/v3/document_image/111c6322-7c83-4904-882c-8c23d4ad4bb2-156946.jpg" alt=""></li>
+</ul>
+</li>
+<li>客户定义测试，客户可以和程序员与测试人员合作创建测试</li>
+<li>测试是开发过程中的一部分，而不是在编码完成后要做的事</li>
+<li>客户应该更专注于那些能向开发团队说明意图的测试</li>
+<li>测试的是缺陷，而不是覆盖率，不要过渡追求 100% 覆盖率</li>
+<li>小结<img src="https://api2.mubu.com/v3/document_image/71e393d2-4b9d-4a10-99c7-a29b537e8854-156946.jpg" alt=""></li>
+</ul>
+</li>
+<li>优秀用户故事准则<ul>
+<li>从目标故事开始<ul>
+<li>考虑每一个用户角色，了解用户使用我们软件的目的<img src="https://api2.mubu.com/v3/document_image/37222145-da98-45aa-bd14-78427cfd957a-156946.jpg" alt=""></li>
+<li>这些是高层次的故事，可以用来衍生出新的故事</li>
+</ul>
+</li>
+<li>切蛋糕式的分解故事<ul>
+<li>求职者可以发布简历<img src="https://api2.mubu.com/v3/document_image/8f1da66d-d864-4f03-87ed-c1e929171f9e-156946.jpg" alt=""></li>
+</ul>
+</li>
+<li>编写封闭的故事<ul>
+<li>一个封闭的故事是指那种随着一个有意义的目标的实现而结束的故事，能让用户使用后觉得她完成了某个任务</li>
+<li>招聘者可以管理她发的招聘广告，这不是一个闭合故事，管理她发布的招聘广告是没法彻底完成的事情，可以分解成如下的闭合故事集合<img src="https://api2.mubu.com/v3/document_image/3efb8982-2180-4934-9e9f-c9926b062d70-156946.jpg" alt=""></li>
+</ul>
+</li>
+<li>卡片约束<ul>
+<li>对于任何必须要遵守而不需要直接实现的故事，在其故事卡上标注“约束”</li>
+<li>示例<img src="https://api2.mubu.com/v3/document_image/83c3ab64-3e2d-46bd-ad4d-73417cc90b74-156946.jpg" alt=""></li>
+<li>编写验收测试来确保系统没有违反约束</li>
+</ul>
+</li>
+<li>根据实现时间来确定故事规模<ul>
+<li>高层次故事<img src="https://api2.mubu.com/v3/document_image/c8f9d849-f65e-4feb-a741-d9ba1986eda6-156946.jpg" alt=""></li>
+<li>客户决定第一轮迭代专注于允许用户发布简历，项目团队和客户进行讨论，通过沟通，扩展故事细节，另外3个高层次的故事先放在一边<img src="https://api2.mubu.com/v3/document_image/e1b4161d-10cb-4a42-97c4-179d6bfca3de-156946.jpg" alt=""></li>
+<li>编写故事时，要利用故事灵活性的优势，让它们能够用于不同的层次</li>
+</ul>
+</li>
+<li>不要过早涉及用户界面<ul>
+<li>尽量让故事不包含用户界面</li>
+</ul>
+</li>
+<li>有些需求并不是故事<ul>
+<li>用户故事也不是万灵药，如果需要，可以放心使用用户故事以外的其他形式来表达某些需求，例如截图、文档等</li>
+</ul>
+</li>
+<li>在故事里包括用户角色<ul>
+<li>示例<ul>
+<li>用户可以发布她的简历（不好的示例）</li>
+<li>求职者可以发布她的简历（好的示例）</li>
+</ul>
+</li>
+<li>可以采用如下简单模板<img src="https://api2.mubu.com/v3/document_image/decc3937-60a2-45e7-8f8a-977e57f8fd15-156946.jpg" alt=""></li>
+</ul>
+</li>
+<li>只为一个用户编写<ul>
+<li>求职者可以删除简历（不好的示例）</li>
+<li>求职者可以删除她自己的简历（好的示例）</li>
+</ul>
+</li>
+<li>以主动语态编写<ul>
+<li>简历可以被求职者发布（不好的示例）</li>
+<li>求职者可以发布简历（好的示例）</li>
+</ul>
+</li>
+<li>由客户编写<ul>
+<li>开发者可以在故事编写工作坊编写故事，或者给客户建议新故事，但编写故事的职责在于客户</li>
+<li>由于客户有责任给故事排列优先级，所以客户理解每个故事是至关重要的，所以亲自编写是最好的办法</li>
+</ul>
+</li>
+<li>不要给故事编号</li>
+<li>不要忘记意图<ul>
+<li>故事卡的主要目的是用来提醒开发人员和客户团队对功能进行讨论的，保持它的简洁性，加入细节，不要加入太多细节并以此取代对话</li>
+</ul>
+</li>
+<li>小结<img src="https://api2.mubu.com/v3/document_image/79b9f2a3-a78c-4486-b381-6381b5ed9297-156946.jpg" alt=""><img src="https://api2.mubu.com/v3/document_image/bed94cb1-e5ad-4234-a7ac-41e843dbb88f-156946.jpg" alt=""></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>估算和计划<ul>
+<li>估算用户故事<ul>
+<li>故事点<ul>
+<li>故事点是一个相对的点数，故事点是一个模糊的单位，仅代表故事相对实现复杂度</li>
+<li>在不同的团队，一个故事点可能代表不同的时间，可能代表一天，也可能代表一周</li>
+<li>作者更愿意把一个故事点代表一个理想的工作日</li>
+</ul>
+</li>
+<li>故事估算是团队的责任，团队大部分成员都参加估算是非常重要的，如果团队很大，不需要每个开发人员都参加。客户也可以参加，但不能参与估算</li>
+<li>估算方法<ul>
+<li>客户拿出故事卡读给开发人员听，开发人员根据需要尽可能多发问，客户要尽其所能解答，如果客户不知道答案，可以先猜猜看，或者要团队推迟估算这个故事</li>
+<li>每个开发人员在卡片上写下自己的估算值，先不要给其他人看，之后同时亮出分数，如果不一致再进行讨论后，再进行估算</li>
+<li>在做出几个估算后，可以使用三角测量来进行估算，把未进行评估的故事，和已经评估完成的故事进行对比，根据实现复杂度来进行相对点评估故事，一个4点故事应该是一个2点故事的两倍，这些都可以不用太精确</li>
+<li>然后使用如下的看板形式，再进行故事比较和点数调整<img src="https://api2.mubu.com/v3/document_image/b06c0491-4a60-49ff-88c6-670c0035a9ce-156946.jpg" alt=""></li>
+</ul>
+</li>
+<li>在迭代中把上一次完成的故事点数，作为下一个迭代的计划故事点数，这就是团队的速率，第一个迭代时，可以先估算一个大概值</li>
+<li>用户故事的故事点数，可以随着我们后面获取到更多的信息进行调整，并不是一成不变的</li>
+<li>小结<img src="https://api2.mubu.com/v3/document_image/a95bccdb-af52-4514-996b-676783f060d8-156946.jpg" alt=""></li>
+</ul>
+</li>
+<li>发布计划<ul>
+<li>选择下一次发布的故事</li>
+<li>什么时候发布<ul>
+<li>给定日期范围</li>
+<li>以迭代次数<ul>
+<li>6或7轮迭代后可能完成基本的功能</li>
+<li>或许10到12轮迭代后有 1.0 版本的所有功能</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>发布中包含哪些功能<ul>
+<li>DSDM<ul>
+<li>必须有的（must have）</li>
+<li>应用有的（should have）</li>
+<li>可以有（could have）</li>
+<li>这次不会有（won’t have）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>排列故事优先级<ul>
+<li>故事不能如期完成的风险</li>
+<li>推迟实现一个故事时对其他故事的影响</li>
+<li>故事对于广泛用户的重要性</li>
+<li>故事对于少部分用户的重要性</li>
+<li>故事与其他故事的的内聚性</li>
+</ul>
+</li>
+<li>选择迭代长度<ul>
+<li>通常是1至4周，固定迭代长度</li>
+</ul>
+</li>
+<li>从故事点到预计工期<ul>
+<li>根据团队速率，确定工期</li>
+</ul>
+</li>
+<li>不要迷信发布计划<ul>
+<li>利用发布计划可以设立初始期望，但之后获得新信息，应该重新调整期望</li>
+</ul>
+</li>
+<li>小结<img src="https://api2.mubu.com/v3/document_image/188215a4-82b9-4315-a180-d4fc47f0b038-156946.jpg" alt=""><img src="https://api2.mubu.com/v3/document_image/9c5af194-9590-42b7-a372-0e2ba26854db-156946.jpg" alt=""></li>
+</ul>
+</li>
+<li>迭代计划<ul>
+<li>迭代计划会议<ul>
+<li>在每个迭代开始之前，进行迭代计划会议来为本轮迭代做计划</li>
+<li>会议内容<ul>
+<li>讨论故事</li>
+<li>从故事中分解出任务</li>
+<li>开发人员承担任务的职责</li>
+<li>讨论过所有故事，并且接受所有任务后，开发人员单独估计他们承担的任务，以确保他们不会做出过于乐观的承诺</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>讨论故事<ul>
+<li>客户从最高优先级的故事开始，读给开发人员听，然后由开发人员提问，直到他们充分理解故事，能从中分解出任务，没有必要理解故事的所有细节，在会议之后，开发人员跟客户一起理清故事的细节</li>
+<li>尽量不要在迭代进行时改变故事的优先级</li>
+</ul>
+</li>
+<li>分解任务<ul>
+<li>用户故事的待办事项</li>
+<li>示例故事<ul>
+<li>用户可以根据不同的字段搜索酒店</li>
+</ul>
+</li>
+<li>分解任务<img src="https://api2.mubu.com/v3/document_image/f2aa8615-1d86-4f75-ac09-de6a08b33817-156946.jpg" alt=""></li>
+</ul>
+</li>
+<li>承担职责<ul>
+<li>自愿领取任务</li>
+<li>每个任务关联一个人的名字</li>
+<li>在迭代快要结束时，如果有开发人员不能完成他接手的所有任务，其他成员应该尽量勇于承担</li>
+</ul>
+</li>
+<li>估算并确认<ul>
+<li>用户故事都分解完成后，开发人员估算自己承担的工作量，然后再进行合理分配任务，或者移除部分任务</li>
+<li>估算<img src="https://api2.mubu.com/v3/document_image/621b2ed1-227f-4c1e-ab01-ed83ff261621-156946.jpg" alt=""></li>
+</ul>
+</li>
+<li>小结<img src="https://api2.mubu.com/v3/document_image/48c94269-00d6-422c-81f1-9a959d5c5ca6-156946.jpg" alt=""><img src="https://api2.mubu.com/v3/document_image/0195b1ae-166f-4f51-9435-12b1a0757c48-156946.jpg" alt=""></li>
+</ul>
+</li>
+<li>测量并监控速率<ul>
+<li>测量速率<ul>
+<li>团队速率可能初期不稳定，两三轮迭代之后，才能获得一个比较稳定的速率</li>
+<li>部分完成的用户故事，不能计算在速率内</li>
+<li>图示<img src="https://api2.mubu.com/v3/document_image/870f62d8-d6b2-41ff-9c9b-d9cf83984d76-156946.jpg" alt=""></li>
+</ul>
+</li>
+<li>计划速率与实际速率<ul>
+<li>速率<img src="https://api2.mubu.com/v3/document_image/d915ccce-4d7b-4fb3-b9fa-14d443031573-156946.jpg" alt=""></li>
+<li>故事点数<img src="https://api2.mubu.com/v3/document_image/78823ae3-c3ee-4d00-a1eb-89f62767279f-156946.jpg" alt=""></li>
+<li>迭代燃尽图<img src="https://api2.mubu.com/v3/document_image/67a34783-b1f7-4930-82f7-82dcdcbe7007-156946.jpg" alt=""><ul>
+<li>可能有新增加的用户故事</li>
+</ul>
+</li>
+<li>迭代中的用户故事点数变化<img src="https://api2.mubu.com/v3/document_image/1fd36441-ccba-4d2c-98e4-975d47a354e2-156946.jpg" alt=""><ul>
+<li>增加故事</li>
+<li>删除故事</li>
+<li>修改故事的评估</li>
+</ul>
+</li>
+<li>迭代中的燃尽图<img src="https://api2.mubu.com/v3/document_image/9b6458d9-5c89-447c-a47f-05b17ff60c42-156946.jpg" alt=""></li>
+<li>小结<img src="https://api2.mubu.com/v3/document_image/5eeae64e-32c0-4989-954f-31d608369a2d-156946.jpg" alt=""><img src="https://api2.mubu.com/v3/document_image/f5c2ec16-0c98-45ce-93ac-e30e688530e1-156946.jpg" alt=""></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>经常讨论的话题<ul>
+<li>故事不是什么<ul>
+<li>用户故事不是 IEEE 830 的软件需求规格<ul>
+<li>需求列表只是描述了软件的行为，不是用户的行为或目的</li>
+</ul>
+</li>
+<li>用户故事不是用例（use case）</li>
+<li>用户故事不是场景（scenario）</li>
+<li>小结<img src="https://api2.mubu.com/v3/document_image/8b918011-fa63-40ac-845f-5e13eaa637a7-156946.jpg" alt=""><img src="https://api2.mubu.com/v3/document_image/d02198aa-85c2-4776-9d55-24e3c758f808-156946.jpg" alt=""></li>
+</ul>
+</li>
+<li>用户故事的优势<ul>
+<li>用户故事强调口头沟通<ul>
+<li>每个人对共享的文档有不同的理解</li>
+<li>客户只会获得开发人员根据他们对写下来的文档的理解所开发出来的系统，而这可能并不是客户真正想要的</li>
+</ul>
+</li>
+<li>人人都可以理解用户故事</li>
+<li>用户故事的大小适合做计划</li>
+<li>用户故事适合于迭代开发<ul>
+<li>在开始编码之前，我们并不需要写出所有的用户故事，可以写一部分故事，就进行编码与测试，然后按需要的节奏重复这个过程</li>
+<li>写故事时，可以按照认为合适的粒度去写，比如项目计划时，可能写出史诗故事，后来准备开发时把故事分解成新的故事</li>
+</ul>
+</li>
+<li>用户故事鼓励延迟细节</li>
+<li>用户故事支持随机应变的开发<ul>
+<li>用户及客户通常都不会准确地知道自己的实际需求</li>
+<li>很多细节只能随着开发进展变得清晰</li>
+<li>我们没有能力理解这么多细节，而且产品和项目也会经常变更</li>
+<li>我们总会犯错</li>
+<li>用户故事提醒我们用随机应变的方式开发软件</li>
+</ul>
+</li>
+<li>用户故事鼓励参与性设计</li>
+<li>用户故事传播隐性知识</li>
+<li>小结<img src="https://api2.mubu.com/v3/document_image/c40bcf83-1df2-4f80-9052-5947f1f6b7e9-156946.jpg" alt=""></li>
+</ul>
+</li>
+<li>用户故事不良症兆<ul>
+<li>故事太小</li>
+<li>故事相互依赖</li>
+<li>镀金<ul>
+<li>在迭代中实现了计划外的功能，或仅凭自己的感觉实现故事，实现的功能超出了实际需求</li>
+</ul>
+</li>
+<li>细节太多</li>
+<li>过早考虑用户界面细节</li>
+<li>想得太远</li>
+<li>故事划分太过频繁</li>
+<li>客户很难为故事安排优先级</li>
+<li>客户不愿意写用户故事，也不愿意为故事安排优先级</li>
+</ul>
+</li>
+<li>Scrum与用户故事<ul>
+<li>Scrum 是迭代和递增的</li>
+<li>Scrum 基础<img src="https://api2.mubu.com/v3/document_image/16e88c68-2d68-44d4-b3b6-062aaf1fac35-156946.jpg" alt=""><img src="https://api2.mubu.com/v3/document_image/c6c44786-f20b-4ae8-87c1-82645ac8ef9e-156946.jpg" alt=""></li>
+<li>产品 Backlog<img src="https://api2.mubu.com/v3/document_image/0f11bd20-43a0-450e-8121-727a780e8df4-156946.jpg" alt=""></li>
+<li>Sprint 计划会议</li>
+<li>在 Scrum 中使用用户故事</li>
+<li>小结<img src="https://api2.mubu.com/v3/document_image/37dfeef2-73b7-4567-a55a-94f7be35eeae-156946.jpg" alt=""><img src="https://api2.mubu.com/v3/document_image/5d741c75-3329-4ea5-bcfd-0e87c7b73f2c-156946.jpg" alt=""></li>
+</ul>
+</li>
+<li>其他话题<ul>
+<li>处理非功能性需求<ul>
+<li>不是所有的东西都必须转化为用户故事，非功能性需求有时无法恰当的以故事形式来表达</li>
+</ul>
+</li>
+<li>纸质还是软件<ul>
+<li>从卡片开始，如果有令人信服的理由使用软件，那就使用软件</li>
+</ul>
+</li>
+<li>用户故事和用户界面</li>
+<li>保留用户故事</li>
+<li>缺陷的用户故事<ul>
+<li>缺陷集合可以当成一个用户故事</li>
+</ul>
+</li>
+<li>小结<img src="https://api2.mubu.com/v3/document_image/54eab900-ba95-4d29-8dde-f62d85339369-156946.jpg" alt=""><img src="https://api2.mubu.com/v3/document_image/2ab59b17-640b-47ae-8470-22ec493629c3-156946.jpg" alt=""></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>一个完整的实例<ul>
+<li>用户角色<ul>
+<li>项目<ul>
+<li>开发一个卖航海用品的网站，但决定先从简单的书开始卖</li>
+</ul>
+</li>
+<li>定义客户<ul>
+<li>项目的客户是需要买书的航海者，他们都不是公司员工，所以需要一个内部客户作为最终客户的代理，最后决定选择 Lori 来充当这个客户，她是销售和市场副总裁</li>
+<li>她的初始想法<ul>
+<li>典型的书店电子商务网站</li>
+<li>通过各种方法搜索书籍</li>
+<li>用户能维护一些书籍列表，记着以后再买</li>
+<li>用户能对书籍打分和评论</li>
+<li>用户可以查看订单状态</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>定义角色雏形<ul>
+<li>Lori 和开发人员一起写用户角色卡片<img src="https://api2.mubu.com/v3/document_image/6d6187f3-18b7-4e5c-800e-f41a904aaad7-156946.jpg" alt=""></li>
+</ul>
+</li>
+<li>整合与提炼<ul>
+<li>去年重复或相似的，得到一个精简的用户角色列表<img src="https://api2.mubu.com/v3/document_image/4476e49c-c9de-4372-b06f-f431efadad1e-156946.jpg" alt=""></li>
+</ul>
+</li>
+<li>角色建模<ul>
+<li>团队考虑每一个角色，在角色卡片上添加一些详细描述，主要考虑以下几个因素<ul>
+<li>用户使用软件的频率</li>
+<li>用户在这个领域的专业能力程度</li>
+<li>用户对电脑和软件的熟练程度</li>
+<li>用户对团队正在开发的软件的熟练程度</li>
+<li>用户使用软件的目的，一些用户关心易用性，一些关注用户体验等等</li>
+</ul>
+</li>
+<li>讨论之后更新用户角色卡片<img src="https://api2.mubu.com/v3/document_image/32e789d5-c791-4637-ae4c-071331089ec4-156946.jpg" alt=""></li>
+</ul>
+</li>
+<li>添加虚构人物<ul>
+<li>有时添加虚构人物是值得的<img src="https://api2.mubu.com/v3/document_image/63964ffc-458a-4940-94eb-1f6ba6f00507-156946.jpg" alt=""></li>
+<li>只有当虚构人物更容易让大家分析出用户故事时，才需要添加虚构人物</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>一些用户故事<ul>
+<li>Teresa 的故事<ul>
+<li>用户可以用作者、书名或 ISBN 搜索书籍</li>
+<li>用户可以查看书籍的具体信息。例如：页数、出版日期和内容简介</li>
+<li>用户可以把书籍放进购物车，在结束购物时，可以购买其中的书</li>
+<li>在完成订单前，用户可以从她的购物车中删除书籍</li>
+<li>购买书时，用户需要输入她的账单地址、送货地址及信用卡信息</li>
+<li>用户可以对书籍进行评级和发表评论</li>
+<li>用户可以创建一个网站账户用于保存送货地址和账单信息</li>
+<li>用户可以编辑她的账户信息（信用卡、送货地址和账单地址等）</li>
+<li>用户可以把书放入愿望清单，网站的其他访问者也可以看到该清单</li>
+<li>用户可以把愿望清单（甚至是别人的愿望清单）中的项目放入自己的购物车</li>
+<li>老顾客必须能购在 90 秒内找到书和下订单（约束）</li>
+</ul>
+</li>
+<li>Ron 船长的故事<ul>
+<li>用户可以查看自己的历史订单</li>
+<li>查看历史订单时，用户可以方便地重新购买订单中的东西</li>
+<li>网站总是告诉购物者她最近三次查看的东西，并提供返回的链接（即使在不同的会话中，这个功能也要能用）</li>
+</ul>
+</li>
+<li>初级航海者的故事<ul>
+<li>用户可以看到我们针对各种主题推荐的书籍</li>
+</ul>
+</li>
+<li>不出海的礼物购买者的故事<ul>
+<li>用户，特别是不出海的礼物购买者，能够很容易查找到其他用户的愿望清单</li>
+<li>用户可以选择对购买的东西进行礼物包装</li>
+<li>用户可以选择附上礼物卡，并且可以在卡片上写上自己的信息</li>
+</ul>
+</li>
+<li>报表查阅者的故事<ul>
+<li>报表查阅者可以按照图书的类别、流量、最佳和最差销售情况来查看每天的购买报表</li>
+<li>用户必须经过适当的身份验证才能查看报表</li>
+<li>在网站上提交的订单最终必须同电话订单放入同一个订单数据库（约束）</li>
+</ul>
+</li>
+<li>管理员的一些故事<ul>
+<li>管理员可以在网站上增加新书</li>
+<li>在评论放上网站之前，必须经过管理员批准</li>
+<li>管理员可以删除书</li>
+<li>管理员可以编辑已有书的信息</li>
+</ul>
+</li>
+<li>收尾<ul>
+<li>用户可以检查她最近的订单状态。如果订单还没有发货，她可以增加或删除书，更改送货方式、送货地址和信用卡信息</li>
+<li>系统必须能够支持 50 个并发用户（约束）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>估算故事<ul>
+<li>初始故事集合<img src="https://api2.mubu.com/v3/document_image/238d2805-0c4a-4b56-987b-94dd447ca4e3-156946.jpg" alt=""><img src="https://api2.mubu.com/v3/document_image/13ea6fcb-77e3-44ca-95b7-34108631202d-156946.jpg" alt=""></li>
+<li>第一个故事<ul>
+<li>没有必要从第一个故事开始，但是这个项目中，第一个故事就很适合开始做估算</li>
+<li>经过讨论之后第一个故事分解成了两个故事<ul>
+<li>用户可以做基本的简单搜索，输入的单词或词组会同时在作者和书名中匹配</li>
+<li>用户可以输入作者、书名和 ISBN ，以它们的任意组合来搜索书</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>评分和评论<ul>
+<li>经历讨论分解成两个用户故事<ul>
+<li>用户可以对书进行1到5的评分。用户即使不从我们这里买书，也可以评分</li>
+<li>用户可以对图书写评论。在提交之前她可以预览评论。用户即使不从我们这里买书，也可以发表评论</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>账户<ul>
+<li>经历讨论分解成两个用户故事<ul>
+<li>用户可以修改存储在她账户中的信用卡信息</li>
+<li>用户可以修改存储在她账户中的发货地址和账单地址</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>完成估算<img src="https://api2.mubu.com/v3/document_image/cc2e0284-903e-43d5-abeb-d32b8539f9f1-156946.jpg" alt=""><img src="https://api2.mubu.com/v3/document_image/4a712b2e-3b0e-4f30-af43-03d48060c165-156946.jpg" alt=""></li>
+</ul>
+</li>
+<li>发布计划<ul>
+<li>确定迭代长度为两周</li>
+<li>估算速率</li>
+<li>给故事安排优先级</li>
+<li>最终发布计划<img src="https://api2.mubu.com/v3/document_image/ca1fe4e0-1139-41db-9912-6f96cd95b50d-156946.jpg" alt=""></li>
+</ul>
+</li>
+<li>验收测试<ul>
+<li>搜索测试<img src="https://api2.mubu.com/v3/document_image/e6ebc20d-a608-41d7-9c14-3dfac809a8ad-156946.jpg" alt=""></li>
+<li>购物车测试<ul>
+<li>团队意识到更改商品数量为 0 的情况，所以他们把原来故事修改了<ul>
+<li>在完成订单前，用户可以从她的购物车中删除书（修改前的故事）</li>
+<li>用户可以调整购物车中商品的数量，把数量设为 0 即可从购物车中删除该商品（修改后的故事）</li>
+</ul>
+</li>
+<li>测试<img src="https://api2.mubu.com/v3/document_image/4e484ef4-05e5-4537-8406-96cef2c78bd6-156946.jpg" alt=""><img src="https://api2.mubu.com/v3/document_image/1db51f03-29c8-4b07-b46c-f994598f9e5a-156946.jpg" alt=""><img src="https://api2.mubu.com/v3/document_image/aab3e284-5a50-4196-bccf-cd6dde31e08d-156946.jpg" alt=""></li>
+</ul>
+</li>
+<li>购买书<img src="https://api2.mubu.com/v3/document_image/04411caa-8f63-4773-a31f-cefbea20a8de-156946.jpg" alt=""></li>
+<li>用户账户<img src="https://api2.mubu.com/v3/document_image/83b9f8b3-fe59-41ee-af87-259887f9c1e2-156946.jpg" alt=""><img src="https://api2.mubu.com/v3/document_image/573f5be1-3256-403b-9a51-44c5f0ad519e-156946.jpg" alt=""></li>
+<li>管理<img src="https://api2.mubu.com/v3/document_image/6ef2b859-4567-4190-b6b9-0b5acb1f4fdc-156946.jpg" alt=""><img src="https://api2.mubu.com/v3/document_image/d386eaa0-7dfd-4d2c-a7f1-71f39ab1c73b-156946.jpg" alt=""><img src="https://api2.mubu.com/v3/document_image/4b0966d3-4d3f-4048-851a-3cc456912e83-156946.jpg" alt=""></li>
+<li>测试限制条件<img src="https://api2.mubu.com/v3/document_image/40b83906-8cce-4d5c-b624-abc444af86be-156946.jpg" alt=""></li>
+<li>最后一个故事<img src="https://api2.mubu.com/v3/document_image/7089c3fb-de4f-4dbd-a057-b8d804e9559e-156946.jpg" alt=""></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 
       
     </div>
@@ -449,13 +1203,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/sre/" rel="tag"># sre</a>
+            <a href="/tags/develop/" rel="tag"># develop</a>
           
-            <a href="/tags/sli/" rel="tag"># sli</a>
-          
-            <a href="/tags/slo/" rel="tag"># slo</a>
-          
-            <a href="/tags/error-budget/" rel="tag"># error budget</a>
+            <a href="/tags/agile/" rel="tag"># agile</a>
           
         </div>
       
@@ -468,8 +1218,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/posts/62/" rel="next" title="服务稳定性指标规范">
-                <i class="fa fa-chevron-left"></i> 服务稳定性指标规范
+              <a href="/posts/62/" rel="next" title="简单设计四原则">
+                <i class="fa fa-chevron-left"></i> 简单设计四原则
               </a>
             
           </div>
@@ -478,8 +1228,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/posts/64/" rel="prev" title="基于错误预算的报警">
-                基于错误预算的报警 <i class="fa fa-chevron-right"></i>
+              <a href="/posts/64/" rel="prev" title="架构整洁之道笔记">
+                架构整洁之道笔记 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>

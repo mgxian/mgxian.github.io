@@ -330,7 +330,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/posts/77/" itemprop="url">代码整洁之道笔记</a></h2>
+                <a class="post-title-link" href="/posts/77/" itemprop="url">持续交付2.0笔记</a></h2>
         
 
         <div class="post-meta">
@@ -365,8 +365,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/开发/" itemprop="url" rel="index">
-                    <span itemprop="name">开发</span>
+                  <a href="/categories/DevOps/" itemprop="url" rel="index">
+                    <span itemprop="name">DevOps</span>
                   </a>
                 </span>
 
@@ -401,24 +401,13 @@
       
         
           <ul>
-<li>整洁代码<ul>
-<li>代码整洁重要性</li>
-<li>让营地比你来时更干净</li>
-</ul>
-</li>
-<li>有意义的命名<ul>
-<li>名副其实<ul>
-<li>命名宁愿长也要能准确表达意义，不要贪图使用简短命名</li>
-</ul>
-</li>
-<li>避免误导<ul>
-<li>不要把已经存在公认的单词表示为其他意义</li>
-<li>不要使用accountList命名，除非它真是一个List</li>
-<li>尽量不要单独使用零和壹（0,O,1,l）</li>
-</ul>
-</li>
-<li>做有意义的区分<ul>
-<li>如money与moneyAmount没有区别，customer与customerInfo没有区别</li></ul></li></ul></li></ul>
+<li>持续交付2.0<ul>
+<li>软件产品开发中的活动浪费<img src="https://api2.mubu.com/v3/document_image/89717ef5-acba-41e8-a576-6e4ac96f7157-156946.jpg" alt=""></li>
+<li>双环模型<img src="https://api2.mubu.com/v3/document_image/a53e13e6-0a91-4e16-b625-1f6e87aab037-156946.jpg" alt=""></li>
+<li>4个核心原则<ul>
+<li>坚持少做<ul>
+<li>少做，先做简单的事情</li>
+<li>想办法对新创意尽早验证</li></ul></li></ul></li></ul></li></ul>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/posts/77/#more" rel="contents">
@@ -486,7 +475,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/posts/76/" itemprop="url">架构整洁之道笔记</a></h2>
+                <a class="post-title-link" href="/posts/76/" itemprop="url">基于错误预算的报警</a></h2>
         
 
         <div class="post-meta">
@@ -521,8 +510,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/开发/" itemprop="url" rel="index">
-                    <span itemprop="name">开发</span>
+                  <a href="/categories/运维/" itemprop="url" rel="index">
+                    <span itemprop="name">运维</span>
                   </a>
                 </span>
 
@@ -556,24 +545,8 @@
 
       
         
-          <ul>
-<li>软件架构的终极目标是，用最小的人力成本来满足构建和维护系统的需求。</li>
-<li>编程范式<ul>
-<li>结构化编程<ul>
-<li>goto 有害</li>
-<li>功能性降解拆分</li>
-<li>结构化编程对程序控制权的直接转移进行了限制和规范</li>
-</ul>
-</li>
-<li>面向对象编程<ul>
-<li>限制函数指针的使用</li>
-<li>封装，继承，多态</li>
-<li>面向对象编程对程序控制权的间接转移进行了限制和规范</li>
-</ul>
-</li>
-<li>函数式编程<ul>
-<li>没有赋值语句</li>
-<li>函数式编程对程序中的赋值进行了限制和规范</li></ul></li></ul></li></ul>
+          <h3 id="错误预算（Error-Budget）"><a href="#错误预算（Error-Budget）" class="headerlink" title="错误预算（Error Budget）"></a>错误预算（Error Budget）</h3><p>基于SLO来计算错误预算，比如可用性要求是99.9%，预估一个周期的总请求数是100万，那错误预算就是 100万 X（1-0.999）= 1000，表示我们在一个统计周期内，最多只能有 1000 个请求可以失败</p>
+<h3 id="燃烧率（Burn-Rate）"><a href="#燃烧率（Burn-Rate）" class="headerlink" title="燃烧率（Burn Rate）"></a>燃烧率（Burn Rate）</h3><p>燃烧率表示错误预算的消耗速度，燃烧率为1时表示在一个统计周期内，刚好消耗完错误预算，如果30天的可用性要求是99.9%，那么持续的0.1%的错误率，正好消耗掉所有错误预算，燃烧率为1。<br></p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/posts/76/#more" rel="contents">
@@ -641,7 +614,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/posts/75/" itemprop="url">用户故事与敏捷方法</a></h2>
+                <a class="post-title-link" href="/posts/75/" itemprop="url">服务稳定性衡量指标</a></h2>
         
 
         <div class="post-meta">
@@ -676,8 +649,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/开发/" itemprop="url" rel="index">
-                    <span itemprop="name">开发</span>
+                  <a href="/categories/运维/" itemprop="url" rel="index">
+                    <span itemprop="name">运维</span>
                   </a>
                 </span>
 
@@ -711,23 +684,10 @@
 
       
         
-          <ul>
-<li>起步<ul>
-<li>概览<ul>
-<li>什么是用户故事<ul>
-<li>用户故事描述了对用户、系统或者软件购买者有价值的功能，用户故事由三个方面组成<ul>
-<li>书面的故事描述，用来做计划和作为提示</li>
-<li>有关故事的对话，用于具体描述故事细节</li>
-<li>验收测试，用于表达故事细节且可用于确定故事如何才算完成</li>
-</ul>
-</li>
-<li>3C<ul>
-<li>卡片（card）</li>
-<li>对话（conversation）</li>
-<li>确认（confirmation）</li>
-</ul>
-</li>
-<li>卡片代表客户需求而不是记录需求，卡片包含故事的文字描述，然而需求细节要在“对话”中获得，并在“确认”部分得以记录</li></ul></li></ul></li></ul></li></ul>
+          <h3 id="衡量指标"><a href="#衡量指标" class="headerlink" title="衡量指标"></a>衡量指标</h3><p><strong>可用性</strong>：成功请求数 / 总请求数</p>
+<p><strong>P90响应时间</strong>：服务的请求响应时间90线</p>
+<p><strong>P99响应时间</strong>：服务的请求响应时间99线</p>
+<p>只有以上指标全部满足，本周期内的服务稳定性才算达成<br></p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/posts/75/#more" rel="contents">
@@ -795,7 +755,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/posts/74/" itemprop="url">简单设计四原则</a></h2>
+                <a class="post-title-link" href="/posts/74/" itemprop="url">服务稳定性指标规范</a></h2>
         
 
         <div class="post-meta">
@@ -830,8 +790,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/开发/" itemprop="url" rel="index">
-                    <span itemprop="name">开发</span>
+                  <a href="/categories/运维/" itemprop="url" rel="index">
+                    <span itemprop="name">运维</span>
                   </a>
                 </span>
 
@@ -865,40 +825,15 @@
 
       
         
-          <ul>
-<li>重构基础原则<ul>
-<li>表达意图（Expresses Intent）</li>
-<li>消除重复（Eliminate Duplication）</li>
-</ul>
-</li>
-<li>简单设计四原则<ul>
-<li>通过测试（Tests Pass）<ul>
-<li>只有通过了测试软件设计才有意义</li>
-<li>测试应该尽可能自动化</li>
-<li>测试应该尽可能快</li>
-</ul>
-</li>
-<li>表达意图（Expresses Intent）<ul>
-<li>当修改代码时，能快速找到应该做修改的地方</li>
-<li>当修改代码时，命名有可能偏离了它所表达的内容</li>
-<li>当找不到一个合适的能表达意图的命名时，说明它做的有点多了，需要重构</li>
-</ul>
-</li>
-<li>消除重复（No Duplication (DRY)）<ul>
-<li>不是指代码层面的重复（code duplication），而是指知识重复（knowledge duplication）</li>
-<li>每块知识都应该有且只有一种表示</li>
-<li>一次并且只有一次（Once and Only Once）</li>
-</ul>
-</li>
-<li>小（Small）<ul>
-<li>应用以上原则的时候，注意本原则</li>
-<li>是否有任何不再使用的残留代码</li>
-<li>是否有任何重复的抽象，合并它们</li>
-<li>是否重构提取做的过头了</li>
-</ul>
-</li>
-<li>相互迭代<ul>
-<li>修复了命名问题之后，可能会发现一些重复，消除这些重复，可能会发现一些可以改进的表达方式</li></ul></li></ul></li></ul>
+          <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>服务稳定性就是我们常说的几个9如 99，99.9，99.99。用来衡量一个服务的稳定性。衡量服务可用性通常有如下两种方式：</p>
+<p><strong>时间维度：Availability = Uptime / (Uptime + Downtime)</strong></p>
+<p><strong>请求维度：Availability = Successful request / Total request</strong></p>
+<p>SRE 通常选择以请求维度来衡量服务稳定性</p>
+<p><strong>常用术语</strong></p>
+<p>SLA（Service Level Agreement）服务等级协议，通常以几个 9 的形式出现，一般用于对客户的承诺</p>
+<p>SLI（Service Level Indicator）服务等级对象，qps、响应时间、请求成功率</p>
+<p>SLO（Service Level Objective）服务等级目标，对服务等级对象设定的目标，如 qps &gt; 100、响应时间 &lt; 100ms</p>
+<p>SLI 可以理解为我们用于衡量服务稳定性的监控指标，SLO 则是针对 SLI 设定的目标，比如 SLI 可能是异常响应码占比，那对应的 SLO 可能是异常响应码占比小于         0.5%</p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/posts/74/#more" rel="contents">
@@ -1301,7 +1236,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/posts/71/" itemprop="url">持续交付2.0笔记</a></h2>
+                <a class="post-title-link" href="/posts/71/" itemprop="url">代码整洁之道笔记</a></h2>
         
 
         <div class="post-meta">
@@ -1336,8 +1271,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/DevOps/" itemprop="url" rel="index">
-                    <span itemprop="name">DevOps</span>
+                  <a href="/categories/开发/" itemprop="url" rel="index">
+                    <span itemprop="name">开发</span>
                   </a>
                 </span>
 
@@ -1372,33 +1307,24 @@
       
         
           <ul>
-<li>持续交付2.0<ul>
-<li>软件产品开发中的活动浪费<img src="https://api2.mubu.com/v3/document_image/89717ef5-acba-41e8-a576-6e4ac96f7157-156946.jpg" alt=""></li>
-<li>双环模型<img src="https://api2.mubu.com/v3/document_image/a53e13e6-0a91-4e16-b625-1f6e87aab037-156946.jpg" alt=""></li>
-<li>4个核心原则<ul>
-<li>坚持少做<ul>
-<li>少做，先做简单的事情</li>
-<li>想办法对新创意尽早验证</li>
+<li>整洁代码<ul>
+<li>代码整洁重要性</li>
+<li>让营地比你来时更干净</li>
 </ul>
 </li>
-<li>持续分解问题<ul>
-<li>对问题的层层分解，可以让团队更了解业务，更早识别出风险。</li>
-<li>即便是很大的课题或者大范围的变更，也可以将其分解为一系列小变更，快速解决，并得到反馈，从而尽早消除风险</li>
+<li>有意义的命名<ul>
+<li>名副其实<ul>
+<li>命名宁愿长也要能准确表达意义，不要贪图使用简短命名</li>
 </ul>
 </li>
-<li>坚持快速反馈<ul>
-<li>只有通过快速反馈，我们才能尽早了解所完成工作的质量和效果</li>
+<li>避免误导<ul>
+<li>不要把已经存在公认的单词表示为其他意义</li>
+<li>不要使用accountList命名，除非它真是一个List</li>
+<li>尽量不要单独使用零和壹（0,O,1,l）</li>
 </ul>
 </li>
-<li>持续改进并衡量<ul>
-<li>无论做了什么样的改进，如果无法以某种方式衡量它的结果，就无法证明真的得到了改进</li>
-<li>在着手解决每个问题之前，我们都要找到适当的衡量方式，并将其与对应的功能需求放在同等重要的位置上，一起完成</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>持续交付七巧板<img src="https://api2.mubu.com/v3/document_image/d9a51231-6bf7-4a87-9197-7232bf5e9fc5-156946.jpg" alt=""></li>
-<li>角色<img src="https://api2.mubu.com/v3/document_image/2c947700-5312-4389-ab7d-1db0fc164ba8-156946.jpg" alt=""></li></ul></li></ul>
+<li>做有意义的区分<ul>
+<li>如money与moneyAmount没有区别，customer与customerInfo没有区别</li></ul></li></ul></li></ul>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/posts/71/#more" rel="contents">

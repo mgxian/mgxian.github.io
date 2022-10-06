@@ -1336,7 +1336,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/posts/64/" itemprop="url">基于错误预算的报警</a></h2>
+                <a class="post-title-link" href="/posts/64/" itemprop="url">架构整洁之道笔记</a></h2>
         
 
         <div class="post-meta">
@@ -1371,8 +1371,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/运维/" itemprop="url" rel="index">
-                    <span itemprop="name">运维</span>
+                  <a href="/categories/开发/" itemprop="url" rel="index">
+                    <span itemprop="name">开发</span>
                   </a>
                 </span>
 
@@ -1406,25 +1406,31 @@
 
       
         
-          
-            <h3 id="错误预算（Error-Budget）"><a href="#错误预算（Error-Budget）" class="headerlink" title="错误预算（Error Budget）"></a>错误预算（Error Budget）</h3><p>基于SLO来计算错误预算，比如可用性要求是99.9%，预估一个周期的总请求数是100万，那错误预算就是 100万 X（1-0.999）= 1000，表示我们在一个统计周期内，最多只能有 1000 个请求可以失败</p>
-<h3 id="燃烧率（Burn-Rate）"><a href="#燃烧率（Burn-Rate）" class="headerlink" title="燃烧率（Burn Rate）"></a>燃烧率（Burn Rate）</h3><p>燃烧率表示错误预算的消耗速度，燃烧率为1时表示在一个统计周期内，刚好消耗完错误预算，如果30天的可用性要求是99.9%，那么持续的0.1%的错误率，正好消耗掉所有错误预算，燃烧率为1。</p>
-<p><strong>燃烧率与错误率关系表：</strong></p>
-<p><img src="https://uploader.shimo.im/f/Mx3qIAa0Bh9Jizfc.png!thumbnail?fileGuid=JJrCrXjCyJwQpvDW" alt="图片"></p>
-<h3 id="错误预算消耗"><a href="#错误预算消耗" class="headerlink" title="错误预算消耗"></a>错误预算消耗</h3><p>一定时间内，当错误预算消耗过快，我们可以选择报警，比如当1个小时消耗的错误预算超过2%时，6个小时消耗的错误预算超过5%时。通过错误预算消耗的占比，我们可以计算出燃烧率。</p>
-<p>假定30天内的错误预算为X，燃烧率为1表示30*24小时正好消耗完X，那么当1h消耗2%的X的燃烧率就可以如下公式计算：</p>
-<p><strong>燃烧率 = (2% <em> X / 1h) / (X / 30 </em> 24h) = 14.4</strong></p>
-<p>常用的错误预算消耗与燃烧率：</p>
-<p><img src="https://uploader.shimo.im/f/VppIqiDmJ3UK0gfv.png!thumbnail?fileGuid=JJrCrXjCyJwQpvDW" alt="图片"></p>
-<h3 id="基于错误预算消耗报警"><a href="#基于错误预算消耗报警" class="headerlink" title="基于错误预算消耗报警"></a>基于错误预算消耗报警</h3><p>当错误预消耗过快，及时报警，并当问题解决时能及时解除报警。多时间周期综合报警规则。报警示例：</p>
-<p><img src="https://uploader.shimo.im/f/xdMdCJboZIlmDmXv.png!thumbnail?fileGuid=JJrCrXjCyJwQpvDW" alt="图片"></p>
-<p>以上报警规则表示，当1h的错误预算消耗超过2%时，并且错误数量大于10个时，并且5m的错误率依然过高，错误预算消耗依然会持续达到2%，就及时报警，当6h内的错误预算超过5%时，也会及时报警。</p>
-<p><code>service:slo_errors_per_request:ratio_rate1h{destination_service=&quot;prod.elasticsearch5-slb.slb.local.gllue.host&quot;} &gt; (14.4*(1-0.9999))</code> 规则是为了在 1h 错误预算消耗超过2%时及时报警，</p>
-<p><code>service:slo_errors:increase1h{destination_service=&quot;prod.elasticsearch5-slb.slb.local.gllue.host&quot;} &gt; 10</code> 规则是为了防止当请求量过少时，少量的出错请求就会导致报警，</p>
-<p><code>service:slo_errors_per_request:ratio_rate5m{destination_service=&quot;prod.elasticsearch5-slb.slb.local.gllue.host&quot;} &gt; (14.4*(1-0.9999))</code> 规则是为了当问题解决时，能及时停止报警，否则可能会出现1h内持续报警，但是问题已经得到解决</p>
-<h3 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h3><p><a href="https://landing.google.com/sre/workbook/chapters/alerting-on-slos/" target="_blank" rel="noopener">https://landing.google.com/sre/workbook/chapters/alerting-on-slos/</a></p>
-
-          
+          <ul>
+<li>软件架构的终极目标是，用最小的人力成本来满足构建和维护系统的需求。</li>
+<li>编程范式<ul>
+<li>结构化编程<ul>
+<li>goto 有害</li>
+<li>功能性降解拆分</li>
+<li>结构化编程对程序控制权的直接转移进行了限制和规范</li>
+</ul>
+</li>
+<li>面向对象编程<ul>
+<li>限制函数指针的使用</li>
+<li>封装，继承，多态</li>
+<li>面向对象编程对程序控制权的间接转移进行了限制和规范</li>
+</ul>
+</li>
+<li>函数式编程<ul>
+<li>没有赋值语句</li>
+<li>函数式编程对程序中的赋值进行了限制和规范</li></ul></li></ul></li></ul>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/posts/64/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1485,7 +1491,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/posts/63/" itemprop="url">服务稳定性衡量指标</a></h2>
+                <a class="post-title-link" href="/posts/63/" itemprop="url">用户故事与敏捷方法</a></h2>
         
 
         <div class="post-meta">
@@ -1520,8 +1526,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/运维/" itemprop="url" rel="index">
-                    <span itemprop="name">运维</span>
+                  <a href="/categories/开发/" itemprop="url" rel="index">
+                    <span itemprop="name">开发</span>
                   </a>
                 </span>
 
@@ -1555,32 +1561,30 @@
 
       
         
-          
-            <p>衡量指标</p>
-<p>可用性：成功请求数 / 总请求数</p>
-<p>P90响应时间：服务的请求响应时间90线</p>
-<p>P99响应时间：服务的请求响应时间99线</p>
-<p>只有以上指标全部满足，本周期内的服务稳定性才算达成</p>
-<p>指标计算规则</p>
-<p>可用性</p>
-<p>对于一般基于 HTTP 协议的服务，采用 HTTP 响应码来作为衡量可用性的指标，响应码由 Istio 统一收集，计算公式如下：</p>
-<p>可用性 = 非5xx响应码请求总数 / 总请求数</p>
-<p>对于其他特殊服务，可能需要服务主动暴露相关指标，然后监控系统收集处理</p>
-<p>P90响应时间</p>
-<p>通过使用 Istio 提供的响应时间指标，统计计算 P90 响应时间，由于 Prometheus 的指标问题，得到的 P90 可能不是非常的精确，但是不影响指标计算</p>
-<p>P99响应时间</p>
-<p>与计算 P90 响应时间类似</p>
-<p>衡量周期</p>
-<p>服务稳定性会定期评估，一般会每1周，每4周各进行评估一次</p>
-<p>注意事项</p>
-<p>服务响应码</p>
-<p>当服务异常时或者强依赖的服务异常时，在响应请求时，请注意设置正确的 5xx 响应码，而不要像正常的请求一样响应 2xx 响应码，这样会导致可用性计算不准确，监控系统无法及时发现问题，无法及时报警，只能等到用户投诉反馈才能发现问题</p>
-<p>附录</p>
-<p>Google 服务稳定性常用指标标准</p>
-<p><a href="https://sre.google/workbook/slo-document/" target="_blank" rel="noopener">slo-document</a></p>
-<p><a href="https://sre.google/workbook/implementing-slos/" target="_blank" rel="noopener">implementing-slos</a></p>
-
-          
+          <ul>
+<li>起步<ul>
+<li>概览<ul>
+<li>什么是用户故事<ul>
+<li>用户故事描述了对用户、系统或者软件购买者有价值的功能，用户故事由三个方面组成<ul>
+<li>书面的故事描述，用来做计划和作为提示</li>
+<li>有关故事的对话，用于具体描述故事细节</li>
+<li>验收测试，用于表达故事细节且可用于确定故事如何才算完成</li>
+</ul>
+</li>
+<li>3C<ul>
+<li>卡片（card）</li>
+<li>对话（conversation）</li>
+<li>确认（confirmation）</li>
+</ul>
+</li>
+<li>卡片代表客户需求而不是记录需求，卡片包含故事的文字描述，然而需求细节要在“对话”中获得，并在“确认”部分得以记录</li></ul></li></ul></li></ul></li></ul>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/posts/63/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1641,7 +1645,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/posts/62/" itemprop="url">服务稳定性指标规范</a></h2>
+                <a class="post-title-link" href="/posts/62/" itemprop="url">简单设计四原则</a></h2>
         
 
         <div class="post-meta">
@@ -1676,8 +1680,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/运维/" itemprop="url" rel="index">
-                    <span itemprop="name">运维</span>
+                  <a href="/categories/开发/" itemprop="url" rel="index">
+                    <span itemprop="name">开发</span>
                   </a>
                 </span>
 
@@ -1711,92 +1715,47 @@
 
       
         
-          
-            <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>服务稳定性就是我们常说的几个9如 99，99.9，99.99。用来衡量一个服务的稳定性。衡量服务可用性通常有如下两种方式：</p>
-<p><strong>时间维度：Availability = Uptime / (Uptime + Downtime)</strong></p>
-<p><strong>请求维度：Availability = Successful request / Total request</strong></p>
-<p>SRE 通常选择以请求维度来衡量服务稳定性</p>
-<p><strong>常用术语</strong></p>
-<p>SLA（Service Level Agreement）服务等级协议，通常以几个 9 的形式出现，一般用于对客户的承诺</p>
-<p>SLI（Service Level Indicator）服务等级对象，qps、响应时间、请求成功率</p>
-<p>SLO（Service Level Objective）服务等级目标，对服务等级对象设定的目标，如 qps &gt; 100、响应时间 &lt; 100ms</p>
-<p>SLI 可以理解为我们用于衡量服务稳定性的监控指标，SLO 则是针对 SLI 设定的目标，比如 SLI 可能是异常响应码占比，那对应的 SLO 可能是异常响应码占比小于         0.5%</p>
-<h3 id="SLI-选择"><a href="#SLI-选择" class="headerlink" title="SLI 选择"></a>SLI 选择</h3><p>根据 Goole SRE 的实践，一般通过 VALET 方法（Volume、Availability、Latency、Error、Ticket）制定选择 SLI</p>
-<p>Volume（容量）：服务承诺的最大容量，可以选择 qps、tps、每小时处理的任务数等</p>
-<p>Availablity（可用性）：服务是否正常，比如 HTTP 协议服务，可以采用 5xx 响应码，任务执行的成功情况等</p>
-<p>Latency（时延）：服务响应是否足够快，90线 &lt; 50ms、99线 &lt; 100ms 等</p>
-<p>Errors（错误率）：服务错误率有多高，比如 HTTP 协议服务 5xx，4xx 响应码占比</p>
-<p>Tickets（人工介入）：是否需要人工介入，比如数据任务跑失败了，但是无法自动恢复，这时就要人工介入恢复；或者超时了，也需要人工介入，来中断任务、重启拉起来跑等</p>
-<p><strong>SLI 的选择应该尽量选择能靠近用户体验的指标，比如选择响应时间，就比选择 CPU 使用率，内存指标要好</strong></p>
-<h3 id="SLO计算方式"><a href="#SLO计算方式" class="headerlink" title="SLO计算方式"></a>SLO计算方式</h3><p>比如定义了如下的 SLO：</p>
-<p>SLO1：状态码成功率 &gt;= 99.95%</p>
-<p>SLO2：响应时间 90 线 &lt;= 80ms</p>
-<p>SLO3：响应时间 99 线 &lt;= 200ms</p>
-<p>那么服务可用性指标就是表示为：</p>
-<p><strong>Availability = SLO1 &amp; SLO2 &amp; SLO3</strong></p>
-<p>只有当所有 SLO 指标同时达标时，才算可用性指标达到，有一个不达标就表示可用性不达标。</p>
-<h3 id="SLO落地：错误预算"><a href="#SLO落地：错误预算" class="headerlink" title="SLO落地：错误预算"></a>SLO落地：错误预算</h3><p>把 SLO 指标转换为可计数量化的错误预算（Error Budget），通过这种转换可以让我们可以看到我们还有多少犯错机会，把数据可视化，让我们心中有数。</p>
-<p>假设我们4周为一个衡量周期，4周内的总请求次数为 100000，那么计算如下：</p>
-<p>SLO1：状态码成功率 &gt;= 99.95%          错误预算：100000x0.5%=500</p>
-<p>SLO2：响应时间 90 线 &lt;= 80ms           错误预算：100000x10%=10000</p>
-<p>SLO3：响应时间 99 线 &lt;= 200ms         错误预算：100000x1%=1000</p>
-<p><strong>数据可视化</strong></p>
-<p>通过计算得到的错误预算可以用于数据可视化，制作成图表，让所有人随时查看 SLO 的情况。</p>
-<p><strong>故障定级</strong></p>
-<p>根据此次故障消耗的错误预算比例，定级故障，比如当故障消耗错误预算 &lt;5% 就为 P4 故障，&gt;5% &lt;20% 定级为 P3 故障等</p>
-<p><strong>稳定性共识</strong></p>
-<ul>
-<li><p>剩余预算充足或未消耗完之前，对问题的发生要有容忍度</p>
-</li>
-<li><p>剩余预算消耗过快或即将消耗完之前，我们有权中止和拒绝任何线上变更</p>
-</li>
+          <ul>
+<li>重构基础原则<ul>
+<li>表达意图（Expresses Intent）</li>
+<li>消除重复（Eliminate Duplication）</li>
 </ul>
-<p><strong>基于错误预算的告警</strong></p>
-<p>当错误预算消耗过快时，或者超过一定的比例时，及时报警，通知相关人处理</p>
-<h3 id="服务稳定性衡量指标"><a href="#服务稳定性衡量指标" class="headerlink" title="服务稳定性衡量指标"></a>服务稳定性衡量指标</h3><p><strong>衡量指标：</strong></p>
-<ul>
-<li><p>可用性：成功请求数 / 总请求数</p>
 </li>
-<li><p>P90 响应时间：服务的请求响应时间 90 线</p>
-</li>
-<li><p>P99 响应时间：服务的请求响应时间 99 线</p>
-</li>
+<li>简单设计四原则<ul>
+<li>通过测试（Tests Pass）<ul>
+<li>只有通过了测试软件设计才有意义</li>
+<li>测试应该尽可能自动化</li>
+<li>测试应该尽可能快</li>
 </ul>
-<p>只有以上指标全部满足，本周期内的服务稳定性才算达成</p>
-<p><strong>指标计算规则：</strong></p>
-<ul>
-<li><p>可用性：对于一般基于 HTTP 协议的服务，采用 HTTP 响应码来作为衡量可用性的指标，计算公式如下：可用性 = 非 5xx 响应码请求总数 / 总请求数</p>
 </li>
-<li><p>P90 响应时间</p>
-</li>
-<li><p>P99 响应时间</p>
-</li>
+<li>表达意图（Expresses Intent）<ul>
+<li>当修改代码时，能快速找到应该做修改的地方</li>
+<li>当修改代码时，命名有可能偏离了它所表达的内容</li>
+<li>当找不到一个合适的能表达意图的命名时，说明它做的有点多了，需要重构</li>
 </ul>
-<p><strong>衡量周期</strong></p>
-<p>服务稳定性会定期评估，一般会每1周，每4周各进行评估一次</p>
-<p><strong>注意事项</strong></p>
-<p>当服务异常时或者强依赖的服务异常时，在响应请求时，请注意设置正确的 5xx 响应码，而不要像正常的请求一样响应 2xx 响应码，这样会导致可用性计算不准确，监控系统无法及时发现问题，无法及时报警，只能等到用户投诉反馈才能发现问题</p>
-<h3 id="基于错误预算的报警"><a href="#基于错误预算的报警" class="headerlink" title="基于错误预算的报警"></a>基于错误预算的报警</h3><p><strong>错误预算（Error Budget）</strong></p>
-<p>基于 SLO 来计算错误预算，比如可用性要求是 99.9%，预估一个周期的总请求数是100万，那错误预算就是 100万 X（1-0.999）= 1000，表示我们在一个统计周期内，最多只能有 1000 个请求可以失败</p>
-<p><strong>燃烧率（Burn Rate）</strong></p>
-<p>燃烧率表示错误预算的消耗速度，燃烧率为 1 时表示在一个统计周期内，刚好消耗完错误预算，如果 30 天的可用性要求是 99.9%，那么持续的 0.1% 的错误率，正好消耗掉所有错误预算，燃烧率为 1</p>
-<p><strong>燃烧率与错误率关系表：</strong></p>
-<p><img src="/posts/62/burn-rate.png" alt="burn-rate"></p>
-<p><strong>错误预算消耗</strong></p>
-<p>一定时间内，当错误预算消耗过快，我们可以选择报警，比如当 1 个小时消耗的错误预算超过 2% 时，6 个小时消耗的错误预算超过 5% 时。通过错误预算消耗的占比，我们可以计算出燃烧率。</p>
-<p>假定 30 天内的错误预算为 X，燃烧率为 1 表示 30*24 小时正好消耗完 X，那么当 1h 消耗 2% 的 X 的燃烧率就可以如下公式计算：</p>
-<p>燃烧率 = (2% <em> X / 1h) / (X / 30 </em> 24h) = 14.4</p>
-<p>常用的错误预算消耗与燃烧率：</p>
-<p><img src="/posts/62/burn-rate-1.png" alt=""></p>
-<p><strong>基于错误预算消耗报警</strong></p>
-<p>当错误预消耗过快，及时报警，并当问题解决时能及时解除报警。多时间周期综合报警规则：</p>
-<p><img src="/posts/62/alert.png" alt=""></p>
-<p>以上报警规则表示，当 1h 的错误预算消耗超过 2% 时，并且 5m 的错误率依然过高，错误预算消耗依然会持续达到 2%，就及时报警，当 6h 内的错误预算超过 5% 时，也会及时报警</p>
-<h3 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h3><p><a href="https://sre.google/workbook/slo-document/" target="_blank" rel="noopener">slo-document</a></p>
-<p><a href="https://sre.google/workbook/implementing-slos/" target="_blank" rel="noopener">implementing-slos</a></p>
-<p><a href="https://landing.google.com/sre/workbook/chapters/alerting-on-slos/" target="_blank" rel="noopener">alerting-on-slos</a></p>
-
-          
+</li>
+<li>消除重复（No Duplication (DRY)）<ul>
+<li>不是指代码层面的重复（code duplication），而是指知识重复（knowledge duplication）</li>
+<li>每块知识都应该有且只有一种表示</li>
+<li>一次并且只有一次（Once and Only Once）</li>
+</ul>
+</li>
+<li>小（Small）<ul>
+<li>应用以上原则的时候，注意本原则</li>
+<li>是否有任何不再使用的残留代码</li>
+<li>是否有任何重复的抽象，合并它们</li>
+<li>是否重构提取做的过头了</li>
+</ul>
+</li>
+<li>相互迭代<ul>
+<li>修复了命名问题之后，可能会发现一些重复，消除这些重复，可能会发现一些可以改进的表达方式</li></ul></li></ul></li></ul>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/posts/62/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
