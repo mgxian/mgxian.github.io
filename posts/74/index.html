@@ -104,7 +104,7 @@
 <meta property="og:image" content="https://mgxian.dev/posts/74/burn-rate.png">
 <meta property="og:image" content="https://mgxian.dev/posts/74/burn-rate-1.png">
 <meta property="og:image" content="https://mgxian.dev/posts/74/alert.png">
-<meta property="og:updated_time" content="2022-10-06T10:49:52.712Z">
+<meta property="og:updated_time" content="2022-10-06T10:58:52.177Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="服务稳定性指标规范">
 <meta name="twitter:description" content="简介服务稳定性就是我们常说的几个9如 99，99.9，99.99。用来衡量一个服务的稳定性。衡量服务可用性通常有如下两种方式： 时间维度：Availability = Uptime / (Uptime + Downtime) 请求维度：Availability = Successful request / Total request SRE 通常选择以请求维度来衡量服务稳定性 常用术语 SLA（S">
@@ -409,7 +409,7 @@
 <p>SLA（Service Level Agreement）服务等级协议，通常以几个 9 的形式出现，一般用于对客户的承诺</p>
 <p>SLI（Service Level Indicator）服务等级对象，qps、响应时间、请求成功率</p>
 <p>SLO（Service Level Objective）服务等级目标，对服务等级对象设定的目标，如 qps &gt; 100、响应时间 &lt; 100ms</p>
-<p>SLI 可以理解为我们用于衡量服务稳定性的监控指标，SLO 则是针对 SLI 设定的目标，比如 SLI 可能是异常响应码占比，那对应的 SLO 可能是异常响应码占比小于         0.5%</p>
+<p>SLI 可以理解为我们用于衡量服务稳定性的监控指标，SLO 则是针对 SLI 设定的目标，比如 SLI 可能是异常响应码占比，那对应的 SLO 可能是异常响应码占比小于 0.5%</p>
 <a id="more"></a>
 <h3 id="SLI-选择"><a href="#SLI-选择" class="headerlink" title="SLI 选择"></a>SLI 选择</h3><p>根据 Goole SRE 的实践，一般通过 VALET 方法（Volume、Availability、Latency、Error、Ticket）制定选择 SLI</p>
 <p>Volume（容量）：服务承诺的最大容量，可以选择 qps、tps、每小时处理的任务数等</p>

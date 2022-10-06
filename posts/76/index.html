@@ -101,14 +101,14 @@
 <meta property="og:site_name" content="mgxian&#39;s blog">
 <meta property="og:description" content="错误预算（Error Budget）基于SLO来计算错误预算，比如可用性要求是99.9%，预估一个周期的总请求数是100万，那错误预算就是 100万 X（1-0.999）= 1000，表示我们在一个统计周期内，最多只能有 1000 个请求可以失败 燃烧率（Burn Rate）燃烧率表示错误预算的消耗速度，燃烧率为1时表示在一个统计周期内，刚好消耗完错误预算，如果30天的可用性要求是99.9%，那么">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://uploader.shimo.im/f/Mx3qIAa0Bh9Jizfc.png!thumbnail?fileGuid=JJrCrXjCyJwQpvDW">
-<meta property="og:image" content="https://uploader.shimo.im/f/VppIqiDmJ3UK0gfv.png!thumbnail?fileGuid=JJrCrXjCyJwQpvDW">
-<meta property="og:image" content="https://uploader.shimo.im/f/xdMdCJboZIlmDmXv.png!thumbnail?fileGuid=JJrCrXjCyJwQpvDW">
-<meta property="og:updated_time" content="2022-10-06T10:52:53.388Z">
+<meta property="og:image" content="https://mgxian.dev/posts/76/1.png">
+<meta property="og:image" content="https://mgxian.dev/posts/76/2.png">
+<meta property="og:image" content="https://mgxian.dev/posts/76/3.png">
+<meta property="og:updated_time" content="2022-10-06T10:58:31.335Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="基于错误预算的报警">
 <meta name="twitter:description" content="错误预算（Error Budget）基于SLO来计算错误预算，比如可用性要求是99.9%，预估一个周期的总请求数是100万，那错误预算就是 100万 X（1-0.999）= 1000，表示我们在一个统计周期内，最多只能有 1000 个请求可以失败 燃烧率（Burn Rate）燃烧率表示错误预算的消耗速度，燃烧率为1时表示在一个统计周期内，刚好消耗完错误预算，如果30天的可用性要求是99.9%，那么">
-<meta name="twitter:image" content="https://uploader.shimo.im/f/Mx3qIAa0Bh9Jizfc.png!thumbnail?fileGuid=JJrCrXjCyJwQpvDW">
+<meta name="twitter:image" content="https://mgxian.dev/posts/76/1.png">
 
 
 
@@ -404,14 +404,14 @@
         <h3 id="错误预算（Error-Budget）"><a href="#错误预算（Error-Budget）" class="headerlink" title="错误预算（Error Budget）"></a>错误预算（Error Budget）</h3><p>基于SLO来计算错误预算，比如可用性要求是99.9%，预估一个周期的总请求数是100万，那错误预算就是 100万 X（1-0.999）= 1000，表示我们在一个统计周期内，最多只能有 1000 个请求可以失败</p>
 <h3 id="燃烧率（Burn-Rate）"><a href="#燃烧率（Burn-Rate）" class="headerlink" title="燃烧率（Burn Rate）"></a>燃烧率（Burn Rate）</h3><p>燃烧率表示错误预算的消耗速度，燃烧率为1时表示在一个统计周期内，刚好消耗完错误预算，如果30天的可用性要求是99.9%，那么持续的0.1%的错误率，正好消耗掉所有错误预算，燃烧率为1。<br><a id="more"></a></p>
 <p><strong>燃烧率与错误率关系表：</strong></p>
-<p><img src="https://uploader.shimo.im/f/Mx3qIAa0Bh9Jizfc.png!thumbnail?fileGuid=JJrCrXjCyJwQpvDW" alt="图片"></p>
+<p><img src="/posts/76/1.png" alt="图片"></p>
 <h3 id="错误预算消耗"><a href="#错误预算消耗" class="headerlink" title="错误预算消耗"></a>错误预算消耗</h3><p>一定时间内，当错误预算消耗过快，我们可以选择报警，比如当1个小时消耗的错误预算超过2%时，6个小时消耗的错误预算超过5%时。通过错误预算消耗的占比，我们可以计算出燃烧率。</p>
 <p>假定30天内的错误预算为X，燃烧率为1表示30*24小时正好消耗完X，那么当1h消耗2%的X的燃烧率就可以如下公式计算：</p>
 <p><strong>燃烧率 = (2% <em> X / 1h) / (X / 30 </em> 24h) = 14.4</strong></p>
 <p>常用的错误预算消耗与燃烧率：</p>
-<p><img src="https://uploader.shimo.im/f/VppIqiDmJ3UK0gfv.png!thumbnail?fileGuid=JJrCrXjCyJwQpvDW" alt="图片"></p>
+<p><img src="/posts/76/2.png" alt="图片"></p>
 <h3 id="基于错误预算消耗报警"><a href="#基于错误预算消耗报警" class="headerlink" title="基于错误预算消耗报警"></a>基于错误预算消耗报警</h3><p>当错误预消耗过快，及时报警，并当问题解决时能及时解除报警。多时间周期综合报警规则。报警示例：</p>
-<p><img src="https://uploader.shimo.im/f/xdMdCJboZIlmDmXv.png!thumbnail?fileGuid=JJrCrXjCyJwQpvDW" alt="图片"></p>
+<p><img src="/posts/76/3.png" alt="图片"></p>
 <p>以上报警规则表示，当1h的错误预算消耗超过2%时，并且错误数量大于10个时，并且5m的错误率依然过高，错误预算消耗依然会持续达到2%，就及时报警，当6h内的错误预算超过5%时，也会及时报警。</p>
 <p><code>service:slo_errors_per_request:ratio_rate1h{destination_service=&quot;prod.elasticsearch5-slb.slb.local.gllue.host&quot;} &gt; (14.4*(1-0.9999))</code> 规则是为了在 1h 错误预算消耗超过2%时及时报警，</p>
 <p><code>service:slo_errors:increase1h{destination_service=&quot;prod.elasticsearch5-slb.slb.local.gllue.host&quot;} &gt; 10</code> 规则是为了防止当请求量过少时，少量的出错请求就会导致报警，</p>
