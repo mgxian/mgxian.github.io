@@ -93,13 +93,13 @@
 
 
 
-<meta name="description" content="重构基础原则 表达意图（Expresses Intent） 消除重复（Eliminate Duplication）   简单设计四原则  通过测试（Tests Pass）  只有通过了测试软件设计才有意义 测试应该尽可能自动化 测试应该尽可能快   表达意图（Expresses Intent）  当修改代码时，能快速找到应该做修改的地方 当修改代码时，命名有可能偏离了它所表达的内容 当找不到一个">
+<meta name="description" content="重构基础原则 表达意图（Expresses Intent） 消除重复（Eliminate Duplication）   简单设计四原则 通过测试（Tests Pass） 只有通过了测试软件设计才有意义 测试应该尽可能自动化 测试应该尽可能快   表达意图（Expresses Intent） 当修改代码时，能快速找到应该做修改的地方 当修改代码时，命名有可能偏离了它所表达的内容 当找不到一个合适的">
 <meta name="keywords" content="develop">
 <meta property="og:type" content="article">
 <meta property="og:title" content="简单设计四原则">
 <meta property="og:url" content="https://mgxian.dev/posts/74/index.html">
 <meta property="og:site_name" content="mgxian&#39;s blog">
-<meta property="og:description" content="重构基础原则 表达意图（Expresses Intent） 消除重复（Eliminate Duplication）   简单设计四原则  通过测试（Tests Pass）  只有通过了测试软件设计才有意义 测试应该尽可能自动化 测试应该尽可能快   表达意图（Expresses Intent）  当修改代码时，能快速找到应该做修改的地方 当修改代码时，命名有可能偏离了它所表达的内容 当找不到一个">
+<meta property="og:description" content="重构基础原则 表达意图（Expresses Intent） 消除重复（Eliminate Duplication）   简单设计四原则 通过测试（Tests Pass） 只有通过了测试软件设计才有意义 测试应该尽可能自动化 测试应该尽可能快   表达意图（Expresses Intent） 当修改代码时，能快速找到应该做修改的地方 当修改代码时，命名有可能偏离了它所表达的内容 当找不到一个合适的">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://api2.mubu.com/v3/document_image/6f3ee387-bb03-471f-a7d1-fdf79900ea47-156946.jpg">
 <meta property="og:image" content="https://api2.mubu.com/v3/document_image/082abfd7-a6a5-4121-b1d0-229de4458ebe-156946.jpg">
@@ -140,10 +140,10 @@
 <meta property="og:image" content="https://api2.mubu.com/v3/document_image/fa00d63f-88f8-4d52-b62a-2084c7f5c2f3-156946.jpg">
 <meta property="og:image" content="https://api2.mubu.com/v3/document_image/e965aa09-fbf8-42fd-a182-6723fa00e1a8-156946.jpg">
 <meta property="og:image" content="https://api2.mubu.com/v3/document_image/0db9331a-9f0a-454c-a328-dde0beb461f3-156946.jpg">
-<meta property="og:updated_time" content="2022-10-06T10:04:54.511Z">
+<meta property="og:updated_time" content="2022-10-06T10:31:18.031Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="简单设计四原则">
-<meta name="twitter:description" content="重构基础原则 表达意图（Expresses Intent） 消除重复（Eliminate Duplication）   简单设计四原则  通过测试（Tests Pass）  只有通过了测试软件设计才有意义 测试应该尽可能自动化 测试应该尽可能快   表达意图（Expresses Intent）  当修改代码时，能快速找到应该做修改的地方 当修改代码时，命名有可能偏离了它所表达的内容 当找不到一个">
+<meta name="twitter:description" content="重构基础原则 表达意图（Expresses Intent） 消除重复（Eliminate Duplication）   简单设计四原则 通过测试（Tests Pass） 只有通过了测试软件设计才有意义 测试应该尽可能自动化 测试应该尽可能快   表达意图（Expresses Intent） 当修改代码时，能快速找到应该做修改的地方 当修改代码时，命名有可能偏离了它所表达的内容 当找不到一个合适的">
 <meta name="twitter:image" content="https://api2.mubu.com/v3/document_image/6f3ee387-bb03-471f-a7d1-fdf79900ea47-156946.jpg">
 
 
@@ -443,59 +443,49 @@
 <li>消除重复（Eliminate Duplication）</li>
 </ul>
 </li>
-<li><p>简单设计四原则</p>
-<ul>
-<li><p>通过测试（Tests Pass）</p>
-<ul>
+<li>简单设计四原则<ul>
+<li>通过测试（Tests Pass）<ul>
 <li>只有通过了测试软件设计才有意义</li>
 <li>测试应该尽可能自动化</li>
 <li>测试应该尽可能快</li>
 </ul>
 </li>
-<li><p>表达意图（Expresses Intent）</p>
-<ul>
+<li>表达意图（Expresses Intent）<ul>
 <li>当修改代码时，能快速找到应该做修改的地方</li>
 <li>当修改代码时，命名有可能偏离了它所表达的内容</li>
 <li>当找不到一个合适的能表达意图的命名时，说明它做的有点多了，需要重构</li>
 </ul>
 </li>
-<li><p>消除重复（No Duplication (DRY)）</p>
-<ul>
+<li>消除重复（No Duplication (DRY)）<ul>
 <li>不是指代码层面的重复（code duplication），而是指知识重复（knowledge duplication）</li>
 <li>每块知识都应该有且只有一种表示</li>
 <li>一次并且只有一次（Once and Only Once）</li>
 </ul>
 </li>
-<li><p>小（Small）</p>
-<ul>
+<li>小（Small）<ul>
 <li>应用以上原则的时候，注意本原则</li>
 <li>是否有任何不再使用的残留代码</li>
 <li>是否有任何重复的抽象，合并它们</li>
 <li>是否重构提取做的过头了</li>
 </ul>
 </li>
-<li><p>相互迭代</p>
-<ul>
+<li>相互迭代<ul>
 <li>修复了命名问题之后，可能会发现一些重复，消除这些重复，可能会发现一些可以改进的表达方式<a id="more"></a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><p>具体示例</p>
-<ul>
-<li><p>测试名称应该影响对象的 API</p>
-<ul>
+<li>具体示例<ul>
+<li>测试名称应该影响对象的 API<ul>
 <li>测试名称应该表达测试代码的意图</li>
-<li><p>示例 1</p>
-<ul>
+<li>示例 1<ul>
 <li>代码<img src="https://api2.mubu.com/v3/document_image/6f3ee387-bb03-471f-a7d1-fdf79900ea47-156946.jpg" alt=""></li>
 <li>测试名称提到了 empty world，但是测试代码中却没有这个empty world 概念</li>
 <li>测试代码只是粗暴地拿出了对象的集合并计数</li>
 <li>优化<img src="https://api2.mubu.com/v3/document_image/082abfd7-a6a5-4121-b1d0-229de4458ebe-156946.jpg" alt=""></li>
 </ul>
 </li>
-<li><p>示例 2</p>
-<ul>
+<li>示例 2<ul>
 <li>代码<img src="https://api2.mubu.com/v3/document_image/0f53220d-ecd9-4425-acb6-b7214311db87-156946.jpg" alt=""></li>
 <li>优化<img src="https://api2.mubu.com/v3/document_image/09d94756-fcd8-412d-8da8-290e2359dbdf-156946.jpg" alt=""></li>
 <li>更小的测试驱动<img src="https://api2.mubu.com/v3/document_image/a1af3b4c-d1d2-4818-9299-b9e3b2969cfd-156946.jpg" alt=""></li>
@@ -503,15 +493,13 @@
 </li>
 </ul>
 </li>
-<li><p>拓扑结构的知识重复</p>
-<ul>
+<li>拓扑结构的知识重复<ul>
 <li>代码<img src="https://api2.mubu.com/v3/document_image/bdca943c-d547-49e9-af43-8fc7d30fe82c-156946.jpg" alt=""><img src="https://api2.mubu.com/v3/document_image/3030f861-1f9a-4beb-a134-db4e5cbecc64-156946.jpg" alt=""></li>
 <li>拓扑结构的知识重复了，如果之后使用三维坐标，可能就需要同时修改这两个地方</li>
 <li>优化<img src="https://api2.mubu.com/v3/document_image/ef0ded26-91fe-4e5b-ac90-4ff0125a8333-156946.jpg" alt=""><img src="https://api2.mubu.com/v3/document_image/326e0dda-ddae-41a8-82e6-aff523b96ccd-156946.jpg" alt=""></li>
 </ul>
 </li>
-<li><p>行为吸引</p>
-<ul>
+<li>行为吸引<ul>
 <li>代码<img src="https://api2.mubu.com/v3/document_image/3aab9c0c-2884-4898-beaa-48330549af05-156946.jpg" alt=""></li>
 <li>在实现 alive_in_next_generation 时，我们发现需要如下方法，但是我们不确定这个方法应该放在哪一个类中<img src="https://api2.mubu.com/v3/document_image/35caa453-1b38-4eb1-a4f8-cd8a14daeb9a-156946.jpg" alt=""></li>
 <li>但是如果我们之前提取了 Location ，我们会发现这是个好地方<img src="https://api2.mubu.com/v3/document_image/1cae8982-5107-4341-a375-4a9cc1a72bde-156946.jpg" alt=""></li>
@@ -519,38 +507,33 @@
 <li>如果我们发现我们想实现的新行为，不知道应该放在哪里，这可能表明我们的系统没有很好地表达某个概念</li>
 </ul>
 </li>
-<li><p>测试状态与测试行为</p>
-<ul>
+<li>测试状态与测试行为<ul>
 <li>状态测试<img src="https://api2.mubu.com/v3/document_image/5b0f0ced-1c4d-4da5-80b2-a00ca28ca175-156946.jpg" alt=""><img src="https://api2.mubu.com/v3/document_image/366a4210-fc53-40e6-a44f-5b6b223e4d51-156946.jpg" alt=""></li>
 <li>行为测试<img src="https://api2.mubu.com/v3/document_image/e3906799-7385-411c-a5c8-980fa279778f-156946.jpg" alt=""></li>
 <li>我们应该更专注于行为测试</li>
 </ul>
 </li>
-<li><p>新的测试不要依赖之前的测试</p>
-<ul>
+<li>新的测试不要依赖之前的测试<ul>
 <li>代码<img src="https://api2.mubu.com/v3/document_image/fd133dae-ac1d-47a4-a148-7744e8c54fd5-156946.jpg" alt=""></li>
 <li>我们如何确定初始化的 word 就是 empty world，我们依赖了之前的测试<img src="https://api2.mubu.com/v3/document_image/5b0f0ced-1c4d-4da5-80b2-a00ca28ca175-156946.jpg" alt=""></li>
 <li>优化<img src="https://api2.mubu.com/v3/document_image/21fae542-80ae-41c4-a7bb-86f6935949cb-156946.jpg" alt=""></li>
 <li>外部调用者不应该调用基础的构造方法，外部调用者不能使用 new 去初始化一个实例，然后期望它有特定的状态</li>
 </ul>
 </li>
-<li><p>打破抽象层次</p>
-<ul>
+<li>打破抽象层次<ul>
 <li>代码<img src="https://api2.mubu.com/v3/document_image/a811ab67-c3fc-4328-b536-687d389d22a3-156946.jpg" alt=""></li>
 <li>我们依赖了 Location 的具体实现，如果我们修改了 Location 类，可能会导致很多测试失败，应该把拓扑相关的知识封装在 Location 类中</li>
 <li>优化<img src="https://api2.mubu.com/v3/document_image/4bae41ca-ab63-4497-956f-5da4bfde6f31-156946.jpg" alt=""></li>
 </ul>
 </li>
-<li><p>简单重复</p>
-<ul>
+<li>简单重复<ul>
 <li>代码<img src="https://api2.mubu.com/v3/document_image/bb654199-a726-45f4-a5a1-c2cadd5c226e-156946.jpg" alt=""></li>
 <li>number_of_neighbors == 3 看起来有点重复，可能会重构成如下所示<img src="https://api2.mubu.com/v3/document_image/10600476-de3e-494d-95fc-5d4b44aab3bf-156946.jpg" alt=""></li>
 <li>当我们理解它们的意图时发现，发现应该重构成如下所示<img src="https://api2.mubu.com/v3/document_image/0e861adc-ce79-407b-b8db-3546681674c6-156946.jpg" alt=""></li>
 <li>它们不是知识的重复，它们只是巧合的代码重复，我们不能看到代码重复就去消除重复</li>
 </ul>
 </li>
-<li><p>程序上的多态性</p>
-<ul>
+<li>程序上的多态性<ul>
 <li>代码<img src="https://api2.mubu.com/v3/document_image/d1f58eca-a6a0-472e-ab3f-d54ebb52a05c-156946.jpg" alt=""></li>
 <li>alive_in_next_generation 方法更像是一个面向状态的描述，而不是一个行为相关的问题</li>
 <li>为什么我们会对 alive 更感兴趣，还可以添加其他状态吗？重构成如下所示<img src="https://api2.mubu.com/v3/document_image/52eb5f97-1e03-42d6-b366-d0a774bfafc8-156946.jpg" alt=""></li>
@@ -558,8 +541,7 @@
 <li>为了更好的表达意图，我们也可能会重构成如下所示<img src="https://api2.mubu.com/v3/document_image/40571cda-ffa3-4406-9749-9b24ea8c63e7-156946.jpg" alt=""></li>
 </ul>
 </li>
-<li><p>对使用做出假设</p>
-<ul>
+<li>对使用做出假设<ul>
 <li>代码<img src="https://api2.mubu.com/v3/document_image/3b5764bd-ff39-47a0-8f1c-8fa60fee54f6-156946.jpg" alt=""></li>
 <li>我们可能会这样使用 cell.stays_alive?(number_of_neighbors) ，</li>
 <li>这些类是围绕状态构建的，它们实际上代表了规则，为什么 Cell 抽象会围绕规则，为什么我们不具体化为规则</li>
@@ -567,8 +549,7 @@
 <li>这些抽象需要吗？我们要考虑我们是不是对使用做出了假设</li>
 </ul>
 </li>
-<li><p>打开对象</p>
-<ul>
+<li>打开对象<ul>
 <li>代码<img src="https://api2.mubu.com/v3/document_image/6b3b2e1e-8f71-403e-93f8-fb20e709249d-156946.jpg" alt=""><img src="https://api2.mubu.com/v3/document_image/3d2aa527-4225-4c5e-806b-68eef7fc5ba2-156946.jpg" alt=""></li>
 <li>大部分情况下，我们问对象要一些它们的数据或者计算，然后做一些计算把结果填充到其他对象</li>
 <li>通过禁用返回值，我们可以强制我们依赖对象去执行行为</li>
@@ -577,8 +558,7 @@
 <li>调用者<img src="https://api2.mubu.com/v3/document_image/1c2e5ac6-2950-449c-83b7-bb4c890da83f-156946.jpg" alt=""><img src="https://api2.mubu.com/v3/document_image/850c38c9-934c-4bce-8783-2f243dfbbe3f-156946.jpg" alt=""></li>
 </ul>
 </li>
-<li><p>反向组合代替继承</p>
-<ul>
+<li>反向组合代替继承<ul>
 <li>代码<img src="https://api2.mubu.com/v3/document_image/846026a2-384b-4cb0-8d11-3ccd60f28cc8-156946.jpg" alt=""></li>
 <li>使用继承<img src="https://api2.mubu.com/v3/document_image/fa00d63f-88f8-4d52-b62a-2084c7f5c2f3-156946.jpg" alt=""></li>
 <li>虽然使用了继承，但是两个类型仍然包含了同样的知识</li>
