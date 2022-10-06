@@ -1,0 +1,1209 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="ES,Elasticsearch," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="简介Elasticsearch 是一个高度可扩展的开源全文搜索分析引擎，可以快速的以接近实时速度存储、搜索、分析大量的数据。使用 Elasticsearch 可以实现复杂的搜索需求。Elasticsearch 可以以单节点的方式启动，也可以以集群的方式运行。Elasticsearch 通常用来解决 MySQL 在数据量比较大时，使用 like 来模糊匹配性能差的问题。 基础概念集群（cluster">
+<meta name="keywords" content="ES,Elasticsearch">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ElasticSearch使用入门">
+<meta property="og:url" content="https://mgxian.dev/posts/59/index.html">
+<meta property="og:site_name" content="mgxian&#39;s blog">
+<meta property="og:description" content="简介Elasticsearch 是一个高度可扩展的开源全文搜索分析引擎，可以快速的以接近实时速度存储、搜索、分析大量的数据。使用 Elasticsearch 可以实现复杂的搜索需求。Elasticsearch 可以以单节点的方式启动，也可以以集群的方式运行。Elasticsearch 通常用来解决 MySQL 在数据量比较大时，使用 like 来模糊匹配性能差的问题。 基础概念集群（cluster">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2022-10-06T07:54:01.972Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ElasticSearch使用入门">
+<meta name="twitter:description" content="简介Elasticsearch 是一个高度可扩展的开源全文搜索分析引擎，可以快速的以接近实时速度存储、搜索、分析大量的数据。使用 Elasticsearch 可以实现复杂的搜索需求。Elasticsearch 可以以单节点的方式启动，也可以以集群的方式运行。Elasticsearch 通常用来解决 MySQL 在数据量比较大时，使用 like 来模糊匹配性能差的问题。 基础概念集群（cluster">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 'undefined',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://mgxian.dev/posts/59/"/>
+
+
+
+
+
+  <title>ElasticSearch使用入门 | mgxian's blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">mgxian's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://mgxian.dev/posts/59/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="mgxian">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="mgxian's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">ElasticSearch使用入门</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-06-10T15:50:25+08:00">
+                2021-06-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/开发/" itemprop="url" rel="index">
+                    <span itemprop="name">开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>Elasticsearch 是一个高度可扩展的开源全文搜索分析引擎，可以快速的以接近实时速度存储、搜索、分析大量的数据。使用 Elasticsearch 可以实现复杂的搜索需求。Elasticsearch 可以以单节点的方式启动，也可以以集群的方式运行。Elasticsearch 通常用来解决 MySQL 在数据量比较大时，使用 like 来模糊匹配性能差的问题。</p>
+<h3 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h3><p><strong>集群（cluster）</strong>是多个 Elasticsearch 节点的集合。共同存储数据，提供服务。</p>
+<p><strong>节点（node）</strong>是 Elasticsearch 集群中的单个服务器。</p>
+<a id="more"></a>
+<p><strong>分片（shards）</strong>由于索引可能会存储大量的数据，以至于超过单个 ES 节点的硬件资源限制，为了解决这个问题，ES 提供了分片功能，可以把一个索引分成若干个分片，每个分片只存储索引部分数据。分片对用户是完全透明的，用户仍然可以把索引当成一个整体来使用。</p>
+<p><strong>副本（replicas）</strong>当索引数据分成多个分片后，为了保证高可用性，可以把同一个分片数据复制多份存储，这些复制的数据就被称为副本分片，简称副本。</p>
+<p><strong>索引（index）</strong>是拥有相似特征的文档集合，相当于 MySQL 中的表。</p>
+<p><strong>映射（mapping）</strong>是索引中存储的文档数据的结构定义，相当于 MySQL 中的表结构定义。</p>
+<p><strong>类型（type）</strong>是索引的逻辑分隔，为了在同一个索引中存储不同类型的文档数据。在 ES 6.x 及之后的版本已经被废弃，不再支持在一个索引中存储多种类型的文档数据。</p>
+<p><strong>文档（document）</strong>是 ES 中索引存储的基本数据单位，相当于 MySQL 表中的一行数据。</p>
+<h3 id="简单使用入门"><a href="#简单使用入门" class="headerlink" title="简单使用入门"></a>简单使用入门</h3><p><code>http://localhost:9200/</code> 是 ES 启动之后的监听地址。</p>
+<h4 id="管理索引"><a href="#管理索引" class="headerlink" title="管理索引"></a>管理索引</h4><p><strong>查看所有索引</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl http://localhost:9200/_cat/indices?v</span><br></pre></td></tr></table></figure>
+<p><strong>创建索引</strong></p>
+<p>创建名为 <code>test</code> 的索引。<code>?pretty</code> 用来设置让 ES 返回格式化后的 json 响应数据，方便在命令行中查看数据。实际生产环境可以去除该参数。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -X PUT http://localhost:9200/<span class="built_in">test</span>?pretty</span><br></pre></td></tr></table></figure>
+<p><strong>删除索引</strong></p>
+<p>删除名为 <code>test</code> 的索引。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -X DELETE http://localhost:9200/<span class="built_in">test</span>?pretty</span><br></pre></td></tr></table></figure>
+<h4 id="管理索引的映射"><a href="#管理索引的映射" class="headerlink" title="管理索引的映射"></a>管理索引的映射</h4><p>索引的映射决定了索引中存储的文档的字段及其类型，类似于 MySQL 中的表结构定义。ES 支持动态的索引映射，可以在不创建映射的情况下存储文档数据，ES 会为索引动态创建映射。但是由于默认动态创建的映射为了有更好的通用性，规则比较宽松，可能会造成映射之后的数据存储空间占用比较大的情况。推荐根据业务需求提前为索引创建好映射。对于已经创建好的映射中字段，是无法修改其类型的，即使修改成功，之前已经索引的数据也不会发生改变。</p>
+<p>映射字段常用类型：</p>
+<ul>
+<li>字符串类型<ul>
+<li><strong>text</strong> 全文索引类型，对字段值进行分词后索引并存储，当需要对该字段进行全文索引时，使用此类型。</li>
+<li><strong>keyword</strong> 关键字索引，不进行分词，把整个字段值作为一个整体索引并存储，适合于精确匹配，如：根据完整的用户名查找用户。</li>
+</ul>
+</li>
+<li>数字类型<ul>
+<li><strong>long</strong> 64位整数，整数范围 -2^63 ~ 2^63 -1</li>
+<li><strong>integer</strong> 32位整数，整数范围 -2^31 ~ 2^31 -1</li>
+<li><strong>short</strong> 16位整数，整数范围 -2^15 ~ 2^15 -1</li>
+<li><strong>byte</strong> 8位整数，整数范围 -2^7 ~ 2^7 -1</li>
+<li><strong>double</strong> 64位浮点数</li>
+<li><strong>float</strong> 32位浮点数</li>
+</ul>
+</li>
+<li>日期类型<ul>
+<li><strong>date</strong></li>
+</ul>
+</li>
+<li>布尔类型<ul>
+<li><strong>bool</strong> true 和 false</li>
+</ul>
+</li>
+</ul>
+<p>其他类型以及详细信息可查看<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-types.html" target="_blank" rel="noopener">官方文档</a>。</p>
+<p><strong>查看索引的映射</strong></p>
+<p>查看 <code>test</code> 索引的映射。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl http://localhost:9200/<span class="built_in">test</span>/_mapping?pretty</span><br></pre></td></tr></table></figure>
+<p><strong>更新索引映射</strong></p>
+<p>更新 <code>test</code> 索引中 <code>_doc</code> 类型的映射。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">curl -X PUT http://localhost:9200/<span class="built_in">test</span>/_mapping/_doc?pretty -H <span class="string">'Content-Type: application/json'</span> -d<span class="string">'</span></span><br><span class="line"><span class="string">&#123;</span></span><br><span class="line"><span class="string">    "properties": &#123;</span></span><br><span class="line"><span class="string">        "name": &#123;</span></span><br><span class="line"><span class="string">            "type": "text"</span></span><br><span class="line"><span class="string">        &#125;,</span></span><br><span class="line"><span class="string">        "nickname": &#123;</span></span><br><span class="line"><span class="string">            "type": "text",</span></span><br><span class="line"><span class="string">            "fields": &#123;</span></span><br><span class="line"><span class="string">                "raw": &#123;</span></span><br><span class="line"><span class="string">                    "type": "keyword"</span></span><br><span class="line"><span class="string">                &#125;</span></span><br><span class="line"><span class="string">            &#125;</span></span><br><span class="line"><span class="string">        &#125;,</span></span><br><span class="line"><span class="string">        "admin": &#123;</span></span><br><span class="line"><span class="string">            "type": "byte"</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">'</span></span><br><span class="line"></span><br><span class="line">curl http://localhost:9200/<span class="built_in">test</span>/_mapping?pretty</span><br></pre></td></tr></table></figure>
+<p>说明：</p>
+<ul>
+<li>name 字段只用全文索引，所以设置类型为 text 类型。</li>
+<li>nickname 字段由于需要全文索引又需要精确匹配，所以设置原始类型设置为 text 类型，并且再额外存储一个字段名为 raw 类型为 keyword 类型的字段，用于精准匹配，使用时字段名为 nickname.raw 。</li>
+<li>admin 字段只存储简单的 0，1 数据，所以选择占用空间更小的 byte 类型。</li>
+</ul>
+<p><strong>注意：</strong></p>
+<p>对于不需要过滤或者搜索，仅需要获取的字段可以设置不进行索引来节省存储空间。如下所示：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"properties"</span>: &#123;</span><br><span class="line">        <span class="attr">"name"</span>: &#123;</span><br><span class="line">            <span class="attr">"type"</span>: <span class="string">"text"</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">"nickname"</span>: &#123;</span><br><span class="line">            <span class="attr">"type"</span>: <span class="string">"text"</span>,</span><br><span class="line">            <span class="attr">"fields"</span>: &#123;</span><br><span class="line">                <span class="attr">"raw"</span>: &#123;</span><br><span class="line">                    <span class="attr">"type"</span>: <span class="string">"keyword"</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">"admin"</span>: &#123;</span><br><span class="line">            <span class="attr">"type"</span>: <span class="string">"byte"</span>,</span><br><span class="line">			<span class="attr">"index"</span>: <span class="literal">false</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>默认情况下不支持使用 text 类型的字段排序，如果需要使用 text 类型的字段排序，需要使用如下配置方式：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"properties"</span>: &#123;</span><br><span class="line">        <span class="attr">"name"</span>: &#123;</span><br><span class="line">            <span class="attr">"type"</span>: <span class="string">"text"</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">"nickname"</span>: &#123;</span><br><span class="line">            <span class="attr">"type"</span>: <span class="string">"text"</span>,</span><br><span class="line">			<span class="attr">"fielddata"</span>: <span class="literal">true</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">"admin"</span>: &#123;</span><br><span class="line">            <span class="attr">"type"</span>: <span class="string">"byte"</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="管理文档数据"><a href="#管理文档数据" class="headerlink" title="管理文档数据"></a>管理文档数据</h4><p><strong>添加单条数据</strong></p>
+<p> 向 <code>test</code> 索引的 <code>_doc</code> 类型添加一条 id 为 1 的数据。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">curl -X PUT http://localhost:9200/<span class="built_in">test</span>/_doc/1?pretty -H <span class="string">'Content-Type: application/json'</span> -d<span class="string">'</span></span><br><span class="line"><span class="string">&#123;</span></span><br><span class="line"><span class="string">  "name": "will",</span></span><br><span class="line"><span class="string">  "nickname": "John Doe",</span></span><br><span class="line"><span class="string">  "admin": 0</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">'</span></span><br></pre></td></tr></table></figure>
+<p><strong>查询数据</strong></p>
+<p>查看 <code>test</code> 索引中类型为 <code>_doc</code> 且 id 为 1 的数据。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl http://localhost:9200/<span class="built_in">test</span>/_doc/1?pretty</span><br></pre></td></tr></table></figure>
+<p><strong>更新数据</strong></p>
+<p>更新 <code>test</code> 索引中类型为 <code>_doc</code>  且 id 为 1 的数据。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">curl -X POST http://localhost:9200/<span class="built_in">test</span>/_doc/1/_update?pretty -H <span class="string">'Content-Type: application/json'</span> -d<span class="string">'</span></span><br><span class="line"><span class="string">&#123;</span></span><br><span class="line"><span class="string">  "doc": &#123;</span></span><br><span class="line"><span class="string">      "nickname": "hello will"</span></span><br><span class="line"><span class="string">  &#125;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">'</span></span><br></pre></td></tr></table></figure>
+<p><strong>批量添加或更新数据</strong></p>
+<p>向 <code>test</code> 索引批量添加类型为 <code>_doc</code> 数据。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">curl -X POST -H <span class="string">"Content-Type: application/json"</span> http://localhost:9200/<span class="built_in">test</span>/_doc/_bulk?pretty -d<span class="string">'</span></span><br><span class="line"><span class="string">&#123;"index":&#123;"_id":"2"&#125;&#125;</span></span><br><span class="line"><span class="string">&#123;"name":"cwill","nickname":"how are you","admin":1&#125;</span></span><br><span class="line"><span class="string">&#123;"index":&#123;"_id":"3"&#125;&#125;</span></span><br><span class="line"><span class="string">&#123;"name":"will2","nickname":"will is very good","admin":0&#125;</span></span><br><span class="line"><span class="string">&#123;"index":&#123;"_id":"4"&#125;&#125;</span></span><br><span class="line"><span class="string">&#123;"name":"awill","nickname":"hi amgxian","admin":0&#125;</span></span><br><span class="line"><span class="string">&#123;"index":&#123;"_id":"5"&#125;&#125;</span></span><br><span class="line"><span class="string">&#123;"name":"Will","nickname":"hello world","admin":1&#125;</span></span><br><span class="line"><span class="string">'</span></span><br></pre></td></tr></table></figure>
+<p><strong>删除数据</strong></p>
+<p>删除 <code>test</code> 索引中类型为 <code>_doc</code>  且 id 为 1 的数据。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -X DELETE http://localhost:9200/<span class="built_in">test</span>/_doc/1?pretty</span><br></pre></td></tr></table></figure>
+<h4 id="搜索数据"><a href="#搜索数据" class="headerlink" title="搜索数据"></a>搜索数据</h4><p>搜索数据可以使用如下的两种方式：</p>
+<ul>
+<li><strong>query 查询</strong> 检查数据与搜索关键字的匹配度，返回 score 值表示相关度得分。</li>
+<li><strong>filter 过滤器</strong> 只检查数据与搜索关键字是否匹配，不计算匹配度，不返回 score 值。</li>
+</ul>
+<p>filter 过滤器能缓存查询结果，性能会更好。</p>
+<h5 id="query-查询"><a href="#query-查询" class="headerlink" title="query 查询"></a>query 查询</h5><p><strong>搜索所有数据</strong></p>
+<p>在 <code>test</code> 索引中搜索数据，从位置 0 开始取数据，取 3 条数据，只获取数据的 nickname 和 name 字段，以 admin 字段降序且以 nickname.raw 字段升序排序。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">curl http://localhost:9200/<span class="built_in">test</span>/_search?pretty</span><br><span class="line"></span><br><span class="line">curl http://localhost:9200/<span class="built_in">test</span>/_search?pretty -H <span class="string">"Content-Type: application/json"</span>  -d<span class="string">'</span></span><br><span class="line"><span class="string">&#123;</span></span><br><span class="line"><span class="string">    "query": &#123;</span></span><br><span class="line"><span class="string">        "match_all": &#123;&#125;</span></span><br><span class="line"><span class="string">    &#125;,</span></span><br><span class="line"><span class="string">    "from": 0,</span></span><br><span class="line"><span class="string">    "size": 3,</span></span><br><span class="line"><span class="string">    "_source": [</span></span><br><span class="line"><span class="string">        "nickname",</span></span><br><span class="line"><span class="string">        "name"</span></span><br><span class="line"><span class="string">    ],</span></span><br><span class="line"><span class="string">    "sort": [</span></span><br><span class="line"><span class="string">        &#123;</span></span><br><span class="line"><span class="string">            "admin": "desc"</span></span><br><span class="line"><span class="string">        &#125;,</span></span><br><span class="line"><span class="string">        &#123;</span></span><br><span class="line"><span class="string">            "nickname.raw": "asc"</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">    ]</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">'</span></span><br></pre></td></tr></table></figure>
+<p><strong>搜索指定数据</strong></p>
+<p>在 <code>test</code> 索引中搜索 nickname 字段中包含 will 关键字的用户。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">curl http://localhost:9200/<span class="built_in">test</span>/_search?pretty -H <span class="string">"Content-Type: application/json"</span>  -d<span class="string">'</span></span><br><span class="line"><span class="string">&#123;</span></span><br><span class="line"><span class="string">    "query": &#123;</span></span><br><span class="line"><span class="string">        "match": &#123;</span></span><br><span class="line"><span class="string">            "nickname": "will"</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">    &#125;,</span></span><br><span class="line"><span class="string">    "from": 0,</span></span><br><span class="line"><span class="string">    "size": 3,</span></span><br><span class="line"><span class="string">    "_source": ["nickname", "name"]</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">'</span></span><br></pre></td></tr></table></figure>
+<p><strong>精准匹配数据</strong></p>
+<p>在 <code>test</code> 索引中搜索 nickname.raw 字段等于 hello world 关键字的用户。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">curl http://localhost:9200/<span class="built_in">test</span>/_search?pretty -H <span class="string">"Content-Type: application/json"</span>  -d<span class="string">'</span></span><br><span class="line"><span class="string">&#123;</span></span><br><span class="line"><span class="string">    "query": &#123;</span></span><br><span class="line"><span class="string">        "term": &#123;</span></span><br><span class="line"><span class="string">            "nickname.raw": "hello world"</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">    &#125;,</span></span><br><span class="line"><span class="string">    "from": 0,</span></span><br><span class="line"><span class="string">    "size": 3,</span></span><br><span class="line"><span class="string">    "_source": ["nickname", "name"]</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">'</span></span><br></pre></td></tr></table></figure>
+<p><strong>多字段数据匹配</strong></p>
+<p>在 <code>test</code> 索引中搜索 name 字段或者 nickname 字段中包含 hello 关键字的用户。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">curl http://localhost:9200/<span class="built_in">test</span>/_search?pretty -H <span class="string">"Content-Type: application/json"</span>  -d<span class="string">'</span></span><br><span class="line"><span class="string">&#123;</span></span><br><span class="line"><span class="string">    "query": &#123;</span></span><br><span class="line"><span class="string">        "multi_match": &#123;</span></span><br><span class="line"><span class="string">            "query": "hello",</span></span><br><span class="line"><span class="string">            "fields": ["nickname", "name"]</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">    &#125;,</span></span><br><span class="line"><span class="string">    "from": 0,</span></span><br><span class="line"><span class="string">    "size": 3,</span></span><br><span class="line"><span class="string">    "_source": ["nickname", "name"]</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">'</span></span><br></pre></td></tr></table></figure>
+<p><strong>前缀数据匹配</strong></p>
+<p>在 <code>test</code> 索引中搜索 nickname.raw 字段中以 will 作为前缀的用户。一般多用于 keyword 类型。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">curl http://localhost:9200/<span class="built_in">test</span>/_search?pretty -H <span class="string">"Content-Type: application/json"</span>  -d<span class="string">'</span></span><br><span class="line"><span class="string">&#123;</span></span><br><span class="line"><span class="string">    "query": &#123;</span></span><br><span class="line"><span class="string">        "prefix": &#123;</span></span><br><span class="line"><span class="string">            "nickname.raw": "will"</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">    &#125;,</span></span><br><span class="line"><span class="string">    "from": 0,</span></span><br><span class="line"><span class="string">    "size": 3,</span></span><br><span class="line"><span class="string">    "_source": ["nickname", "name"]</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">'</span></span><br></pre></td></tr></table></figure>
+<p><strong>组合搜索</strong></p>
+<p>在 <code>test</code> 索引中搜索 admin 字段等于 1 且 name 字段中包含 will 关键字的用户。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">curl http://localhost:9200/<span class="built_in">test</span>/_search?pretty -H <span class="string">"Content-Type: application/json"</span>  -d<span class="string">'</span></span><br><span class="line"><span class="string">&#123;</span></span><br><span class="line"><span class="string">    "query": &#123;</span></span><br><span class="line"><span class="string">        "bool": &#123;</span></span><br><span class="line"><span class="string">            "must": [&#123;</span></span><br><span class="line"><span class="string">                    "match": &#123;</span></span><br><span class="line"><span class="string">                        "name": "will"</span></span><br><span class="line"><span class="string">                    &#125;</span></span><br><span class="line"><span class="string">                &#125;,</span></span><br><span class="line"><span class="string">                &#123;</span></span><br><span class="line"><span class="string">                    "term": &#123;</span></span><br><span class="line"><span class="string">                        "admin": 1</span></span><br><span class="line"><span class="string">                    &#125;</span></span><br><span class="line"><span class="string">                &#125;</span></span><br><span class="line"><span class="string">            ]</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">    &#125;,</span></span><br><span class="line"><span class="string">    "from": 0,</span></span><br><span class="line"><span class="string">    "size": 3,</span></span><br><span class="line"><span class="string">    "_source": ["nickname", "name", "admin"]</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">'</span></span><br></pre></td></tr></table></figure>
+<h5 id="filter-过滤器"><a href="#filter-过滤器" class="headerlink" title="filter 过滤器"></a>filter 过滤器</h5><p>在 <code>test</code> 索引中搜索 admin 字段等于 1 的用户。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">curl http://localhost:9200/<span class="built_in">test</span>/_search?pretty -H <span class="string">"Content-Type: application/json"</span>  -d<span class="string">'</span></span><br><span class="line"><span class="string">&#123;</span></span><br><span class="line"><span class="string">    "query": &#123;</span></span><br><span class="line"><span class="string">        "bool": &#123;</span></span><br><span class="line"><span class="string">            "filter": &#123;</span></span><br><span class="line"><span class="string">                "term": &#123;</span></span><br><span class="line"><span class="string">                    "admin": 1</span></span><br><span class="line"><span class="string">                &#125;</span></span><br><span class="line"><span class="string">            &#125;</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">    &#125;,</span></span><br><span class="line"><span class="string">    "from": 0,</span></span><br><span class="line"><span class="string">    "size": 3,</span></span><br><span class="line"><span class="string">    "_source": ["nickname", "name", "admin"]</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">'</span></span><br></pre></td></tr></table></figure>
+<p>在 <code>test</code> 索引中搜索 admin 字段等于 1 且 name 字段中包含 will 关键字的用户。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">curl http://localhost:9200/<span class="built_in">test</span>/_search?pretty -H <span class="string">"Content-Type: application/json"</span>  -d<span class="string">'</span></span><br><span class="line"><span class="string">&#123;</span></span><br><span class="line"><span class="string">    "query": &#123;</span></span><br><span class="line"><span class="string">        "bool": &#123;</span></span><br><span class="line"><span class="string">            "must": &#123;</span></span><br><span class="line"><span class="string">                "match": &#123;</span></span><br><span class="line"><span class="string">                    "name": "will"</span></span><br><span class="line"><span class="string">                &#125;</span></span><br><span class="line"><span class="string">            &#125;,</span></span><br><span class="line"><span class="string">            "filter": &#123;</span></span><br><span class="line"><span class="string">                "term": &#123;</span></span><br><span class="line"><span class="string">                    "admin": 1</span></span><br><span class="line"><span class="string">                &#125;</span></span><br><span class="line"><span class="string">            &#125;</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">    &#125;,</span></span><br><span class="line"><span class="string">    "from": 0,</span></span><br><span class="line"><span class="string">    "size": 3,</span></span><br><span class="line"><span class="string">    "_source": ["nickname", "name", "admin"]</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">'</span></span><br></pre></td></tr></table></figure>
+<h5 id="使用建议"><a href="#使用建议" class="headerlink" title="使用建议"></a>使用建议</h5><p>由于 filter 过滤器能缓存查询结果，性能更好。如果可能，请使用 filter 过滤器而不是 query 查询。</p>
+<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><p><strong>索引多类型弃用说明</strong></p>
+<p>一个索引中使用多个类型的文档在6.x 版本仍能使用，但只允许创建一个索引类型，且官方文档均以 <code>_doc</code> 示例，建议使用时与官方保持一致，为每个索引只创建一个名为 <code>_doc</code> 的类型。7.x 版本索引类型被废弃，8.x 版本会完全移除。</p>
+<h3 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h3><ul>
+<li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html" target="_blank" rel="noopener">https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html</a></li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ES/" rel="tag"># ES</a>
+          
+            <a href="/tags/Elasticsearch/" rel="tag"># Elasticsearch</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/61/" rel="next" title="收集nginx-ingress-controller的指标">
+                <i class="fa fa-chevron-left"></i> 收集nginx-ingress-controller的指标
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/68/" rel="prev" title="世界上最简单的会计书笔记">
+                世界上最简单的会计书笔记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="mgxian" />
+          <p class="site-author-name" itemprop="name">mgxian</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">77</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">61</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/mgxian" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基础概念"><span class="nav-number">2.</span> <span class="nav-text">基础概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#简单使用入门"><span class="nav-number">3.</span> <span class="nav-text">简单使用入门</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#管理索引"><span class="nav-number">3.1.</span> <span class="nav-text">管理索引</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#管理索引的映射"><span class="nav-number">3.2.</span> <span class="nav-text">管理索引的映射</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#管理文档数据"><span class="nav-number">3.3.</span> <span class="nav-text">管理文档数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#搜索数据"><span class="nav-number">3.4.</span> <span class="nav-text">搜索数据</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#query-查询"><span class="nav-number">3.4.1.</span> <span class="nav-text">query 查询</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#filter-过滤器"><span class="nav-number">3.4.2.</span> <span class="nav-text">filter 过滤器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#使用建议"><span class="nav-number">3.4.3.</span> <span class="nav-text">使用建议</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注意事项"><span class="nav-number">4.</span> <span class="nav-text">注意事项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考文档"><span class="nav-number">5.</span> <span class="nav-text">参考文档</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">mgxian</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

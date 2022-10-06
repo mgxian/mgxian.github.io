@@ -1,0 +1,1702 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="agile,devops," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="持续交付2.0  软件产品开发中的活动浪费 双环模型 4个核心原则  坚持少做  少做，先做简单的事情 想办法对新创意尽早验证   持续分解问题  对问题的层层分解，可以让团队更了解业务，更早识别出风险。 即便是很大的课题或者大范围的变更，也可以将其分解为一系列小变更，快速解决，并得到反馈，从而尽早消除风险   坚持快速反馈  只有通过快速反馈，我们才能尽早了解所完成工作的质量和效果   持续改">
+<meta name="keywords" content="agile,devops">
+<meta property="og:type" content="article">
+<meta property="og:title" content="持续交付2.0笔记">
+<meta property="og:url" content="https://mgxian.dev/posts/71/index.html">
+<meta property="og:site_name" content="mgxian&#39;s blog">
+<meta property="og:description" content="持续交付2.0  软件产品开发中的活动浪费 双环模型 4个核心原则  坚持少做  少做，先做简单的事情 想办法对新创意尽早验证   持续分解问题  对问题的层层分解，可以让团队更了解业务，更早识别出风险。 即便是很大的课题或者大范围的变更，也可以将其分解为一系列小变更，快速解决，并得到反馈，从而尽早消除风险   坚持快速反馈  只有通过快速反馈，我们才能尽早了解所完成工作的质量和效果   持续改">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/89717ef5-acba-41e8-a576-6e4ac96f7157-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/a53e13e6-0a91-4e16-b625-1f6e87aab037-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/d9a51231-6bf7-4a87-9197-7232bf5e9fc5-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/2c947700-5312-4389-ab7d-1db0fc164ba8-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/4eaae23c-1cd3-485f-852e-6c8321926db1-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/1b54d9c9-0143-43af-943d-397b58dcafc7-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/1199bfa2-06b1-41a3-9cbd-e574098ea23a-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/b44b438f-ece5-4688-8c01-86330b8730a9-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/ed9818f4-823d-403a-97fd-efb673e547ed-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/93479d4d-e978-454d-a115-1c4e76082a2a-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/7f050587-c5ab-4ab5-8113-ffebf2472584-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/4614cbd1-dc48-4139-942a-8063dc12f226-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/95ad5e88-5d38-46cc-810a-da2a63c438d4-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/4b246ef2-3d55-4743-9d80-4e4cdb3cf9a0-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/cc446e42-eb68-4b08-83fa-6815ad1e53d5-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/e084a7dd-9e52-4bd3-ba32-0f39df64af73-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/51087d51-e360-4df4-ad25-07e5d32c8570-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/6872bfc9-3c33-4db1-8f22-96287a6ed5f2-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/a08c1279-acdb-4e96-9e18-786a76bbf05a-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/95d758dd-0f14-4bb3-b210-90ae8aa89ad5-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/db3b74ad-cca8-4e78-b67f-74653f6e4d76-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/510d85b2-f2ba-42f0-b196-d6df0c38921c-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/2d2394a7-78b3-4710-b0e2-5f5d0615a782-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/51d1396b-5df4-431f-8d11-817ffe3e8256-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/e5684de2-1977-4a95-92a9-de286bdb3809-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/a408111a-7ca0-4cb1-9b5e-6b6a19ef3f70-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/a820ed3e-663b-403c-a9d9-eb812637eb63-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/94486552-394f-4685-9ab7-e86529e96424-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/e7ea4ec9-4671-4f4f-88f2-b941ac8d0ccc-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/54fc7bc6-8f8a-4937-96ce-7f7fb32eeeb7-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/3193bf16-ff47-4601-b031-dd20f23a0654-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/0f3cf1e3-9334-4677-a3be-fcb34a52ea8c-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/c1fc3b75-fb04-4c0a-a64c-f0f37c0bf660-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/2a471e63-8852-4469-898f-715d7446ee55-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/72f67597-bde4-458f-9c45-a3478462fb27-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/b84401a3-fd54-406b-ad47-61a8dd76f974-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/9c45627b-aa3d-4441-8bd2-e1d5affcaadd-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/caa7d62f-9e7e-4722-b3fd-afed0f8f5235-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/5d07dfe5-61d5-4595-b5a6-96a07615f97b-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/2ef8ce1b-1897-4217-8ae1-1c059e2bf4f0-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/7a279225-c12f-4568-8325-c9fce0321733-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/ac9e0a4f-95d2-452b-af9a-eb805831efb3-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/b317b1a3-3c69-43a7-be47-6c48726a20db-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/e38618f6-b215-4536-a606-ec081b1adba2-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/066653ae-8506-4487-af6d-a585f2bacfa5-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/b31d2ade-3f0e-417f-878b-9d6a8ed02ce8-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/9accba66-d32e-492c-9dd7-c870a9de9db8-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/50eaa3ce-f8f1-4e27-8bc4-72629528af0c-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/dd4a0457-56cb-40d9-ad10-3c56f6ff00e9-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/8dacfd01-9396-453a-b874-3b5024119a82-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/deb9361e-7631-47d8-b00b-49deef68e6c0-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/bed85277-ab90-4d5b-945b-30da24decba8-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/0ab4f1e0-af10-4ee6-85c9-bfd63a4b3ad3-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/683a88bd-158e-4cf0-8e5b-2dae2a5fbe90-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/fbbe9d61-73d8-4757-853c-4b0f9d0b7775-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/1093d5a0-98ce-4d97-8a8e-50395e46cc91-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/2aaca913-a5b1-4e7d-8a74-818102a1ad32-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/fa52b456-4502-428f-97f2-623afca1dac0-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/69264403-26a9-429b-8eb1-19880c28311a-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/3b7b4c0b-a39d-4bff-9af1-e7e73c9fc187-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/6691cf0b-d8ef-44ee-9e11-2fcd50c2c865-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/f62af3d3-6acd-43bc-8f2c-d6fa5d874805-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/66f36fcd-baae-4ddf-85ea-9b551ff40e9a-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/f9f2a902-8943-4f65-bfda-067d3049a733-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/1c590a1b-5efd-49fa-be02-a587835df4f0-156946.jpg">
+<meta property="og:image" content="https://api2.mubu.com/v3/document_image/a4e32ea1-5bf9-46bc-a2ee-2e76324a341a-156946.jpg">
+<meta property="og:updated_time" content="2022-10-06T10:04:12.887Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="持续交付2.0笔记">
+<meta name="twitter:description" content="持续交付2.0  软件产品开发中的活动浪费 双环模型 4个核心原则  坚持少做  少做，先做简单的事情 想办法对新创意尽早验证   持续分解问题  对问题的层层分解，可以让团队更了解业务，更早识别出风险。 即便是很大的课题或者大范围的变更，也可以将其分解为一系列小变更，快速解决，并得到反馈，从而尽早消除风险   坚持快速反馈  只有通过快速反馈，我们才能尽早了解所完成工作的质量和效果   持续改">
+<meta name="twitter:image" content="https://api2.mubu.com/v3/document_image/89717ef5-acba-41e8-a576-6e4ac96f7157-156946.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 'undefined',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://mgxian.dev/posts/71/"/>
+
+
+
+
+
+  <title>持续交付2.0笔记 | mgxian's blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">mgxian's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://mgxian.dev/posts/71/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="mgxian">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="mgxian's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">持续交付2.0笔记</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-08-15T18:40:03+08:00">
+                2022-08-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/DevOps/" itemprop="url" rel="index">
+                    <span itemprop="name">DevOps</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <ul>
+<li><p>持续交付2.0</p>
+<ul>
+<li>软件产品开发中的活动浪费<img src="https://api2.mubu.com/v3/document_image/89717ef5-acba-41e8-a576-6e4ac96f7157-156946.jpg" alt=""></li>
+<li>双环模型<img src="https://api2.mubu.com/v3/document_image/a53e13e6-0a91-4e16-b625-1f6e87aab037-156946.jpg" alt=""></li>
+<li><p>4个核心原则</p>
+<ul>
+<li><p>坚持少做</p>
+<ul>
+<li>少做，先做简单的事情</li>
+<li>想办法对新创意尽早验证</li>
+</ul>
+</li>
+<li><p>持续分解问题</p>
+<ul>
+<li>对问题的层层分解，可以让团队更了解业务，更早识别出风险。</li>
+<li>即便是很大的课题或者大范围的变更，也可以将其分解为一系列小变更，快速解决，并得到反馈，从而尽早消除风险</li>
+</ul>
+</li>
+<li><p>坚持快速反馈</p>
+<ul>
+<li>只有通过快速反馈，我们才能尽早了解所完成工作的质量和效果</li>
+</ul>
+</li>
+<li><p>持续改进并衡量</p>
+<ul>
+<li>无论做了什么样的改进，如果无法以某种方式衡量它的结果，就无法证明真的得到了改进</li>
+<li>在着手解决每个问题之前，我们都要找到适当的衡量方式，并将其与对应的功能需求放在同等重要的位置上，一起完成</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>持续交付七巧板<img src="https://api2.mubu.com/v3/document_image/d9a51231-6bf7-4a87-9197-7232bf5e9fc5-156946.jpg" alt=""></li>
+<li>角色<img src="https://api2.mubu.com/v3/document_image/2c947700-5312-4389-ab7d-1db0fc164ba8-156946.jpg" alt=""><a id="more"></a></li>
+</ul>
+</li>
+<li><p>价值探索环</p>
+<ul>
+<li>工作原则<ul>
+<li>分解并快速试错</li>
+<li>一次只验证一点</li>
+<li>允许失败</li>
+</ul>
+</li>
+<li><p>共创与精炼的常用方法</p>
+<ul>
+<li><p>装饰窗方法</p>
+<ul>
+<li>为新功能预留一个“入口”，让用户能够看到，但实际上并没有真正实现其功能</li>
+</ul>
+</li>
+<li><p>最小可行特性法</p>
+<ul>
+<li>通常在产品从 1到n的过程中使用</li>
+</ul>
+</li>
+<li><p>特区法</p>
+<ul>
+<li>在特定用户范围内进行试验，以验证某个新功能的有效性</li>
+</ul>
+</li>
+<li><p>定向探索法</p>
+<ul>
+<li>针对具有某种特定行为的特定用户群体，依据该用户的具体行为模式，设计调查提纲，有针对性地探索其行为背后的动机</li>
+</ul>
+</li>
+<li><p>稻草人法</p>
+<ul>
+<li>不开发任何真实的功能，只假装这个功能已经完成了，并向用户展示该功能的真实效果，从而得到用户的真实反馈</li>
+<li>与装饰窗方法的区别在于它让用户真实地感受到了功能提供的结果，而事实上并没有开发这个功能</li>
+</ul>
+</li>
+<li><p>最小可行产品法</p>
+<ul>
+<li>通常是在产品从0到 1 的过程中使用。</li>
+<li>它是以尽可能少的成本快速开发产品的核心功能，并找到用户，收集真实反馈，验证真实的用户需求，以确定新产品方向和形态的方法，其目标是找到合适的产品形态</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>快速验证环</p>
+<ul>
+<li><p>构建</p>
+<ul>
+<li>时间盒管理</li>
+<li><p>任务分解</p>
+<ul>
+<li>需求拆分</li>
+<li>开发任务拆分</li>
+</ul>
+</li>
+<li>持续验证</li>
+</ul>
+</li>
+<li><p>工作原则</p>
+<ul>
+<li><p>质量内建</p>
+<ul>
+<li>从生产过程的第一个环节开始 ，就要注重产出物的质量，并且在每个环节中都要开展质量保障活动，消除因质量问题导致的返工及次品率上升，以此降低最终的质量风险，保障进度</li>
+</ul>
+</li>
+<li><p>消除等待</p>
+<ul>
+<li>通过“拉动”让价值流动起来<ul>
+<li>关注点先从“人”移动到“物”</li>
+<li>因下游处理能力不足导致的阻塞<img src="https://api2.mubu.com/v3/document_image/4eaae23c-1cd3-485f-852e-6c8321926db1-156946.jpg" alt=""></li>
+<li>通过下游拉动方式，让价值流动起来<img src="https://api2.mubu.com/v3/document_image/1b54d9c9-0143-43af-943d-397b58dcafc7-156946.jpg" alt=""></li>
+<li>开发工具、提升能力或增加瓶颈入力后，整体吞吐量提升<img src="https://api2.mubu.com/v3/document_image/1199bfa2-06b1-41a3-9cbd-e574098ea23a-156946.jpg" alt=""></li>
+</ul>
+</li>
+<li>任务自助化<ul>
+<li>企业应该在工具平台建设方面改变一下思路，也就是说，通过运用先进的生产技术，使得环境部署、数据统计这一类事务性操作不再依赖“专家型”人才，而是让每个人在其需要时都能够“自助服务”</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>重复事务自动化</li>
+<li><p>监测一切</p>
+<ul>
+<li>对生产系统的监测有两个目的， 一是要确认软件的确在正常运行， 一旦发现异常，我们可以及时采取措施，纠正错误，以免影响用户的使用。 二是要及时得到有效业务数据，验证我们在探索环中提出的假设</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>持续交付2.0的组织文化</p>
+<ul>
+<li><p>安全 、 信任与持续改善</p>
+<ul>
+<li>失败是安全的</li>
+<li>相互信任</li>
+<li>持续改善</li>
+</ul>
+</li>
+<li><p>文化塑造四步法</p>
+<ul>
+<li>行为决定文化<ul>
+<li>公司文化转变四步法<ul>
+<li>第一步：定义我们想要做的事情</li>
+<li>第二步：定义我们期望的做事方式或方法</li>
+<li>第三步：提供相应的培训，使员工具备完成其工作的能力</li>
+<li>第四步：设计一些必要的机制或措施来强化我们所鼓励的那些行为</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>谷歌的工程师质量文化<img src="https://api2.mubu.com/v3/document_image/b44b438f-ece5-4688-8c01-86330b8730a9-156946.jpg" alt=""></li>
+</ul>
+</li>
+<li><p>行动原则</p>
+<ul>
+<li>价值导向</li>
+<li>快速验证</li>
+<li><p>持续学习</p>
+<ul>
+<li>定期回顾</li>
+<li>复盘机制</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>度量原则</p>
+<ul>
+<li><p>度量指标的4类属性</p>
+<ul>
+<li><p>引领性指标</p>
+<ul>
+<li>引领性指标是指那些对达成预定目标有着重要作用的指标。通常，一个好的引领性指标有以下两个基本特点：第一，它具有预见性；第二，团队成员可以影响这些指标。</li>
+</ul>
+</li>
+<li><p>滞后性指标</p>
+<ul>
+<li>滞后性指标是指那些为了达成最重要目标的跟踪性指标，如销售收入、利润率、市场份额、客户满意度等研究分析都属于滞后性指标。当你得到这些结果的时候，导致这些结果的事情早已结束，你得到的都是历史性结果数据。</li>
+</ul>
+</li>
+<li><p>可观测性指标</p>
+<ul>
+<li>可观测性指标是指可以被客观监测到，但无法通过直接行动来改变的指标。</li>
+</ul>
+</li>
+<li><p>可行动性指标</p>
+<ul>
+<li>可行动性指标是指在能力可触达范围内，通过团队努力，可以设法直接改变的指标。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>软件度量项的相关性示意图<img src="https://api2.mubu.com/v3/document_image/ed9818f4-823d-403a-97fd-efb673e547ed-156946.jpg" alt=""></li>
+<li>度量的目标是改善</li>
+</ul>
+</li>
+<li><p>改善套路<img src="https://api2.mubu.com/v3/document_image/93479d4d-e978-454d-a115-1c4e76082a2a-156946.jpg" alt=""></p>
+<ul>
+<li>迭代改进<ul>
+<li>PDCA循环</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>持续交付的软件架构系统</p>
+<ul>
+<li><p>大系统小做原则</p>
+<ul>
+<li>持续交付架构要求<ul>
+<li>为测试而设计（ design for test ）</li>
+<li>为部署而设计（ design for deployment ）</li>
+<li>为监控而设计（ design for monitor ）</li>
+<li>为扩展而设计（ design for scale ）</li>
+<li>为失效而设计（ design for failure ）</li>
+</ul>
+</li>
+<li>系统拆分原则<ul>
+<li>每个组件或服务有清晰的业务职责</li>
+<li>高内聚、低耦合</li>
+<li>整个系统易于构建与测试</li>
+<li>使团队成员之间的沟通协作更加顺畅</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>常见架构模式</p>
+<ul>
+<li>微核架构<img src="https://api2.mubu.com/v3/document_image/7f050587-c5ab-4ab5-8113-ffebf2472584-156946.jpg" alt=""></li>
+<li>微服务架构</li>
+<li>巨石应用</li>
+</ul>
+</li>
+<li><p>架构改造实施模式</p>
+<ul>
+<li><p>拆迁者模式</p>
+<ul>
+<li>重写所有代码</li>
+</ul>
+</li>
+<li><p>绞杀者模式</p>
+<ul>
+<li>保持原来的遗留系统不变，当需要开发新的功能时，重新开发一个服务，实现新的功能。通过不断构建新的服务，逐步使遗留系统失效，并最终替代它</li>
+</ul>
+</li>
+<li><p>修缮者模式</p>
+<ul>
+<li>将遗留系统的部分功能与其余部分隔离，以新的架构进行单独改善。在改善的同时，需要保证与其他部分仍能协同工作。这种方式与绞杀者模式类似，但改造只发生在同一个系统内部，而非遗留系统外部</li>
+</ul>
+</li>
+<li><p>数据库的拆分方法</p>
+<ul>
+<li>详细了解数据库结构，包括外键约束、共享的可变数据以及事务性边界等</li>
+<li>先拆分数据库，再进行数据迁移</li>
+<li>数据库双写无误后，找到程序架构中的缝隙</li>
+<li>将拆分出来的程序模块和数据库组合在一起，形成微服务</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>业务需求协作管理</p>
+<ul>
+<li><p>不平等的 INVEST 原则</p>
+<ul>
+<li>EST &gt; INV</li>
+</ul>
+</li>
+<li><p>五大拆分技法</p>
+<ul>
+<li>路径拆分法<img src="https://api2.mubu.com/v3/document_image/4614cbd1-dc48-4139-942a-8063dc12f226-156946.jpg" alt=""><img src="https://api2.mubu.com/v3/document_image/95ad5e88-5d38-46cc-810a-da2a63c438d4-156946.jpg" alt=""></li>
+<li>接触点拆分<img src="https://api2.mubu.com/v3/document_image/4b246ef2-3d55-4743-9d80-4e4cdb3cf9a0-156946.jpg" alt=""></li>
+<li>按数据类型或格式拆分<img src="https://api2.mubu.com/v3/document_image/cc446e42-eb68-4b08-83fa-6815ad1e53d5-156946.jpg" alt=""></li>
+<li>按规则拆分<img src="https://api2.mubu.com/v3/document_image/e084a7dd-9e52-4bd3-ba32-0f39df64af73-156946.jpg" alt=""></li>
+<li>接探索路径拆分<img src="https://api2.mubu.com/v3/document_image/51087d51-e360-4df4-ad25-07e5d32c8570-156946.jpg" alt=""></li>
+</ul>
+</li>
+<li>七大组成部分<img src="https://api2.mubu.com/v3/document_image/6872bfc9-3c33-4db1-8f22-96287a6ed5f2-156946.jpg" alt=""><img src="https://api2.mubu.com/v3/document_image/a08c1279-acdb-4e96-9e18-786a76bbf05a-156946.jpg" alt=""></li>
+<li><p>需求分析与管理工具集</p>
+<ul>
+<li>用户故事地图<img src="https://api2.mubu.com/v3/document_image/95d758dd-0f14-4bb3-b210-90ae8aa89ad5-156946.jpg" alt=""></li>
+<li>用户故事树<img src="https://api2.mubu.com/v3/document_image/db3b74ad-cca8-4e78-b67f-74653f6e4d76-156946.jpg" alt=""></li>
+<li>依赖关系图<img src="https://api2.mubu.com/v3/document_image/510d85b2-f2ba-42f0-b196-d6df0c38921c-156946.jpg" alt=""></li>
+</ul>
+</li>
+<li>可视化故事墙<img src="https://api2.mubu.com/v3/document_image/2d2394a7-78b3-4710-b0e2-5f5d0615a782-156946.jpg" alt=""><img src="https://api2.mubu.com/v3/document_image/51d1396b-5df4-431f-8d11-817ffe3e8256-156946.jpg" alt=""></li>
+<li>故事验证<img src="https://api2.mubu.com/v3/document_image/e5684de2-1977-4a95-92a9-de286bdb3809-156946.jpg" alt=""></li>
+</ul>
+</li>
+<li><p>部署流水线原则与工具设计</p>
+<ul>
+<li><p>流水线的设计原则</p>
+<ul>
+<li>一次构建，多次使用</li>
+<li>与业务逻辑松耦合</li>
+<li>并行化原则</li>
+<li>快速反馈优先</li>
+<li>重要反馈优先</li>
+</ul>
+</li>
+<li>工具链总体架构<img src="https://api2.mubu.com/v3/document_image/a408111a-7ca0-4cb1-9b5e-6b6a19ef3f70-156946.jpg" alt=""></li>
+<li>部署流水线示例<img src="https://api2.mubu.com/v3/document_image/a820ed3e-663b-403c-a9d9-eb812637eb63-156946.jpg" alt=""></li>
+<li>部署流水线执行过程示意图<img src="https://api2.mubu.com/v3/document_image/94486552-394f-4685-9ab7-e86529e96424-156946.jpg" alt=""><img src="https://api2.mubu.com/v3/document_image/e7ea4ec9-4671-4f4f-88f2-b941ac8d0ccc-156946.jpg" alt=""></li>
+<li>编译构建管理服务<img src="https://api2.mubu.com/v3/document_image/54fc7bc6-8f8a-4937-96ce-7f7fb32eeeb7-156946.jpg" alt=""></li>
+<li>自动化测试管理服务<img src="https://api2.mubu.com/v3/document_image/3193bf16-ff47-4601-b031-dd20f23a0654-156946.jpg" alt=""></li>
+<li><p>软件部署管理服务</p>
+<ul>
+<li>Puppet/Chef/Ansible/SaltStack</li>
+</ul>
+</li>
+<li>基础环境管理服务<img src="https://api2.mubu.com/v3/document_image/0f3cf1e3-9334-4677-a3be-fcb34a52ea8c-156946.jpg" alt=""></li>
+<li><p>多种多样的部署流水线</p>
+<ul>
+<li>多组件的部署流水线<img src="https://api2.mubu.com/v3/document_image/c1fc3b75-fb04-4c0a-a64c-f0f37c0bf660-156946.jpg" alt=""></li>
+<li>个人部署流水线<img src="https://api2.mubu.com/v3/document_image/2a471e63-8852-4469-898f-715d7446ee55-156946.jpg" alt=""></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>利于集成的分支策略</p>
+<ul>
+<li><p>常见分支开发模式</p>
+<ul>
+<li>主干开发，主干发布（Trunk-based Development &amp; Release)</li>
+<li>主干开发，分支发布（Trunk-based Development &amp; Branch-based Release)</li>
+<li>分支开发，主干发布（Branch-based Development &amp; Trunk-based Release)</li>
+</ul>
+</li>
+<li><p>分支模式的演化</p>
+<ul>
+<li>三驾马车分支模式<img src="https://api2.mubu.com/v3/document_image/72f67597-bde4-458f-9c45-a3478462fb27-156946.jpg" alt=""></li>
+<li>Gitflow 分支模式<img src="https://api2.mubu.com/v3/document_image/b84401a3-fd54-406b-ad47-61a8dd76f974-156946.jpg" alt=""></li>
+<li>GitHubFlow 分支模式<img src="https://api2.mubu.com/v3/document_image/9c45627b-aa3d-4441-8bd2-e1d5affcaadd-156946.jpg" alt=""></li>
+</ul>
+</li>
+<li><p>分支策略的选择</p>
+<ul>
+<li>版本发布模式三要素<img src="https://api2.mubu.com/v3/document_image/caa7d62f-9e7e-4722-b3fd-afed0f8f5235-156946.jpg" alt=""></li>
+<li>项目制发布模式</li>
+<li>发布火车模式</li>
+<li>城际快线模式</li>
+<li>分支策略与发布周期的关系<img src="https://api2.mubu.com/v3/document_image/5d07dfe5-61d5-4595-b5a6-96a07615f97b-156946.jpg" alt=""></li>
+</ul>
+</li>
+<li><p>持续交付2.0 选择分支模式的原则</p>
+<ul>
+<li>分支越少越好，最好只有一条主干</li>
+<li>分支生存周期越短越好，最好在3天以内</li>
+<li>在业务允许的前提下，发布周期越短越好</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>持续集成</p>
+<ul>
+<li>六步提交法<img src="https://api2.mubu.com/v3/document_image/2ef8ce1b-1897-4217-8ae1-1c059e2bf4f0-156946.jpg" alt=""></li>
+<li><p>自查表</p>
+<ul>
+<li>主干开发，频繁提交</li>
+<li>每次提交应该是一个完整的任务</li>
+<li>让提交构建在 10 分钟以内完成</li>
+<li>提交构建失败后应禁止团队成员提交新代码，也不许其他人检出该代码</li>
+<li>立即在 10 分钟内修复已失败的提交构建，否则回滚代码</li>
+<li>自动化构建验证通过后，对软件质量有比较大的信心</li>
+</ul>
+</li>
+<li><p>速度与质量的权衡</p>
+<ul>
+<li>分级构建<img src="https://api2.mubu.com/v3/document_image/7a279225-c12f-4568-8325-c9fce0321733-156946.jpg" alt=""><ul>
+<li>团队将所有自动化验证分成两部分。将那些运行速度较快、反馈质量高的测试用例，放人提交构建中 ， 而将那些运行较慢或者不经常失败的测试用例放在次级构建环节，作为次级构建验证的内容。当提交构建验证成功之后，马上触发次级构建的执行</li>
+</ul>
+</li>
+<li>云平台的威力</li>
+</ul>
+</li>
+<li><p>在团队中实施持续集成实践</p>
+<ul>
+<li>持续集成实施五步法<img src="https://api2.mubu.com/v3/document_image/ac9e0a4f-95d2-452b-af9a-eb805831efb3-156946.jpg" alt=""></li>
+<li>构建脚本化 ，搭建持续集成框架</li>
+<li>向构建中添加已有的自动化验证集合</li>
+<li>选择有利于持续集成的分支策略</li>
+<li>建立六步提交法</li>
+<li>持续优化</li>
+<li>工程师改变习惯，并提升技能</li>
+</ul>
+</li>
+<li><p>分支策略与部署流水线</p>
+<ul>
+<li>主干开发，主干发布<img src="https://api2.mubu.com/v3/document_image/b317b1a3-3c69-43a7-be47-6c48726a20db-156946.jpg" alt=""></li>
+<li>主干开发，分支发布<img src="https://api2.mubu.com/v3/document_image/e38618f6-b215-4536-a606-ec081b1adba2-156946.jpg" alt=""></li>
+<li>分支开发，主干发布<img src="https://api2.mubu.com/v3/document_image/066653ae-8506-4487-af6d-a585f2bacfa5-156946.jpg" alt=""></li>
+<li>多组件集成<img src="https://api2.mubu.com/v3/document_image/b31d2ade-3f0e-417f-878b-9d6a8ed02ce8-156946.jpg" alt=""></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>自动化测试策略与方法</p>
+<ul>
+<li>测试四象限<img src="https://api2.mubu.com/v3/document_image/9accba66-d32e-492c-9dd7-c870a9de9db8-156946.jpg" alt=""></li>
+<li>微核架构的测试金字塔<img src="https://api2.mubu.com/v3/document_image/50eaa3ce-f8f1-4e27-8bc4-72629528af0c-156946.jpg" alt=""></li>
+<li>微服务应用的测试金字塔<img src="https://api2.mubu.com/v3/document_image/dd4a0457-56cb-40d9-ad10-3c56f6ff00e9-156946.jpg" alt=""><img src="https://api2.mubu.com/v3/document_image/8dacfd01-9396-453a-b874-3b5024119a82-156946.jpg" alt=""></li>
+<li><p>自动化测试的实践原则</p>
+<ul>
+<li>自动化测试用例运行次数越多，平均成本越低，收益就越大</li>
+<li>自动化测试用例之间应该尽可能相互独立，互不影响</li>
+<li>在质量有保障的前提下，自动化测试用例的数量越少越好</li>
+<li>遗留代码的自动化测试编写应该从代码热区开始</li>
+<li>自动化测试用例从测试金字塔的中间层开始补充，投入产出比最高</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>软件配置管理</p>
+<ul>
+<li><p>将一切纳入配置管理</p>
+<ul>
+<li>我们要通过软件配置管理获得两种基本能力，它们分别是可追溯性和可重现性，从而提升软件整个生命周期管理的安全性，并提高团队协作效率</li>
+<li>可追溯性是指任何人在获得授权的前提下，能够找到该软件的任何变更历史，即对任何一次软件变更，都可以准确地回答 5W1H ，即谁（ who ）、什么时间（ when ）、做了什么( what ）、为什么（ why ）、如何做的（ how ）</li>
+<li>可重现性是指任何人在获得授权的前提下，能够重现从过去到现在之间任意时间点的软件状态</li>
+<li>软件配置管理的范围<img src="https://api2.mubu.com/v3/document_image/deb9361e-7631-47d8-b00b-49deef68e6c0-156946.jpg" alt=""></li>
+<li><p>软件配置管理原则</p>
+<ul>
+<li>一切皆有版本</li>
+<li>共享唯一受信源</li>
+<li>标准化与自动化</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>软件包的版本管理</li>
+<li>包依赖管理</li>
+<li>环境基础设施管理</li>
+<li><p>软件配置项的管理</p>
+<ul>
+<li>二进制与配置项的分离<img src="https://api2.mubu.com/v3/document_image/bed85277-ab90-4d5b-945b-30da24decba8-156946.jpg" alt=""></li>
+<li><p>配置信息的版本管理</p>
+<ul>
+<li><p>环境配置项</p>
+<ul>
+<li>域名、端口等</li>
+</ul>
+</li>
+<li><p>应用配置项</p>
+<ul>
+<li>内存大小、数据库连接池大小等</li>
+</ul>
+</li>
+<li><p>业务配置项</p>
+<ul>
+<li>功能特性开关</li>
+</ul>
+</li>
+<li>配置的分类<img src="https://api2.mubu.com/v3/document_image/0ab4f1e0-af10-4ee6-85c9-bfd63a4b3ad3-156946.jpg" alt=""></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>不可变基础设施与云应用</li>
+<li><p>数据的版本管理</p>
+<ul>
+<li>数据库结构变更<ul>
+<li>存储在源代码管理</li>
+</ul>
+</li>
+<li>数据文件<ul>
+<li>数据文件存在远程文件系统，源代码里存储URI</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>需求与源代码的版本关联</li>
+<li><p>检查版本管理</p>
+<ul>
+<li>产品源代码和测试代码是否放入了版本控制系统</li>
+<li>软件应用的配置信息是否放入了版本控制系统</li>
+<li>各类环境的系统配置是否放入了版本控制系统</li>
+<li>自动化的构建和部署脚本是否放入了版本控制系统</li>
+<li>软件包是否进行了版本管理</li>
+</ul>
+</li>
+<li><p>软件配置管理自检查</p>
+<ul>
+<li>只要从源代码仓库中检出产品源代码仓库，就可以一键式自动化地构建出完整软件包吗？</li>
+<li>在没有他人的帮助下，任何团队成员都可以一键式自动化搭建出一套应用软件系统，用于体验产品新功能吗？</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>低风险发布</p>
+<ul>
+<li>高频发布是一种趋势</li>
+<li><p>降低发布风险的方法</p>
+<ul>
+<li>蓝绿部署<img src="https://api2.mubu.com/v3/document_image/683a88bd-158e-4cf0-8e5b-2dae2a5fbe90-156946.jpg" alt=""><img src="https://api2.mubu.com/v3/document_image/fbbe9d61-73d8-4757-853c-4b0f9d0b7775-156946.jpg" alt=""></li>
+<li>滚动部署<img src="https://api2.mubu.com/v3/document_image/1093d5a0-98ce-4d97-8a8e-50395e46cc91-156946.jpg" alt=""></li>
+<li>金丝雀发布与灰度发布<img src="https://api2.mubu.com/v3/document_image/2aaca913-a5b1-4e7d-8a74-818102a1ad32-156946.jpg" alt=""><img src="https://api2.mubu.com/v3/document_image/fa52b456-4502-428f-97f2-623afca1dac0-156946.jpg" alt=""></li>
+<li>暗部署<img src="https://api2.mubu.com/v3/document_image/69264403-26a9-429b-8eb1-19880c28311a-156946.jpg" alt=""></li>
+</ul>
+</li>
+<li><p>高频发布支撑技术</p>
+<ul>
+<li>拆分功能。将一个功能进行分解，分解为更小的在一个开发周期 内能够完成的功能集</li>
+<li>先后再前。先实现服务端功能，再实现用户界面。 即首先实现用户不可见的那部分功能，同时要确保不影响原有的功能</li>
+<li>功能开关技术<img src="https://api2.mubu.com/v3/document_image/3b7b4c0b-a39d-4bff-9af1-e7e73c9fc187-156946.jpg" alt=""></li>
+<li><p>数据迁移技术</p>
+<ul>
+<li>只增不删</li>
+<li>数据迁移<img src="https://api2.mubu.com/v3/document_image/6691cf0b-d8ef-44ee-9e11-2fcd50c2c865-156946.jpg" alt=""></li>
+</ul>
+</li>
+<li>抽象分支方法<img src="https://api2.mubu.com/v3/document_image/f62af3d3-6acd-43bc-8f2c-d6fa5d874805-156946.jpg" alt=""></li>
+<li>升级替代回滚</li>
+</ul>
+</li>
+<li>推迟发布动机的渐进增强环<img src="https://api2.mubu.com/v3/document_image/66f36fcd-baae-4ddf-85ea-9b551ff40e9a-156946.jpg" alt=""></li>
+</ul>
+</li>
+<li><p>监测与决策</p>
+<ul>
+<li><p>生产监测范围</p>
+<ul>
+<li>后台服务的监测<ul>
+<li>基础监测</li>
+<li>应用监测</li>
+<li>业务监测</li>
+</ul>
+</li>
+<li>分发软件的监测<ul>
+<li>基础监测是软件所运行的基础环境（如移动设备的机型、操作系统、内存等）的运行情况，以及与服务器的连接情况</li>
+<li>应用监测是软件应用本身的健康状态（如内存使用、程序崩横、无晌应、与后台服务器的通信情况等）</li>
+<li>业务监测是用户的使用数据，如所在页面、停留时间、用户操作等</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>数据监测体系</p>
+<ul>
+<li>收集与处理<img src="https://api2.mubu.com/v3/document_image/f9f2a902-8943-4f65-bfda-067d3049a733-156946.jpg" alt=""></li>
+<li>数据的标准化<img src="https://api2.mubu.com/v3/document_image/1c590a1b-5efd-49fa-be02-a587835df4f0-156946.jpg" alt=""></li>
+<li><p>监测数据体系及其能力衡量</p>
+<ul>
+<li>正确性，即收集到的数据与事实的一致性。</li>
+<li>全面性，即收集到的数据信息是否足以支持团队做出决策。</li>
+<li>及时性，即数据的发生到能够支持决策所需要的处理时间足够短。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>问题处理体系</p>
+<ul>
+<li>告警海洋与智能化管理<ul>
+<li>通过关联分析 ， 让监控点离问题发生地更近</li>
+<li>通过动态阁值设定合理的告警</li>
+<li>定期梳理告警设置，清理不必要的告警</li>
+<li>通过人工智 能动态解除告警</li>
+</ul>
+</li>
+<li>问题处理是一个学习过程<img src="https://api2.mubu.com/v3/document_image/a4e32ea1-5bf9-46bc-a2ee-2e76324a341a-156946.jpg" alt=""></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/agile/" rel="tag"># agile</a>
+          
+            <a href="/tags/devops/" rel="tag"># devops</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/70/" rel="next" title="Testing Vue.js Applications笔记">
+                <i class="fa fa-chevron-left"></i> Testing Vue.js Applications笔记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/72/" rel="prev" title="Effective Go笔记">
+                Effective Go笔记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="mgxian" />
+          <p class="site-author-name" itemprop="name">mgxian</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">77</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">61</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/mgxian" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">mgxian</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

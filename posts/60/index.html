@@ -1,0 +1,1120 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="k8s,containerd," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="本文主要是介绍部署K8S的1.21版本并配合containerd，实现高可用集群，并更新证书到10年。 节点说明master1: etcd master kube-vip 11.11.11.111master2: etcd master kube-vip 11.11.11.112master3: etcd master kube-vip 11.11.11.113node1: node  11.11">
+<meta name="keywords" content="k8s,containerd">
+<meta property="og:type" content="article">
+<meta property="og:title" content="K8S高可用集群部署">
+<meta property="og:url" content="https://mgxian.dev/posts/60/index.html">
+<meta property="og:site_name" content="mgxian&#39;s blog">
+<meta property="og:description" content="本文主要是介绍部署K8S的1.21版本并配合containerd，实现高可用集群，并更新证书到10年。 节点说明master1: etcd master kube-vip 11.11.11.111master2: etcd master kube-vip 11.11.11.112master3: etcd master kube-vip 11.11.11.113node1: node  11.11">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2022-10-06T08:26:32.377Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="K8S高可用集群部署">
+<meta name="twitter:description" content="本文主要是介绍部署K8S的1.21版本并配合containerd，实现高可用集群，并更新证书到10年。 节点说明master1: etcd master kube-vip 11.11.11.111master2: etcd master kube-vip 11.11.11.112master3: etcd master kube-vip 11.11.11.113node1: node  11.11">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 'undefined',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://mgxian.dev/posts/60/"/>
+
+
+
+
+
+  <title>K8S高可用集群部署 | mgxian's blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">mgxian's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://mgxian.dev/posts/60/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="mgxian">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="mgxian's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">K8S高可用集群部署</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-05-12T11:00:15+08:00">
+                2021-05-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/运维/" itemprop="url" rel="index">
+                    <span itemprop="name">运维</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本文主要是介绍部署<code>K8S</code>的<code>1.21</code>版本并配合<code>containerd</code>，实现高可用集群，并更新证书到10年。</p>
+<h3 id="节点说明"><a href="#节点说明" class="headerlink" title="节点说明"></a>节点说明</h3><p>master1: etcd master kube-vip 11.11.11.111<br>master2: etcd master kube-vip 11.11.11.112<br>master3: etcd master kube-vip 11.11.11.113<br>node1: node  11.11.11.114<br>node2: node  11.11.11.115<br>node3: node  11.11.11.116</p>
+<p>vip(loadblancer ip): 11.11.11.110</p>
+<h3 id="配置-yum-源"><a href="#配置-yum-源" class="headerlink" title="配置 yum 源"></a>配置 yum 源</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.ori</span><br><span class="line">sudo curl -o /etc/yum.repos.d/CentOS-Base.repo https://mirrors.aliyun.com/repo/Centos-7.repo</span><br><span class="line">sudo curl -o /etc/yum.repos.d/epel-7.repo http://mirrors.aliyun.com/repo/epel-7.repo</span><br></pre></td></tr></table></figure>
+<h3 id="安装-containerd"><a href="#安装-containerd" class="headerlink" title="安装 containerd"></a>安装 containerd</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">cat &lt;&lt;EOF | sudo tee /etc/modules-load.d/containerd.conf</span><br><span class="line">overlay</span><br><span class="line">br_netfilter</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line">sudo modprobe overlay</span><br><span class="line">sudo modprobe br_netfilter</span><br><span class="line"></span><br><span class="line">cat &lt;&lt;EOF | sudo tee /etc/sysctl.d/99-kubernetes-cri.conf</span><br><span class="line">vm.swappiness = 0</span><br><span class="line">net.ipv4.ip_forward = 1</span><br><span class="line">net.bridge.bridge-nf-call-iptables = 1</span><br><span class="line">net.bridge.bridge-nf-call-ip6tables = 1</span><br><span class="line">fs.inotify.max_user_instances = 8192</span><br><span class="line">EOF</span><br><span class="line">sudo sysctl --system</span><br><span class="line"></span><br><span class="line">sudo yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo</span><br><span class="line">sudo yum install -y yum-utils device-mapper-persistent-data lvm2</span><br><span class="line">sudo yum install -y containerd.io-1.4.9</span><br><span class="line"></span><br><span class="line">sudo mkdir -p /etc/containerd</span><br><span class="line">containerd config default | sudo tee /etc/containerd/config.toml</span><br><span class="line"></span><br><span class="line">sudo cp /etc/containerd/config.toml /etc/containerd/config.toml.bak</span><br><span class="line">sudo sed -i <span class="string">'s@\["https://registry-1.docker.io"\]@["https://docker.mirrors.ustc.edu.cn", "https://registry-1.docker.io"]@g'</span> /etc/containerd/config.toml</span><br><span class="line">sudo sed -i <span class="string">'/plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options/a \            SystemdCgroup = true'</span> /etc/containerd/config.toml</span><br><span class="line">sudo sed -i <span class="string">'s@sandbox_image = "k8s.gcr.io/pause:3.2"@sandbox_image = "registry.cn-hangzhou.aliyuncs.com/google_containers/pause:3.2"@'</span> /etc/containerd/config.toml</span><br><span class="line">sudo systemctl daemon-reload</span><br><span class="line">sudo systemctl restart containerd</span><br><span class="line">sudo systemctl <span class="built_in">enable</span> containerd</span><br></pre></td></tr></table></figure>
+<h3 id="安装-kubeadm"><a href="#安装-kubeadm" class="headerlink" title="安装 kubeadm"></a>安装 kubeadm</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">sudo tee /etc/yum.repos.d/kubernetes.repo &lt;&lt;-<span class="string">'EOF'</span> </span><br><span class="line">[kubernetes]</span><br><span class="line">name=Kubernetes</span><br><span class="line">baseurl=https://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64</span><br><span class="line">enabled=1</span><br><span class="line">gpgcheck=1</span><br><span class="line">repo_gpgcheck=1</span><br><span class="line">gpgkey=https://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg https://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg</span><br><span class="line">EOF</span><br><span class="line">sudo yum install -y kubelet-1.21.4 kubeadm-1.21.4 kubectl-1.21.4 ipvsadm kubernetes-cni-0.8.7</span><br><span class="line">sudo systemctl <span class="built_in">enable</span> kubelet.service</span><br></pre></td></tr></table></figure>
+<h3 id="配置-crictl"><a href="#配置-crictl" class="headerlink" title="配置 crictl"></a>配置 crictl</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sudo tee /etc/crictl.yaml &lt;&lt;-<span class="string">'EOF'</span></span><br><span class="line">runtime-endpoint: unix:///var/run/containerd/containerd.sock</span><br><span class="line">image-endpoint: unix:///var/run/containerd/containerd.sock</span><br><span class="line">timeout: 10</span><br><span class="line">debug: <span class="literal">false</span></span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+<h3 id="镜像拉取测试"><a href="#镜像拉取测试" class="headerlink" title="镜像拉取测试"></a>镜像拉取测试</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo crictl pull busybox</span><br><span class="line">sudo crictl images</span><br></pre></td></tr></table></figure>
+<h3 id="基础环境配置"><a href="#基础环境配置" class="headerlink" title="基础环境配置"></a>基础环境配置</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl stop firewalld</span><br><span class="line">sudo systemctl <span class="built_in">disable</span> firewalld</span><br><span class="line">sudo sed -i <span class="string">'s/SELINUX=permissive/SELINUX=disabled/'</span> /etc/sysconfig/selinux</span><br><span class="line">sudo setenforce 0</span><br><span class="line"></span><br><span class="line">sudo swapoff -a</span><br><span class="line">sudo sed -ri <span class="string">'s@(^/.*swap.*)@#\1@g'</span> /etc/fstab</span><br><span class="line">free -m</span><br><span class="line"></span><br><span class="line">sudo modprobe ip_vs</span><br><span class="line">sudo modprobe ip_vs_rr</span><br><span class="line">sudo modprobe ip_vs_wrr</span><br><span class="line">sudo modprobe ip_vs_sh</span><br><span class="line">sudo modprobe nf_conntrack_ipv4</span><br><span class="line">sudo lsmod | grep ip_vs</span><br><span class="line">sudo tee /etc/modules-load.d/k8s-ipvs.conf &lt;&lt;-<span class="string">'EOF'</span></span><br><span class="line">ip_vs</span><br><span class="line">ip_vs_rr</span><br><span class="line">ip_vs_wrr</span><br><span class="line">ip_vs_sh</span><br><span class="line">nf_conntrack_ipv4</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+<h3 id="配置-kubelet"><a href="#配置-kubelet" class="headerlink" title="配置 kubelet"></a>配置 kubelet</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">NODE_IP=$(ip a | grep <span class="string">'11\.'</span> | awk <span class="string">'&#123;print $2&#125;'</span> | cut -d <span class="string">'/'</span> -f 1 | head -n 1)</span><br><span class="line">sudo tee /etc/sysconfig/kubelet &lt;&lt;-EOF</span><br><span class="line">KUBELET_EXTRA_ARGS=<span class="string">"--node-ip=<span class="variable">$NODE_IP</span>"</span></span><br><span class="line">EOF</span><br><span class="line">sudo cat /etc/sysconfig/kubelet</span><br><span class="line">sudo systemctl daemon-reload</span><br><span class="line">sudo systemctl <span class="built_in">enable</span> kubelet.service</span><br></pre></td></tr></table></figure>
+<h3 id="在-master1-节点-配置-kube-vip"><a href="#在-master1-节点-配置-kube-vip" class="headerlink" title="在 master1 节点 配置 kube-vip"></a>在 master1 节点 配置 kube-vip</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">VIP=11.11.11.110</span><br><span class="line">INTERFACE=eth2</span><br><span class="line">sudo ctr image pull docker.io/plndr/kube-vip:v0.3.7</span><br><span class="line">sudo ctr run --rm --net-host docker.io/plndr/kube-vip:v0.3.7 vip \</span><br><span class="line">/kube-vip manifest pod \</span><br><span class="line">--interface <span class="variable">$INTERFACE</span> \</span><br><span class="line">--vip <span class="variable">$VIP</span> \</span><br><span class="line">--controlplane \</span><br><span class="line">--services \</span><br><span class="line">--arp \</span><br><span class="line">--leaderElection | sudo tee /etc/kubernetes/manifests/kube-vip.yaml</span><br></pre></td></tr></table></figure>
+<h3 id="初始化-master1-节点"><a href="#初始化-master1-节点" class="headerlink" title="初始化 master1 节点"></a>初始化 master1 节点</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">cat &gt;kubeadm-master.config&lt;&lt;EOF</span><br><span class="line">apiVersion: kubeadm.k8s.io/v1beta2</span><br><span class="line">kind: InitConfiguration</span><br><span class="line">localAPIEndpoint:</span><br><span class="line">  advertiseAddress: 11.11.11.111</span><br><span class="line">nodeRegistration: </span><br><span class="line">  criSocket: /run/containerd/containerd.sock</span><br><span class="line">---</span><br><span class="line">apiVersion: kubeadm.k8s.io/v1beta2</span><br><span class="line">kind: ClusterConfiguration</span><br><span class="line">kubernetesVersion: v1.21.4</span><br><span class="line">imageRepository: registry.cn-hangzhou.aliyuncs.com/google_containers</span><br><span class="line">controlPlaneEndpoint: 11.11.11.110:6443</span><br><span class="line">apiServer:</span><br><span class="line">  timeoutForControlPlane: 4m0s</span><br><span class="line">controllerManager:</span><br><span class="line">  extraArgs:</span><br><span class="line">    node-monitor-grace-period: 3m</span><br><span class="line">    pod-eviction-timeout: 30s</span><br><span class="line">networking:</span><br><span class="line">  podSubnet: 10.244.0.0/16</span><br><span class="line">dns:</span><br><span class="line">  imageRepository: coredns</span><br><span class="line">  imageTag: 1.8.0</span><br><span class="line">---</span><br><span class="line">apiVersion: kubeproxy.config.k8s.io/v1alpha1</span><br><span class="line">kind: KubeProxyConfiguration</span><br><span class="line">mode: ipvs</span><br><span class="line">ipvs:</span><br><span class="line">  strictARP: <span class="literal">true</span></span><br><span class="line">---</span><br><span class="line">apiVersion: kubelet.config.k8s.io/v1beta1</span><br><span class="line">kind: KubeletConfiguration</span><br><span class="line">cgroupDriver: systemd</span><br><span class="line">systemReserved:</span><br><span class="line">  cpu: <span class="string">"500m"</span></span><br><span class="line">  memory: <span class="string">"1Gi"</span></span><br><span class="line">  ephemeral-storage: <span class="string">"1Gi"</span></span><br><span class="line">kubeReserved:</span><br><span class="line">  cpu: <span class="string">"1"</span></span><br><span class="line">  memory: <span class="string">"2Gi"</span></span><br><span class="line">  ephemeral-storage: <span class="string">"1Gi"</span></span><br><span class="line">evictionHard:</span><br><span class="line">  memory.available: <span class="string">"500Mi"</span></span><br><span class="line">  nodefs.available: <span class="string">"10%"</span></span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line">sudo kubeadm config images pull --config kubeadm-master.config</span><br><span class="line">sudo kubeadm init --config kubeadm-master.config --upload-certs</span><br></pre></td></tr></table></figure>
+<h3 id="配置-kubectl"><a href="#配置-kubectl" class="headerlink" title="配置 kubectl"></a>配置 kubectl</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">rm -rf <span class="variable">$HOME</span>/.kube</span><br><span class="line">mkdir -p <span class="variable">$HOME</span>/.kube</span><br><span class="line">sudo cp -i /etc/kubernetes/admin.conf <span class="variable">$HOME</span>/.kube/config</span><br><span class="line">sudo chown $(id -u):$(id -g) <span class="variable">$HOME</span>/.kube/config</span><br><span class="line">kubectl get nodes</span><br></pre></td></tr></table></figure>
+<h3 id="加入-master-2-and-3"><a href="#加入-master-2-and-3" class="headerlink" title="加入 master 2 and 3"></a>加入 master 2 and 3</h3><h1 id="注意：如果节点有多个IP-–apiserver-advertise-address-参数不可缺少"><a href="#注意：如果节点有多个IP-–apiserver-advertise-address-参数不可缺少" class="headerlink" title="注意：如果节点有多个IP –apiserver-advertise-address 参数不可缺少"></a>注意：如果节点有多个IP –apiserver-advertise-address 参数不可缺少</h1><p>sudo kubeadm join … –apiserver-advertise-address 11.11.11.112</p>
+<h3 id="在-master2-和-master3-节点配置-kube-vip"><a href="#在-master2-和-master3-节点配置-kube-vip" class="headerlink" title="在 master2 和 master3 节点配置 kube-vip"></a>在 master2 和 master3 节点配置 kube-vip</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">VIP=11.11.11.110</span><br><span class="line">INTERFACE=eth2</span><br><span class="line">sudo ctr image pull docker.io/plndr/kube-vip:v0.3.7</span><br><span class="line">sudo ctr run --rm --net-host docker.io/plndr/kube-vip:v0.3.7 vip \</span><br><span class="line">/kube-vip manifest pod \</span><br><span class="line">--interface <span class="variable">$INTERFACE</span> \</span><br><span class="line">--vip <span class="variable">$VIP</span> \</span><br><span class="line">--controlplane \</span><br><span class="line">--services \</span><br><span class="line">--arp \</span><br><span class="line">--leaderElection | sudo tee /etc/kubernetes/manifests/kube-vip.yaml</span><br></pre></td></tr></table></figure>
+<h3 id="加入-worker-node"><a href="#加入-worker-node" class="headerlink" title="加入 worker node"></a>加入 worker node</h3><p>sudo kubeadm join …</p>
+<h3 id="部署-flannel-网络组件"><a href="#部署-flannel-网络组件" class="headerlink" title="部署 flannel 网络组件"></a>部署 flannel 网络组件</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">curl -s https://raw.githubusercontent.com/mgxian/k8s-addons/v0.3/kube-flannel/kube-flannel.yaml -o kube-flannel.yaml</span><br><span class="line">sed -i <span class="string">"/--kube-subnet-mgr/a \            - --iface=eth2"</span> kube-flannel.yaml</span><br><span class="line">kubectl apply -f kube-flannel.yaml</span><br><span class="line">kubectl get pods -n kube-system</span><br><span class="line">kubectl get svc -n kube-system</span><br></pre></td></tr></table></figure>
+<h3 id="部署-metallb"><a href="#部署-metallb" class="headerlink" title="部署 metallb"></a>部署 metallb</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">cat &gt;metallb-config.yaml&lt;&lt;EOF</span><br><span class="line">apiVersion: v1</span><br><span class="line">kind: ConfigMap</span><br><span class="line">metadata:</span><br><span class="line">  namespace: metallb-system</span><br><span class="line">  name: config</span><br><span class="line">data:</span><br><span class="line">  config: |</span><br><span class="line">    address-pools:</span><br><span class="line">    - name: default</span><br><span class="line">      protocol: layer2</span><br><span class="line">      addresses:</span><br><span class="line">      - 10.186.70.151-10.186.70.200</span><br><span class="line">    - name: nginx-ingress</span><br><span class="line">      protocol: layer2</span><br><span class="line">      addresses:</span><br><span class="line">      - 10.186.70.150/32</span><br><span class="line">EOF</span><br><span class="line">curl -s https://raw.githubusercontent.com/mgxian/k8s-addons/v0.3/metallb/metallb.yaml -o metallb.yaml</span><br><span class="line">kubectl apply -f metallb.yaml</span><br><span class="line">kubectl apply -f metallb-config.yaml</span><br><span class="line">kubectl get pod -n metallb-system</span><br></pre></td></tr></table></figure>
+<h3 id="部署-nginx-ingress-controller"><a href="#部署-nginx-ingress-controller" class="headerlink" title="部署 nginx ingress controller"></a>部署 nginx ingress controller</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">curl -s https://raw.githubusercontent.com/mgxian/k8s-addons/v0.3/ingress-nginx/ingress-nginx.yaml -o ingress-nginx.yaml</span><br><span class="line">kubectl apply -f ingress-nginx.yaml</span><br><span class="line">kubectl get pod -n ingress-nginx</span><br><span class="line">kubectl get svc -n ingress-nginx</span><br></pre></td></tr></table></figure>
+<h3 id="测试-k8s-cluster"><a href="#测试-k8s-cluster" class="headerlink" title="测试 k8s cluster"></a>测试 k8s cluster</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">kubectl create deployment nginx --image=nginx:alpine</span><br><span class="line">kubectl expose deployment nginx --name=nginx-service --port=80 --target-port=80</span><br><span class="line">kubectl expose deployment nginx --<span class="built_in">type</span>=NodePort --name=nginx-service-nodeport --port=80 --target-port=80</span><br><span class="line">kubectl get deploy</span><br><span class="line">kubectl get pods</span><br><span class="line">kubectl get svc</span><br><span class="line"></span><br><span class="line">cat &gt;dns-test.yaml&lt;&lt;EOF</span><br><span class="line">apiVersion: v1</span><br><span class="line">kind: Pod</span><br><span class="line">metadata:</span><br><span class="line">  name: dns-test</span><br><span class="line">spec:</span><br><span class="line">  containers:</span><br><span class="line">  - image: radial/busyboxplus:curl</span><br><span class="line">    name: dns-test</span><br><span class="line">    stdin: <span class="literal">true</span></span><br><span class="line">    tty: <span class="literal">true</span></span><br><span class="line">EOF</span><br><span class="line">kubectl apply -f dns-test.yaml</span><br><span class="line">kubectl get pod</span><br><span class="line"></span><br><span class="line">kubectl <span class="built_in">exec</span> dns-test -- nslookup kubernetes</span><br><span class="line">kubectl <span class="built_in">exec</span> dns-test -- nslookup nginx-service</span><br><span class="line">kubectl <span class="built_in">exec</span> dns-test -- nslookup www.baidu.com</span><br><span class="line">kubectl <span class="built_in">exec</span> dns-test -- curl -s -I www.baidu.com</span><br><span class="line">kubectl <span class="built_in">exec</span> dns-test -- curl -s -I nginx-service</span><br><span class="line"></span><br><span class="line">cat &gt;ingress-test.yaml&lt;&lt;EOF</span><br><span class="line">apiVersion: networking.k8s.io/v1</span><br><span class="line">kind: Ingress</span><br><span class="line">metadata:</span><br><span class="line">  name: ingress-test</span><br><span class="line">spec:</span><br><span class="line">  rules:</span><br><span class="line">  - host: ingress.test.com</span><br><span class="line">    http:</span><br><span class="line">      paths:</span><br><span class="line">      - backend:</span><br><span class="line">          service:</span><br><span class="line">            name: nginx-service</span><br><span class="line">            port:</span><br><span class="line">              number: 80</span><br><span class="line">        path: /</span><br><span class="line">        pathType: ImplementationSpecific</span><br><span class="line">EOF</span><br><span class="line">kubectl apply -f ingress-test.yaml</span><br><span class="line">kubectl get ingress</span><br><span class="line"></span><br><span class="line">curl 10.186.70.150:80</span><br><span class="line">curl -H <span class="string">"Host: ingress.test.com"</span> 10.186.70.150:80</span><br></pre></td></tr></table></figure>
+<h3 id="清理测试"><a href="#清理测试" class="headerlink" title="清理测试"></a>清理测试</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">kubectl delete deployment nginx</span><br><span class="line">kubectl delete service nginx-service</span><br><span class="line">kubectl delete service nginx-service-nodeport</span><br><span class="line">kubectl delete -f ingress-test.yaml</span><br><span class="line">kubectl delete -f dns-test.yaml</span><br></pre></td></tr></table></figure>
+<h3 id="延长证书到10年"><a href="#延长证书到10年" class="headerlink" title="延长证书到10年"></a>延长证书到10年</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 注意：以下命令使用 root 用户执行，并配置好 root 用户的 kubectl 配置文件</span></span><br><span class="line"><span class="comment"># 链接: https://pan.baidu.com/s/1co8g8fNUidncpc46s9uD2A 提取码: z867</span></span><br><span class="line">rm -rf <span class="variable">$HOME</span>/.kube</span><br><span class="line">mkdir -p <span class="variable">$HOME</span>/.kube</span><br><span class="line">sudo cp -i /etc/kubernetes/admin.conf <span class="variable">$HOME</span>/.kube/config</span><br><span class="line">sudo chown $(id -u):$(id -g) <span class="variable">$HOME</span>/.kube/config</span><br><span class="line">kubectl get nodes</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">chmod +x sealos k8s-certs-renew.sh</span><br><span class="line">bash k8s-certs-renew.sh 11.11.11.110:6443 <span class="string">"11.11.11.110"</span></span><br><span class="line">bash -c <span class="string">'for f in `ls /etc/kubernetes/pki/*.crt`;do openssl x509 -noout -text -in $f | grep "Not After";done'</span></span><br><span class="line">bash -c <span class="string">'for f in `ls /etc/kubernetes/pki/etcd/*.crt`;do openssl x509 -noout -text -in $f | grep "Not After";done'</span></span><br><span class="line">bash -c <span class="string">'for f in `ls /etc/kubernetes/*.conf`;do grep server $f;done'</span></span><br></pre></td></tr></table></figure>
+<h3 id="更新完成后重新设置-kubectl"><a href="#更新完成后重新设置-kubectl" class="headerlink" title="更新完成后重新设置 kubectl"></a>更新完成后重新设置 kubectl</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">rm -rf <span class="variable">$HOME</span>/.kube</span><br><span class="line">mkdir -p <span class="variable">$HOME</span>/.kube</span><br><span class="line">sudo cp -i /etc/kubernetes/admin.conf <span class="variable">$HOME</span>/.kube/config</span><br><span class="line">sudo chown $(id -u):$(id -g) <span class="variable">$HOME</span>/.kube/config</span><br><span class="line">kubectl get nodes</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/k8s/" rel="tag"># k8s</a>
+          
+            <a href="/tags/containerd/" rel="tag"># containerd</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/64/" rel="next" title="基于错误预算的报警">
+                <i class="fa fa-chevron-left"></i> 基于错误预算的报警
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/61/" rel="prev" title="收集nginx-ingress-controller的指标">
+                收集nginx-ingress-controller的指标 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="mgxian" />
+          <p class="site-author-name" itemprop="name">mgxian</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">77</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">61</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/mgxian" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#节点说明"><span class="nav-number">1.</span> <span class="nav-text">节点说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置-yum-源"><span class="nav-number">2.</span> <span class="nav-text">配置 yum 源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-containerd"><span class="nav-number">3.</span> <span class="nav-text">安装 containerd</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-kubeadm"><span class="nav-number">4.</span> <span class="nav-text">安装 kubeadm</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置-crictl"><span class="nav-number">5.</span> <span class="nav-text">配置 crictl</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#镜像拉取测试"><span class="nav-number">6.</span> <span class="nav-text">镜像拉取测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基础环境配置"><span class="nav-number">7.</span> <span class="nav-text">基础环境配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置-kubelet"><span class="nav-number">8.</span> <span class="nav-text">配置 kubelet</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在-master1-节点-配置-kube-vip"><span class="nav-number">9.</span> <span class="nav-text">在 master1 节点 配置 kube-vip</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#初始化-master1-节点"><span class="nav-number">10.</span> <span class="nav-text">初始化 master1 节点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置-kubectl"><span class="nav-number">11.</span> <span class="nav-text">配置 kubectl</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#加入-master-2-and-3"><span class="nav-number">12.</span> <span class="nav-text">加入 master 2 and 3</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#注意：如果节点有多个IP-–apiserver-advertise-address-参数不可缺少"><span class="nav-number"></span> <span class="nav-text">注意：如果节点有多个IP –apiserver-advertise-address 参数不可缺少</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#在-master2-和-master3-节点配置-kube-vip"><span class="nav-number">1.</span> <span class="nav-text">在 master2 和 master3 节点配置 kube-vip</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#加入-worker-node"><span class="nav-number">2.</span> <span class="nav-text">加入 worker node</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#部署-flannel-网络组件"><span class="nav-number">3.</span> <span class="nav-text">部署 flannel 网络组件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#部署-metallb"><span class="nav-number">4.</span> <span class="nav-text">部署 metallb</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#部署-nginx-ingress-controller"><span class="nav-number">5.</span> <span class="nav-text">部署 nginx ingress controller</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#测试-k8s-cluster"><span class="nav-number">6.</span> <span class="nav-text">测试 k8s cluster</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#清理测试"><span class="nav-number">7.</span> <span class="nav-text">清理测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#延长证书到10年"><span class="nav-number">8.</span> <span class="nav-text">延长证书到10年</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更新完成后重新设置-kubectl"><span class="nav-number">9.</span> <span class="nav-text">更新完成后重新设置 kubectl</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">mgxian</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

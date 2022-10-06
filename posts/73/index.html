@@ -1,0 +1,1868 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="develop," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="什么是 Web API Web API 的重要性 通过 API 才能使用的在线服务出现 移动应用与 API API 的经济学   各种各样的 API 模式 将已发布的 Web 在线服务的数据或功能通过 API 公开 将附加在其他网页上的微件公开 Amazon 提供的广告功能   构建现代 Web 应用 单页面应用 异步加载   开发智能手机应用 开发社交游戏 公司内部多个系统的集成   应该通过">
+<meta name="keywords" content="develop">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Web API的设计与开发笔记">
+<meta property="og:url" content="https://mgxian.dev/posts/73/index.html">
+<meta property="og:site_name" content="mgxian&#39;s blog">
+<meta property="og:description" content="什么是 Web API Web API 的重要性 通过 API 才能使用的在线服务出现 移动应用与 API API 的经济学   各种各样的 API 模式 将已发布的 Web 在线服务的数据或功能通过 API 公开 将附加在其他网页上的微件公开 Amazon 提供的广告功能   构建现代 Web 应用 单页面应用 异步加载   开发智能手机应用 开发社交游戏 公司内部多个系统的集成   应该通过">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2022-10-06T10:08:14.585Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Web API的设计与开发笔记">
+<meta name="twitter:description" content="什么是 Web API Web API 的重要性 通过 API 才能使用的在线服务出现 移动应用与 API API 的经济学   各种各样的 API 模式 将已发布的 Web 在线服务的数据或功能通过 API 公开 将附加在其他网页上的微件公开 Amazon 提供的广告功能   构建现代 Web 应用 单页面应用 异步加载   开发智能手机应用 开发社交游戏 公司内部多个系统的集成   应该通过">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 'undefined',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://mgxian.dev/posts/73/"/>
+
+
+
+
+
+  <title>Web API的设计与开发笔记 | mgxian's blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">mgxian's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://mgxian.dev/posts/73/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="mgxian">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="mgxian's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Web API的设计与开发笔记</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-09-05T15:44:26+08:00">
+                2022-09-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/开发/" itemprop="url" rel="index">
+                    <span itemprop="name">开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <ul>
+<li>什么是 Web API<ul>
+<li>Web API 的重要性<ul>
+<li>通过 API 才能使用的在线服务出现</li>
+<li>移动应用与 API</li>
+<li>API 的经济学</li>
+</ul>
+</li>
+<li>各种各样的 API 模式<ul>
+<li>将已发布的 Web 在线服务的数据或功能通过 API 公开</li>
+<li>将附加在其他网页上的微件公开<ul>
+<li>Amazon 提供的广告功能</li>
+</ul>
+</li>
+<li>构建现代 Web 应用<ul>
+<li>单页面应用 异步加载</li>
+</ul>
+</li>
+<li>开发智能手机应用</li>
+<li>开发社交游戏</li>
+<li>公司内部多个系统的集成</li>
+</ul>
+</li>
+<li>应该通过 API 公开什么<ul>
+<li>公开所有能公开的</li>
+<li>公开 API 是否会带来风险<ul>
+<li>不会有风险 即使不公开也可以使用爬虫抓取数据</li>
+</ul>
+</li>
+<li>公开 API 能得到什么<a id="more"></a></li>
+</ul>
+</li>
+<li>设计优美的 Web API 的重要性<ul>
+<li>设计优美的 Web API 易于使用</li>
+<li>设计优美的 Web API 便于更改</li>
+<li>设计优美的 Web API 健壮性好</li>
+<li>设计优美的 Web API 不怕公之于众</li>
+</ul>
+</li>
+<li>如何美化 Web API<ul>
+<li>设计规范明确的内容必须遵守相关规范</li>
+<li>没有设计规范的内容必须遵守相关事实标准</li>
+</ul>
+</li>
+<li>REST 与 Web API</li>
+<li>作为目标对象的开发人员数量与 API 的设计思想<ul>
+<li>LSUD<ul>
+<li>Large Set of Unknown Developers<ul>
+<li>尽可能设计的普适与通用</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>SSKD<ul>
+<li>Small Set of Known Developers<ul>
+<li>易于上手</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>端点的设计与请求的形式</p>
+<ul>
+<li>设计通过 API 公开的功能<ul>
+<li>SNS聊天功能为例<ul>
+<li>用户注册与编辑</li>
+<li>搜索，添加，删除好友</li>
+<li>好友之间的消息交互</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>API 端点的设计思想</p>
+<ul>
+<li><p>端口的设计</p>
+<ul>
+<li><p>容易记忆，URI 包含的功能一目了然</p>
+<ul>
+<li>短小便于输入的 URI<ul>
+<li><a href="http://api.example.com/service/api/search" target="_blank" rel="noopener">http://api.example.com/service/api/search</a></li>
+<li><a href="http://api.example.com/search" target="_blank" rel="noopener">http://api.example.com/search</a></li>
+</ul>
+</li>
+<li><p>人可以读懂的 URI</p>
+<ul>
+<li><a href="http://api.example.com/sv/u" target="_blank" rel="noopener">http://api.example.com/sv/u</a></li>
+<li><a href="http://api.example.com/products/12345" target="_blank" rel="noopener">http://api.example.com/products/12345</a></li>
+</ul>
+</li>
+<li>没有大小写的混用的 URI</li>
+<li>修改方便的 URI</li>
+<li><p>不会暴露服务端架构的 URI</p>
+<ul>
+<li><a href="http://api.example.com/cgi-bin/get_user.php?user=100" target="_blank" rel="noopener">http://api.example.com/cgi-bin/get_user.php?user=100</a></li>
+</ul>
+</li>
+<li>规则统一的 URI</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>HTTP 方法与端口</p>
+<ul>
+<li><p>GET</p>
+<ul>
+<li>获取资源</li>
+</ul>
+</li>
+<li><p>POST</p>
+<ul>
+<li>新增资源</li>
+</ul>
+</li>
+<li><p>PUT</p>
+<ul>
+<li>更新已有资源</li>
+</ul>
+</li>
+<li><p>DELETE</p>
+<ul>
+<li>删除资源</li>
+</ul>
+</li>
+<li><p>PATCH</p>
+<ul>
+<li>更新资源的部分属性</li>
+</ul>
+</li>
+<li><p>HEAD</p>
+<ul>
+<li>获取资源的元信息</li>
+</ul>
+</li>
+<li><p>在不支持其他有些 HTTP 方法时解决方法</p>
+<ul>
+<li>使用 _method参数</li>
+<li>使用 X-Http-Method_Override 头部</li>
+<li>请求时统一使用 POST 方法</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>API 端点的设计</p>
+<ul>
+<li><p>基本设计</p>
+<ul>
+<li><p>获取用户信息列表</p>
+<ul>
+<li>GET <a href="http://api.example.com/v1/users" target="_blank" rel="noopener">http://api.example.com/v1/users</a></li>
+</ul>
+</li>
+<li><p>新用户注册</p>
+<ul>
+<li>POST <a href="http://api.example.com/v1/users" target="_blank" rel="noopener">http://api.example.com/v1/users</a></li>
+</ul>
+</li>
+<li><p>更新用户信息</p>
+<ul>
+<li>PUT/PATCH <a href="http://api.example.com/v1/users/:id" target="_blank" rel="noopener">http://api.example.com/v1/users/:id</a></li>
+</ul>
+</li>
+<li><p>删除用户信息</p>
+<ul>
+<li>DELETE <a href="http://api.example.com/v1/users/:id" target="_blank" rel="noopener">http://api.example.com/v1/users/:id</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>好友关系</p>
+<ul>
+<li><p>获取当前用户的好友列表</p>
+<ul>
+<li>GET <a href="http://api.example.com/v1/users/:id/friends" target="_blank" rel="noopener">http://api.example.com/v1/users/:id/friends</a></li>
+</ul>
+</li>
+<li><p>添加好友</p>
+<ul>
+<li>POST <a href="http://api.example.com/v1/users/:id/friends" target="_blank" rel="noopener">http://api.example.com/v1/users/:id/friends</a></li>
+</ul>
+</li>
+<li><p>删除好友</p>
+<ul>
+<li>DELETE <a href="http://api.example.com/v1/users/:id/friends/:id" target="_blank" rel="noopener">http://api.example.com/v1/users/:id/friends/:id</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>动态相关的端点</p>
+<ul>
+<li><p>编辑动态信息</p>
+<ul>
+<li>PUT <a href="http://api.example.com/v1/updates/:id" target="_blank" rel="noopener">http://api.example.com/v1/updates/:id</a></li>
+</ul>
+</li>
+<li><p>删除动态信息</p>
+<ul>
+<li>DELETE <a href="http://api.example.com/v1/updates/:id" target="_blank" rel="noopener">http://api.example.com/v1/updates/:id</a></li>
+</ul>
+</li>
+<li><p>发表动态信息</p>
+<ul>
+<li>POST <a href="http://api.example.com/v1/updates" target="_blank" rel="noopener">http://api.example.com/v1/updates</a></li>
+</ul>
+</li>
+<li><p>获取特定用户的动态信息</p>
+<ul>
+<li>GET <a href="http://api.example.com/v1/users/:id/updates" target="_blank" rel="noopener">http://api.example.com/v1/users/:id/updates</a></li>
+</ul>
+</li>
+<li><p>获取好友的动态列表</p>
+<ul>
+<li>GET <a href="http://api.example.com/v1/users/:id/friends/updates" target="_blank" rel="noopener">http://api.example.com/v1/users/:id/friends/updates</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>访问资源的端点设计的注意事项</p>
+<ul>
+<li>使用名词复数形式</li>
+<li>注意所用的单词</li>
+<li>不使用空格及需要编码的字符</li>
+<li>使用连接符’_’或者’-‘来连接多个单词</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>搜索与查询参数的设计</p>
+<ul>
+<li>获取数据量与获取位置的查询参数<ul>
+<li>limit 与 offset</li>
+<li>per_page 与 page</li>
+<li>since_id</li>
+</ul>
+</li>
+<li>参数过滤<ul>
+<li><a href="http://api.example.com/v1/users?name=ken" target="_blank" rel="noopener">http://api.example.com/v1/users?name=ken</a></li>
+<li><a href="http://api.example.com/v1/users?q=ken" target="_blank" rel="noopener">http://api.example.com/v1/users?q=ken</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>登录与 OAuth 2.0</p>
+<ul>
+<li><p>Authorization Code</p>
+<ul>
+<li>适用于在服务器端进行大量处理的 Web 应用</li>
+</ul>
+</li>
+<li><p>Implicit</p>
+<ul>
+<li>适用于智能手机应用与使用 JavaScript 客户端进行大量处理的应用</li>
+</ul>
+</li>
+<li><p>Resource Owner Password Credentials</p>
+<ul>
+<li><p>适用于不使用服务器端的应用， 直接使用用户名与密码</p>
+<ul>
+<li>grant_type: password</li>
+<li>username</li>
+<li>password</li>
+<li><p>scope</p>
+<ul>
+<li>指定允许访问的权限范围</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Client Credentials</li>
+<li><p>端点设计</p>
+<ul>
+<li>/oauth2/token</li>
+</ul>
+</li>
+<li><p>刷新 token</p>
+<ul>
+<li>获取token的时候返回一个用于刷新token的refresh_token</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>主机名和端点共有部分</p>
+<ul>
+<li><a href="http://api.example.com/" target="_blank" rel="noopener">api.example.com</a> 最为合适</li>
+</ul>
+</li>
+<li><p>SSKDs 与 API 设计</p>
+<ul>
+<li>尽量使用少的 API</li>
+<li>一个屏幕的内容只使用一次 API 调用</li>
+</ul>
+</li>
+<li><p>HATEOAS 和 REST LEVEL3 API</p>
+<ul>
+<li>返回的数据中加入超链接</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>响应数据的设计</p>
+<ul>
+<li><p>数据格式</p>
+<ul>
+<li><p>LSUD</p>
+<ul>
+<li>JSON</li>
+<li>XML</li>
+</ul>
+</li>
+<li><p>SSKD</p>
+<ul>
+<li>高效序列化方式<ul>
+<li>thrift</li>
+<li>protobuf</li>
+<li>messagepack</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>数据格式指定方法</p>
+<ul>
+<li>URI添加查询参数<ul>
+<li>format=json</li>
+</ul>
+</li>
+<li>在请求头指定媒体类型<ul>
+<li>Accept: application/json</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>使用JSONP</p>
+<ul>
+<li>不一定非要实现JSONP，可能会有安全问题</li>
+<li><p>支持JSONP的操作方法</p>
+<ul>
+<li>查询参数 callback</li>
+</ul>
+</li>
+<li><p>JSONP与错误处理</p>
+<ul>
+<li>发生了错误依然需要返回200状态码</li>
+<li>在响应的数据中添加真正的响应码</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>数据内部结构的思考方法</p>
+<ul>
+<li><p>让用户来选择响应的内容</p>
+<ul>
+<li>查询参数 fields=name,age</li>
+<li>指定响应群<ul>
+<li>small</li>
+<li>medium</li>
+<li>large</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>封装是否必要</p>
+<ul>
+<li>一般情况都是否</li>
+</ul>
+</li>
+<li><p>数据是否应该扁平化</p>
+<ul>
+<li>层级</li>
+<li>扁平化</li>
+<li>只有遇到层级结构有绝对优势时才使用层级</li>
+</ul>
+</li>
+<li><p>序列与格式</p>
+<ul>
+<li>推荐使用对象来封装数据（如果返回是列表，再在外面加一层对像封装）<ul>
+<li>更容易理解响应数据表示什么</li>
+<li>响应数据通过对像的封装实现了结构统一</li>
+<li>可以避免安全方面的风险</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>该如何返回序列的个数以及是否还有后续数据</p>
+<ul>
+<li>服务端要返回20条数据时，可以试着获取21条数据，如果能获取成功，说明至少存在1条后续数据</li>
+<li>在返回给客户端的对像中添加还有后续的字段标识<ul>
+<li>hasNext: true</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>各个数据的格式</p>
+<ul>
+<li><p>各个数据的名称</p>
+<ul>
+<li>推荐使用蛇形法</li>
+</ul>
+</li>
+<li><p>如何描述性别数据</p>
+<ul>
+<li>gender（推荐）<ul>
+<li>male</li>
+<li>female</li>
+</ul>
+</li>
+<li>sex</li>
+</ul>
+</li>
+<li><p>日期格式</p>
+<ul>
+<li>一般采用RFC 3339<ul>
+<li>2015-10-12T11:30:22+09:00</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>大整数与JSON</p>
+<ul>
+<li>同时传输id和id_str</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>响应数据的设计</p>
+<ul>
+<li>API没有必要如实反映DB的数据表结构</li>
+</ul>
+</li>
+<li><p>出错信息的表示</p>
+<ul>
+<li><p>通过状态码来表示出错信息</p>
+<ul>
+<li>1字头 消息</li>
+<li>2字头 成功</li>
+<li>3字头 重定向</li>
+<li>4字头 客户端原因引起的错误</li>
+<li>5字头 服务端原因引起的错误</li>
+<li>当找不到合适的状态码的时候，使用’200’，’400’，’500’这些以’00’结尾的状态码</li>
+</ul>
+</li>
+<li><p>向客户端返回详细的出错信息</p>
+<ul>
+<li>把详细的出错信息填入响应消息首部<ul>
+<li>code 内部定义的错误码</li>
+<li>message 出错信息</li>
+<li>info 帮助文档的URL</li>
+</ul>
+</li>
+<li>把详细的出错信息放入消息体（推荐）</li>
+</ul>
+</li>
+<li><p>如何填写详细的出错信息</p>
+<ul>
+<li>可以同时提供面向开发人员和非开发人员的信息提示<ul>
+<li>developerMessage</li>
+<li>userMessage</li>
+<li>code</li>
+<li>info</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>发生错误时防止返回HTML</p>
+<ul>
+<li>某些API在发生错误时会把HTML信息写入消息体，尤其是发生500，503以及404等错误时</li>
+</ul>
+</li>
+<li><p>维护与状态码</p>
+<ul>
+<li>当维护时应该返回503状态码</li>
+<li>如果能够预测服务何时能够重启可以添加 Retry-After 头</li>
+</ul>
+</li>
+<li><p>需要返回意义不明确的信息</p>
+<ul>
+<li>有时出于安全考虑或其它原因需要返回模棱两可的信息</li>
+<li>比如当用户被屏蔽时，如果访问可以返回404，如果返回403对方可能就知道是被屏蔽了</li>
+<li>用户登录时，如果明确指出哪一个字段错误，可能会给恶意用户破解的机会</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>最大程度地利用 HTTP 协议规范</p>
+<ul>
+<li><p>使用HTTP协议规范的意义</p>
+<ul>
+<li>对大家都好</li>
+</ul>
+</li>
+<li><p>正确使用状态码</p>
+<ul>
+<li>1字头 消息</li>
+<li><p>2字头 成功</p>
+<ul>
+<li>200 OK 请求成功</li>
+<li>201 Created 请求成功，新的资源已创建</li>
+<li>202 Accepted 请求成功，请求的操作已接受</li>
+<li>204 No Content 没有内容</li>
+</ul>
+</li>
+<li><p>3字头 重定向</p>
+<ul>
+<li>300 Multiple Choices 存在多个资源</li>
+<li>301 Moved Permanently 资源被永久转移</li>
+<li>302 Found 请求的资源被暂时转移</li>
+<li>303 See Other 引用他处</li>
+<li>304 Not Modified 自上一次访问后没有发生更新</li>
+<li>307 Temporary Redirect 请求的资源被暂时转移</li>
+</ul>
+</li>
+<li><p>4字头 客户端原因引起的错误</p>
+<ul>
+<li>400 Bad Request 请求不正确，一般是数据格式不正确</li>
+<li>401 Unauthorized 需要认证</li>
+<li>403 Forbidden 禁止访问，一般是没有权限</li>
+<li>404 Not Found 没有找到指定的资源</li>
+<li>405 Method Not Allowed 没有找到指定的方法</li>
+<li>406 Not Acceptable 同Accept相关联的首部里含有无法处理的内容</li>
+<li>408 Request Timeout 请求在规定时间内没有处理结束</li>
+<li>409 Conflict 资源存在冲突</li>
+<li>410 Gone 指定的资源已不存在</li>
+<li>413 Request Entity Too Large 请求消息体太大</li>
+<li>414 Request-URI Too Long 请求的URI太长</li>
+<li>415 Unsupported Media Type 不支持所指定的媒体类型</li>
+<li>429 Too Many Requests 请求次数过多，一般用于API请求速度控制</li>
+</ul>
+</li>
+<li><p>5字头 服务端原因引起的错误</p>
+<ul>
+<li>500 Internal Server Error 服务器端发生错误</li>
+<li>503 Service Unavailable 服务器暂时停止运行</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>缓存与HTTP协议规范</p>
+<ul>
+<li><p>过期模型</p>
+<ul>
+<li>Cache-Control<ul>
+<li>更多控制方法</li>
+</ul>
+</li>
+<li>Expires<ul>
+<li>使用绝对时间来表示到期</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>验证模型</p>
+<ul>
+<li>Last-Modified</li>
+<li>Etag</li>
+</ul>
+</li>
+<li><p>启发式过期</p>
+<ul>
+<li>当服务器端没有给出过期时间时，客户端可以决定大约缓存数据多久</li>
+</ul>
+</li>
+<li><p>不希望实施缓存的情况</p>
+<ul>
+<li>Cache-Control: no-cache</li>
+</ul>
+</li>
+<li><p>使用Vary来指定缓存单位</p>
+<ul>
+<li>在实施缓存时可能需要同时指定Vary首部</li>
+<li>Vary用于指定除URI外使用哪个请求首部来确定唯一的数据</li>
+<li>Vary: Accept-Encoding,User-Agent,Accept-Language</li>
+</ul>
+</li>
+<li><p>Cache-Control首部</p>
+<ul>
+<li>public 代理服务器处保存的缓存可以在不同用户之间共享</li>
+<li>private 每个用户的缓存数据必须各不相同</li>
+<li>no-cache 缓存数据需要通过验证模式来确认</li>
+<li>no-store 不需要进行缓存</li>
+<li>no-transform 代理服务器不可变更响应数据的媒体类型或其他相关内容</li>
+<li>must-revalidate 不管何时都需要向原始服务器再次验证</li>
+<li>proxy-revalidate 代理服务器需要向原始服务器再次验证</li>
+<li>max-age 表示缓存数据处于新鲜状态的时间</li>
+<li>s-maxage 和max-age一样，但只用于中继服务器</li>
+<li>stable-while-revalidate 指定的max-age过期后，缓存会异步刷新，但此时缓存依然可以使用</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>媒体类型的指定</p>
+<ul>
+<li>Content-Type</li>
+<li>以x-开头的媒体类型</li>
+<li>自己定义媒体类型</li>
+<li><p>请求数据与媒体类型</p>
+<ul>
+<li>Content-Type</li>
+<li>Accept</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>同源策略和跨域资源共享</p>
+<ul>
+<li><p>CORS基本的交互</p>
+<ul>
+<li>Origin</li>
+<li>Access-Control-Allow-Origin</li>
+</ul>
+</li>
+<li><p>事先请求</p>
+<ul>
+<li>OPTIONS</li>
+</ul>
+</li>
+<li><p>CORS与用户认证</p>
+<ul>
+<li>Access-Control-Allow-Credentials: true</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>定义私有的HTTP首部</p>
+<ul>
+<li>一般以x-作为前缀</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>开发方便更改设计的 Web API</p>
+<ul>
+<li><p>方便更改设计的重要性</p>
+<ul>
+<li>公开发布的API（LSUD）</li>
+<li>面向移动应用的API（SSKD）</li>
+<li>Web服务中使用的API</li>
+</ul>
+</li>
+<li><p>通过版本信息来管理API</p>
+<ul>
+<li>在URI中嵌入版本号</li>
+<li>如何添加版本号</li>
+<li>在查询字符串里加入版本信息</li>
+<li><p>通过媒体类型来指定版本信息</p>
+<ul>
+<li>Accept: applicaton/vnd.example.v2+json</li>
+</ul>
+</li>
+<li><p>应该采用什么方法</p>
+<ul>
+<li>推荐在URI中嵌入版本信息</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>版本变更的方针</li>
+<li>终止提供API</li>
+<li><p>编排层</p>
+<ul>
+<li>整合API</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>开发牢固的 Web API</p>
+<ul>
+<li>让Web API变得安全</li>
+<li><p>非法获取服务器端和客户端之间的信息</p>
+<ul>
+<li>使用HTTPS加密通信</li>
+</ul>
+</li>
+<li><p>使用浏览器访问API时的问题</p>
+<ul>
+<li>XSS</li>
+<li><p>XSRF</p>
+<ul>
+<li>在表单里嵌入一次性令牌</li>
+</ul>
+</li>
+<li>JSON劫持</li>
+</ul>
+</li>
+<li><p>思考防范恶意访问的对策</p>
+<ul>
+<li>篡改参数 获取没有权限的资源</li>
+<li>请求再次发送</li>
+</ul>
+</li>
+<li><p>同安全相关的HTTP首部</p>
+<ul>
+<li>X-Content-Type-Options: nosniff</li>
+<li>X-XSS-Protection</li>
+<li>X-Frame-Options</li>
+<li>Content-Security-Policy</li>
+<li>Strict-Transport-Security</li>
+<li>Public-Key-Pins</li>
+<li>Set-Cookie: HttpOnly</li>
+</ul>
+</li>
+<li><p>应用大规模访问的对策</p>
+<ul>
+<li>限制每个用户的访问</li>
+<li>限制单位</li>
+<li><p>应对超出上限值的情况</p>
+<ul>
+<li>429 Too Many Requests</li>
+</ul>
+</li>
+<li><p>向用户告知访问限制的信息</p>
+<ul>
+<li>X-RateLimit-Limit 单位时间访问上限</li>
+<li>X-RateLimit-Remaining 剩余的访问次数</li>
+<li>X-RateLimit-Reset 访问次数重置的时间</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>附录 A 开发 Web API 的准备工作</p>
+<ul>
+<li>提供API文档</li>
+<li><p>提供沙盒API</p>
+<ul>
+<li>涉及金钱交易</li>
+</ul>
+</li>
+<li><p>API Console</p>
+<ul>
+<li>能够在浏览器上尝试实际操作API的工具</li>
+</ul>
+</li>
+<li>提供SDK</li>
+</ul>
+</li>
+<li>附录 B Web API 确认清单<ul>
+<li>URI是否短小且容易输入</li>
+<li>URI是否能让人一眼看懂</li>
+<li>URI是否只有小写字母组成</li>
+<li>URI是否容易修改</li>
+<li>URI是否反映了服务端架构</li>
+<li>URI规则是否统一</li>
+<li>有没有使用合适的HTTP方法</li>
+<li>URI里用到的单词所表示的意思是否和大部分API相同</li>
+<li>URI里用到的名词是否采用了复数形式</li>
+<li>URI里有没有空格及需要编码的字符</li>
+<li>URI里的单词和单词之间有没有使用连接符</li>
+<li>分页的设计是否恰当</li>
+<li>登录有没有使用OAuth 2.0</li>
+<li>响应数据格式有没有使用JSON作为默认的格式</li>
+<li>是否支持通过查询参数来指定数据格式</li>
+<li>是否支持不必要的JSONP</li>
+<li>响应数据的内容能不能从客户端指定</li>
+<li>响应数据中是否存在不必要的封装</li>
+<li>响应数据的结构有没有尽量做到扁平化</li>
+<li>响应数据有没有用对像来描述，而不是用数组</li>
+<li>响应数据的名称所选用的单词的意思是不是和大部分API相同</li>
+<li>响应数据的名称有没有用尽可能少的单词来描述</li>
+<li>响应数据的名称由多个单词连接而成时，连接方式在整个API里是否一致</li>
+<li>响应数据的名称有没有使用奇怪的缩写形式</li>
+<li>响应数据的名称的单复数形式是否和数据内容相一致</li>
+<li>出错时响应数据中是不是包含有助于客户端剖析原因的信息</li>
+<li>出错时有没有返回HTML数据</li>
+<li>有没有返回合适的状态码</li>
+<li>服务器端在维护时有没有返回503状态码</li>
+<li>有没有返回合适的媒体类型</li>
+<li>必要时能不能支持CORS</li>
+<li>有没有返回Cache-Control,Etag, Last-Modified,Vary等首部以便客户端采用合适的缓存策略</li>
+<li>不想缓存的数据有没有添加Cache-Control: no-cache首部信息</li>
+<li>有没有对API进行版本管理</li>
+<li>API版本的命名有没有遵循语义化的版本控制规范</li>
+<li>有没有在URI里嵌入主版本编号，并且能够让人一目了然</li>
+<li>有没有考虑API终止提供时的相关事项</li>
+<li>有没有在文档里明确注明API的最低提供期限</li>
+<li>有没有使用HTTPS来提供API</li>
+<li>有没有认真执行JSON转义</li>
+<li>能不能识别X-Requested-With首部，让浏览器无法通过SCRIPT元素读取JSON数据</li>
+<li>通过浏览器访问的API有没有使用XSRF token</li>
+<li>API在接受参数时有没有仔细检查非法的参数（负数等）</li>
+<li>有没有做到即使请求重复发送，数据也不会多次更新</li>
+<li>有没有在响应消息里添加各种增强安全性的首部</li>
+<li>有没有实施访问限速</li>
+<li>对预想的用例来说限速的次数有没有设置得过少</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/develop/" rel="tag"># develop</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/72/" rel="next" title="Effective Go笔记">
+                <i class="fa fa-chevron-left"></i> Effective Go笔记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/74/" rel="prev" title="简单设计四原则">
+                简单设计四原则 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="mgxian" />
+          <p class="site-author-name" itemprop="name">mgxian</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">77</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">61</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/mgxian" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">mgxian</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

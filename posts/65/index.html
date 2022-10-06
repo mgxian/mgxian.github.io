@@ -1,0 +1,1417 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="refactor," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="keywords" content="refactor">
+<meta property="og:type" content="article">
+<meta property="og:title" content="重构手法一句话总结">
+<meta property="og:url" content="https://mgxian.dev/posts/65/index.html">
+<meta property="og:site_name" content="mgxian&#39;s blog">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://mgxian.dev/posts/65/refactor.png">
+<meta property="og:updated_time" content="2022-10-06T09:18:11.924Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="重构手法一句话总结">
+<meta name="twitter:image" content="https://mgxian.dev/posts/65/refactor.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 'undefined',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://mgxian.dev/posts/65/"/>
+
+
+
+
+
+  <title>重构手法一句话总结 | mgxian's blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">mgxian's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://mgxian.dev/posts/65/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="mgxian">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="mgxian's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">重构手法一句话总结</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-05-02T14:30:48+08:00">
+                2022-05-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/开发/" itemprop="url" rel="index">
+                    <span itemprop="name">开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="/posts/65/refactor.png" alt=""></p>
+<a id="more"></a>
+<ul>
+<li><p>基础</p>
+<ul>
+<li><p>提炼函数(Extract Function)</p>
+<ul>
+<li>将意图与实现分开</li>
+<li>减少重复</li>
+</ul>
+</li>
+<li><p>内联函数(Inline Function)</p>
+<ul>
+<li>实现与意图相比已经足够清楚</li>
+<li>内联到一起方便后续提炼</li>
+</ul>
+</li>
+<li><p>提炼变量(Extract Variable)</p>
+<ul>
+<li>解释表达式意图</li>
+<li>减少重复</li>
+</ul>
+</li>
+<li><p>内联变量(Inline Variable)</p>
+<ul>
+<li>表达式足够清晰表明意图</li>
+<li>变量妨碍重构</li>
+</ul>
+</li>
+<li><p>改变函数声明(Change Function Declaration)</p>
+<ul>
+<li>更好的表现意图</li>
+<li>增加/减少参数</li>
+</ul>
+</li>
+<li><p>封装变量(Encapsulate Variable)</p>
+<ul>
+<li>统一变量的直接访问和修改</li>
+</ul>
+</li>
+<li><p>变量改名(Rename Variable)</p>
+<ul>
+<li>更好的表现意图</li>
+</ul>
+</li>
+<li><p>引入参数对象(Introduce Parameter Object)</p>
+<ul>
+<li>参数经常结伴而行</li>
+<li>迁移共同行为</li>
+</ul>
+</li>
+<li><p>函数组合成类(Combine Functions into Class)</p>
+<ul>
+<li>不同函数经常操作同一块数据（参数）</li>
+</ul>
+</li>
+<li><p>函数组合成变换(Combine Functions into Transform)</p>
+<ul>
+<li>收拢派生数据（根据其他数据计算得到的数据）</li>
+</ul>
+</li>
+<li><p>拆分阶段(Split Phase)</p>
+<ul>
+<li>一段代码同时处理多件不同的事</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>封装</p>
+<ul>
+<li><p>封装记录(Encapsulate Record)</p>
+<ul>
+<li>封装字典、map、数据类</li>
+</ul>
+</li>
+<li><p>封装集合(Encapsulate Collection)</p>
+<ul>
+<li>封装数组、列表</li>
+</ul>
+</li>
+<li><p>以对象取代基本类型(Replace Primitive with Object)</p>
+<ul>
+<li>封装基本类型处理的业务逻辑</li>
+</ul>
+</li>
+<li><p>以查询取代临时变量(Replace Temp with Query)</p>
+<ul>
+<li>把临时变量抽取成函数</li>
+</ul>
+</li>
+<li><p>提炼类(Extract Class)</p>
+<ul>
+<li>类责任过大</li>
+</ul>
+</li>
+<li><p>内联类(Inline Class)</p>
+<ul>
+<li>类责任过小</li>
+</ul>
+</li>
+<li><p>隐藏委托关系(Hide Delegate)</p>
+<ul>
+<li>减少调用方与其他元素的耦合</li>
+</ul>
+</li>
+<li><p>移除中间人(Remove Middle Man)</p>
+<ul>
+<li>委托的功能越来越多</li>
+</ul>
+</li>
+<li><p>替换算法(Substitute Algorithm)</p>
+<ul>
+<li>替换原来的算法</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>搬移特性</p>
+<ul>
+<li><p>搬移函数(Move Function)</p>
+<ul>
+<li>它与其他类/模块上的元素交互更多</li>
+<li>类/模块需要频繁调用一个别处的函数</li>
+</ul>
+</li>
+<li><p>搬移字段(Move Field)</p>
+<ul>
+<li>一条记录总是喜欢与别处的记录一起使用、修改</li>
+</ul>
+</li>
+<li><p>搬移语句到函数(Move Statements into Function)</p>
+<ul>
+<li>多处调用函数前都使用了类似的语句</li>
+</ul>
+</li>
+<li><p>搬移语句到调用者(Move Statements to Callers)</p>
+<ul>
+<li>多处调用点表现不同的行为需要从函数中挪出</li>
+</ul>
+</li>
+<li><p>以函数调用取代内联代码(Replace Inline Code with Function Call)</p>
+<ul>
+<li>内联代码是已有函数的重复</li>
+</ul>
+</li>
+<li><p>移动语句(Slide Statements)</p>
+<ul>
+<li>让关联的东西一起出现</li>
+</ul>
+</li>
+<li><p>拆分循环(Split Loop)</p>
+<ul>
+<li>一个循环内做了多件事</li>
+</ul>
+</li>
+<li><p>以管道取代循环(Replace Loop with Pipeline)</p>
+<ul>
+<li>使用函数式编程的map/filter</li>
+</ul>
+</li>
+<li><p>移除死代码(Remove Dead Code)</p>
+<ul>
+<li>删除无用的代码</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>重新组织数据</p>
+<ul>
+<li><p>拆分变量(Split Variable)</p>
+<ul>
+<li>一个变量承担了多种用途</li>
+</ul>
+</li>
+<li><p>字段改名(Rename Field)</p>
+<ul>
+<li>更好的表明意图</li>
+</ul>
+</li>
+<li><p>以查询取代派生变量(Replace Derived Variable with Query)</p>
+<ul>
+<li>有些变量其实可以很容易地随时计算出来</li>
+<li>减少可变变量</li>
+</ul>
+</li>
+<li><p>将引用对象改为值对象(Change Reference to Value)</p>
+<ul>
+<li>值对象更好</li>
+</ul>
+</li>
+<li><p>将值对象改为引用对象(Change Value to Reference)</p>
+<ul>
+<li>有时共享的数据需要更新</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>简化条件逻辑</p>
+<ul>
+<li><p>分解条件表达式(Decompose Conditional)</p>
+<ul>
+<li>条件和分支提取成函数</li>
+</ul>
+</li>
+<li><p>合并条件表达式(Consolidate Conditional Expression)</p>
+<ul>
+<li>多个条件表达的分支行为一致</li>
+</ul>
+</li>
+<li><p>以卫语句取代嵌套条件表达式(Replace Nested Conditional with Guard Clauses)</p>
+<ul>
+<li>提前返回异常情况</li>
+<li>减少条件嵌套</li>
+</ul>
+</li>
+<li><p>以多态取代条件表达式(Replace Conditional with Polymorphism)</p>
+<ul>
+<li>多处使用相同的条件表达式</li>
+</ul>
+</li>
+<li><p>引入特例(Introduce Special Case)</p>
+<ul>
+<li>对有些特殊值的检查多次出现</li>
+</ul>
+</li>
+<li><p>引入断言(Introduce Assertion)</p>
+<ul>
+<li>使用断言明确标明这些假设</li>
+<li>条件必须为真</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>重构API</p>
+<ul>
+<li><p>将查询函数和修改函数分离(Separate Query from Modifier)</p>
+<ul>
+<li>把有副作用和无副作用的部分分开</li>
+</ul>
+</li>
+<li><p>函数参数化(Parameterize Function)</p>
+<ul>
+<li>函数有点类似</li>
+</ul>
+</li>
+<li><p>移除标记参数(Remove Flag Argument)</p>
+<ul>
+<li>调用者用标记参数来指示执行被调用函数的哪部分</li>
+</ul>
+</li>
+<li><p>保持对象完整(Preserve Whole Object)</p>
+<ul>
+<li>从一个记录结构中导出几个值，然后又把这几个值一起传递给一个函数</li>
+</ul>
+</li>
+<li><p>以查询取代参数(Replace Parameter with Query)</p>
+<ul>
+<li>有些参数可以通过其他方式获取到</li>
+</ul>
+</li>
+<li><p>以参数取代查询(Replace Query with Parameter)</p>
+<ul>
+<li>移除一些不需要的依赖引用，如全局变量、对象</li>
+</ul>
+</li>
+<li><p>移除设值函数(Remove Setting Method)</p>
+<ul>
+<li>不可变更好</li>
+</ul>
+</li>
+<li><p>以工厂函数取代构造函数(Replace Constructor with Factory Function)</p>
+<ul>
+<li>更好的表明意图</li>
+</ul>
+</li>
+<li><p>以命令取代函数(Replace Function with Command)</p>
+<ul>
+<li>对复杂函数进行面向对象改造</li>
+</ul>
+</li>
+<li><p>以函数取代命令(Replace Command with Function)</p>
+<ul>
+<li>命令对象已经简单到不需要了</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>处理继承关系</p>
+<ul>
+<li><p>函数上移(Pull Up Method)</p>
+<ul>
+<li>子类共用，去除重复</li>
+</ul>
+</li>
+<li><p>字段上移(Pull Up Field)</p>
+<ul>
+<li>子类共用，去除重复</li>
+</ul>
+</li>
+<li><p>构造函数本体上移(Pull Up Constructor Body)</p>
+<ul>
+<li>子类共用，去除重复</li>
+</ul>
+</li>
+<li><p>函数下移(Push Down Method)</p>
+<ul>
+<li>子类不共用</li>
+</ul>
+</li>
+<li><p>字段下移(Push Down Field)</p>
+<ul>
+<li>子类不共用</li>
+</ul>
+</li>
+<li><p>以子类取代类型码(Replace Type Code with Subclasses)</p>
+<ul>
+<li>使用面向对象和多态</li>
+</ul>
+</li>
+<li><p>移除子类(Remove Subclass)</p>
+<ul>
+<li>子类过于简单，可以使用字段区分</li>
+</ul>
+</li>
+<li><p>提炼超类(Extract Superclass)</p>
+<ul>
+<li>多个类在做相似的事</li>
+</ul>
+</li>
+<li><p>折叠继承体系(Collapse Hierarchy)</p>
+<ul>
+<li>一个类与其超类已经没多大差别</li>
+</ul>
+</li>
+<li><p>以委托取代子类(Replace Subclass with Delegate)</p>
+<ul>
+<li>继承只能用一次（单继承）</li>
+<li>对象组合优于类继承</li>
+</ul>
+</li>
+<li><p>以委托取代超类(Replace Superclass with Delegate)</p>
+<ul>
+<li>超类的一些函数/功能对子类并不适用</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/refactor/" rel="tag"># refactor</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/57/" rel="next" title="对软件开发中需求的思考">
+                <i class="fa fa-chevron-left"></i> 对软件开发中需求的思考
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/66/" rel="prev" title="代码坏味道一句话总结">
+                代码坏味道一句话总结 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="mgxian" />
+          <p class="site-author-name" itemprop="name">mgxian</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">77</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">61</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/mgxian" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">mgxian</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

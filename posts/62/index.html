@@ -1,0 +1,1188 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="sre,sli,slo,error budget," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="简介服务稳定性就是我们常说的几个9如 99，99.9，99.99。用来衡量一个服务的稳定性。衡量服务可用性通常有如下两种方式： 时间维度：Availability = Uptime / (Uptime + Downtime) 请求维度：Availability = Successful request / Total request SRE 通常选择以请求维度来衡量服务稳定性 常用术语 SLA（S">
+<meta name="keywords" content="sre,sli,slo,error budget">
+<meta property="og:type" content="article">
+<meta property="og:title" content="服务稳定性指标规范">
+<meta property="og:url" content="https://mgxian.dev/posts/62/index.html">
+<meta property="og:site_name" content="mgxian&#39;s blog">
+<meta property="og:description" content="简介服务稳定性就是我们常说的几个9如 99，99.9，99.99。用来衡量一个服务的稳定性。衡量服务可用性通常有如下两种方式： 时间维度：Availability = Uptime / (Uptime + Downtime) 请求维度：Availability = Successful request / Total request SRE 通常选择以请求维度来衡量服务稳定性 常用术语 SLA（S">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://mgxian.dev/posts/62/burn-rate.png">
+<meta property="og:image" content="https://mgxian.dev/posts/62/burn-rate-1.png">
+<meta property="og:image" content="https://mgxian.dev/posts/62/alert.png">
+<meta property="og:updated_time" content="2022-10-06T08:52:37.795Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="服务稳定性指标规范">
+<meta name="twitter:description" content="简介服务稳定性就是我们常说的几个9如 99，99.9，99.99。用来衡量一个服务的稳定性。衡量服务可用性通常有如下两种方式： 时间维度：Availability = Uptime / (Uptime + Downtime) 请求维度：Availability = Successful request / Total request SRE 通常选择以请求维度来衡量服务稳定性 常用术语 SLA（S">
+<meta name="twitter:image" content="https://mgxian.dev/posts/62/burn-rate.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 'undefined',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://mgxian.dev/posts/62/"/>
+
+
+
+
+
+  <title>服务稳定性指标规范 | mgxian's blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">mgxian's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://mgxian.dev/posts/62/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="mgxian">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="mgxian's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">服务稳定性指标规范</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-03-10T12:38:10+08:00">
+                2021-03-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/运维/" itemprop="url" rel="index">
+                    <span itemprop="name">运维</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>服务稳定性就是我们常说的几个9如 99，99.9，99.99。用来衡量一个服务的稳定性。衡量服务可用性通常有如下两种方式：</p>
+<p><strong>时间维度：Availability = Uptime / (Uptime + Downtime)</strong></p>
+<p><strong>请求维度：Availability = Successful request / Total request</strong></p>
+<p>SRE 通常选择以请求维度来衡量服务稳定性</p>
+<p><strong>常用术语</strong></p>
+<p>SLA（Service Level Agreement）服务等级协议，通常以几个 9 的形式出现，一般用于对客户的承诺</p>
+<p>SLI（Service Level Indicator）服务等级对象，qps、响应时间、请求成功率</p>
+<p>SLO（Service Level Objective）服务等级目标，对服务等级对象设定的目标，如 qps &gt; 100、响应时间 &lt; 100ms</p>
+<p>SLI 可以理解为我们用于衡量服务稳定性的监控指标，SLO 则是针对 SLI 设定的目标，比如 SLI 可能是异常响应码占比，那对应的 SLO 可能是异常响应码占比小于         0.5%</p>
+<h3 id="SLI-选择"><a href="#SLI-选择" class="headerlink" title="SLI 选择"></a>SLI 选择</h3><p>根据 Goole SRE 的实践，一般通过 VALET 方法（Volume、Availability、Latency、Error、Ticket）制定选择 SLI</p>
+<p>Volume（容量）：服务承诺的最大容量，可以选择 qps、tps、每小时处理的任务数等</p>
+<p>Availablity（可用性）：服务是否正常，比如 HTTP 协议服务，可以采用 5xx 响应码，任务执行的成功情况等</p>
+<p>Latency（时延）：服务响应是否足够快，90线 &lt; 50ms、99线 &lt; 100ms 等</p>
+<p>Errors（错误率）：服务错误率有多高，比如 HTTP 协议服务 5xx，4xx 响应码占比</p>
+<p>Tickets（人工介入）：是否需要人工介入，比如数据任务跑失败了，但是无法自动恢复，这时就要人工介入恢复；或者超时了，也需要人工介入，来中断任务、重启拉起来跑等</p>
+<p><strong>SLI 的选择应该尽量选择能靠近用户体验的指标，比如选择响应时间，就比选择 CPU 使用率，内存指标要好</strong></p>
+<h3 id="SLO计算方式"><a href="#SLO计算方式" class="headerlink" title="SLO计算方式"></a>SLO计算方式</h3><p>比如定义了如下的 SLO：</p>
+<p>SLO1：状态码成功率 &gt;= 99.95%</p>
+<p>SLO2：响应时间 90 线 &lt;= 80ms</p>
+<p>SLO3：响应时间 99 线 &lt;= 200ms</p>
+<p>那么服务可用性指标就是表示为：</p>
+<p><strong>Availability = SLO1 &amp; SLO2 &amp; SLO3</strong></p>
+<p>只有当所有 SLO 指标同时达标时，才算可用性指标达到，有一个不达标就表示可用性不达标。</p>
+<h3 id="SLO落地：错误预算"><a href="#SLO落地：错误预算" class="headerlink" title="SLO落地：错误预算"></a>SLO落地：错误预算</h3><p>把 SLO 指标转换为可计数量化的错误预算（Error Budget），通过这种转换可以让我们可以看到我们还有多少犯错机会，把数据可视化，让我们心中有数。</p>
+<p>假设我们4周为一个衡量周期，4周内的总请求次数为 100000，那么计算如下：</p>
+<p>SLO1：状态码成功率 &gt;= 99.95%          错误预算：100000x0.5%=500</p>
+<p>SLO2：响应时间 90 线 &lt;= 80ms           错误预算：100000x10%=10000</p>
+<p>SLO3：响应时间 99 线 &lt;= 200ms         错误预算：100000x1%=1000</p>
+<p><strong>数据可视化</strong></p>
+<p>通过计算得到的错误预算可以用于数据可视化，制作成图表，让所有人随时查看 SLO 的情况。</p>
+<p><strong>故障定级</strong></p>
+<p>根据此次故障消耗的错误预算比例，定级故障，比如当故障消耗错误预算 &lt;5% 就为 P4 故障，&gt;5% &lt;20% 定级为 P3 故障等</p>
+<p><strong>稳定性共识</strong></p>
+<ul>
+<li><p>剩余预算充足或未消耗完之前，对问题的发生要有容忍度</p>
+</li>
+<li><p>剩余预算消耗过快或即将消耗完之前，我们有权中止和拒绝任何线上变更</p>
+</li>
+</ul>
+<p><strong>基于错误预算的告警</strong></p>
+<p>当错误预算消耗过快时，或者超过一定的比例时，及时报警，通知相关人处理</p>
+<h3 id="服务稳定性衡量指标"><a href="#服务稳定性衡量指标" class="headerlink" title="服务稳定性衡量指标"></a>服务稳定性衡量指标</h3><p><strong>衡量指标：</strong></p>
+<ul>
+<li><p>可用性：成功请求数 / 总请求数</p>
+</li>
+<li><p>P90 响应时间：服务的请求响应时间 90 线</p>
+</li>
+<li><p>P99 响应时间：服务的请求响应时间 99 线</p>
+</li>
+</ul>
+<p>只有以上指标全部满足，本周期内的服务稳定性才算达成</p>
+<p><strong>指标计算规则：</strong></p>
+<ul>
+<li><p>可用性：对于一般基于 HTTP 协议的服务，采用 HTTP 响应码来作为衡量可用性的指标，计算公式如下：可用性 = 非 5xx 响应码请求总数 / 总请求数</p>
+</li>
+<li><p>P90 响应时间</p>
+</li>
+<li><p>P99 响应时间</p>
+</li>
+</ul>
+<p><strong>衡量周期</strong></p>
+<p>服务稳定性会定期评估，一般会每1周，每4周各进行评估一次</p>
+<p><strong>注意事项</strong></p>
+<p>当服务异常时或者强依赖的服务异常时，在响应请求时，请注意设置正确的 5xx 响应码，而不要像正常的请求一样响应 2xx 响应码，这样会导致可用性计算不准确，监控系统无法及时发现问题，无法及时报警，只能等到用户投诉反馈才能发现问题</p>
+<h3 id="基于错误预算的报警"><a href="#基于错误预算的报警" class="headerlink" title="基于错误预算的报警"></a>基于错误预算的报警</h3><p><strong>错误预算（Error Budget）</strong></p>
+<p>基于 SLO 来计算错误预算，比如可用性要求是 99.9%，预估一个周期的总请求数是100万，那错误预算就是 100万 X（1-0.999）= 1000，表示我们在一个统计周期内，最多只能有 1000 个请求可以失败</p>
+<p><strong>燃烧率（Burn Rate）</strong></p>
+<p>燃烧率表示错误预算的消耗速度，燃烧率为 1 时表示在一个统计周期内，刚好消耗完错误预算，如果 30 天的可用性要求是 99.9%，那么持续的 0.1% 的错误率，正好消耗掉所有错误预算，燃烧率为 1</p>
+<p><strong>燃烧率与错误率关系表：</strong></p>
+<p><img src="/posts/62/burn-rate.png" alt="burn-rate"></p>
+<p><strong>错误预算消耗</strong></p>
+<p>一定时间内，当错误预算消耗过快，我们可以选择报警，比如当 1 个小时消耗的错误预算超过 2% 时，6 个小时消耗的错误预算超过 5% 时。通过错误预算消耗的占比，我们可以计算出燃烧率。</p>
+<p>假定 30 天内的错误预算为 X，燃烧率为 1 表示 30*24 小时正好消耗完 X，那么当 1h 消耗 2% 的 X 的燃烧率就可以如下公式计算：</p>
+<p>燃烧率 = (2% <em> X / 1h) / (X / 30 </em> 24h) = 14.4</p>
+<p>常用的错误预算消耗与燃烧率：</p>
+<p><img src="/posts/62/burn-rate-1.png" alt=""></p>
+<p><strong>基于错误预算消耗报警</strong></p>
+<p>当错误预消耗过快，及时报警，并当问题解决时能及时解除报警。多时间周期综合报警规则：</p>
+<p><img src="/posts/62/alert.png" alt=""></p>
+<p>以上报警规则表示，当 1h 的错误预算消耗超过 2% 时，并且 5m 的错误率依然过高，错误预算消耗依然会持续达到 2%，就及时报警，当 6h 内的错误预算超过 5% 时，也会及时报警</p>
+<h3 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h3><p><a href="https://sre.google/workbook/slo-document/" target="_blank" rel="noopener">slo-document</a></p>
+<p><a href="https://sre.google/workbook/implementing-slos/" target="_blank" rel="noopener">implementing-slos</a></p>
+<p><a href="https://landing.google.com/sre/workbook/chapters/alerting-on-slos/" target="_blank" rel="noopener">alerting-on-slos</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/sre/" rel="tag"># sre</a>
+          
+            <a href="/tags/sli/" rel="tag"># sli</a>
+          
+            <a href="/tags/slo/" rel="tag"># slo</a>
+          
+            <a href="/tags/error-budget/" rel="tag"># error budget</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/56/" rel="next" title="Istio 上线可能会遇到的坑总结">
+                <i class="fa fa-chevron-left"></i> Istio 上线可能会遇到的坑总结
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/63/" rel="prev" title="服务稳定性衡量指标">
+                服务稳定性衡量指标 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="mgxian" />
+          <p class="site-author-name" itemprop="name">mgxian</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">77</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">61</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/mgxian" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SLI-选择"><span class="nav-number">2.</span> <span class="nav-text">SLI 选择</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SLO计算方式"><span class="nav-number">3.</span> <span class="nav-text">SLO计算方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SLO落地：错误预算"><span class="nav-number">4.</span> <span class="nav-text">SLO落地：错误预算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#服务稳定性衡量指标"><span class="nav-number">5.</span> <span class="nav-text">服务稳定性衡量指标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于错误预算的报警"><span class="nav-number">6.</span> <span class="nav-text">基于错误预算的报警</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考文档"><span class="nav-number">7.</span> <span class="nav-text">参考文档</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">mgxian</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
