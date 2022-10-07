@@ -77,7 +77,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="refactor," />
+  <meta name="keywords" content="develop," />
 
 
 
@@ -93,17 +93,18 @@
 
 
 
-<meta name="keywords" content="refactor">
+<meta name="description" content="什么是 Web APIWeb API 的重要性 通过 API 才能使用的在线服务出现 移动应用与 API API 的经济学  各种各样的 API 模式 将已发布的 Web 在线服务的数据或功能通过 API 公开 将附加在其他网页上的微件公开：例如 Amazon 提供的广告功能 构建现代 Web 应用：单页面应用异步加载 开发智能手机应用 开发社交游戏 公司内部多个系统的集成">
+<meta name="keywords" content="develop">
 <meta property="og:type" content="article">
-<meta property="og:title" content="代码坏味道一句话总结">
+<meta property="og:title" content="Web API的设计与开发笔记">
 <meta property="og:url" content="https://mgxian.dev/posts/66/index.html">
 <meta property="og:site_name" content="mgxian&#39;s blog">
+<meta property="og:description" content="什么是 Web APIWeb API 的重要性 通过 API 才能使用的在线服务出现 移动应用与 API API 的经济学  各种各样的 API 模式 将已发布的 Web 在线服务的数据或功能通过 API 公开 将附加在其他网页上的微件公开：例如 Amazon 提供的广告功能 构建现代 Web 应用：单页面应用异步加载 开发智能手机应用 开发社交游戏 公司内部多个系统的集成">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://mgxian.dev/posts/66/refactor.png">
-<meta property="og:updated_time" content="2022-10-06T10:31:19.206Z">
+<meta property="og:updated_time" content="2022-10-07T13:57:09.468Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="代码坏味道一句话总结">
-<meta name="twitter:image" content="https://mgxian.dev/posts/66/refactor.png">
+<meta name="twitter:title" content="Web API的设计与开发笔记">
+<meta name="twitter:description" content="什么是 Web APIWeb API 的重要性 通过 API 才能使用的在线服务出现 移动应用与 API API 的经济学  各种各样的 API 模式 将已发布的 Web 在线服务的数据或功能通过 API 公开 将附加在其他网页上的微件公开：例如 Amazon 提供的广告功能 构建现代 Web 应用：单页面应用异步加载 开发智能手机应用 开发社交游戏 公司内部多个系统的集成">
 
 
 
@@ -137,7 +138,7 @@
 
 
 
-  <title>代码坏味道一句话总结 | mgxian's blog</title>
+  <title>Web API的设计与开发笔记 | mgxian's blog</title>
   
 
 
@@ -327,7 +328,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">代码坏味道一句话总结</h2>
+          <h2 class="post-title" itemprop="name headline">Web API的设计与开发笔记</h2>
         
 
         <div class="post-meta">
@@ -396,346 +397,336 @@
       
 
       
-        <p><img src="/posts/66/refactor.png" alt=""><br><a id="more"></a></p>
+        <h3 id="什么是-Web-API"><a href="#什么是-Web-API" class="headerlink" title="什么是 Web API"></a>什么是 Web API</h3><h4 id="Web-API-的重要性"><a href="#Web-API-的重要性" class="headerlink" title="Web API 的重要性"></a>Web API 的重要性</h4><ul>
+<li>通过 API 才能使用的在线服务出现</li>
+<li>移动应用与 API</li>
+<li>API 的经济学</li>
+</ul>
+<h4 id="各种各样的-API-模式"><a href="#各种各样的-API-模式" class="headerlink" title="各种各样的 API 模式"></a>各种各样的 API 模式</h4><ul>
+<li>将已发布的 Web 在线服务的数据或功能通过 API 公开</li>
+<li>将附加在其他网页上的微件公开：例如 Amazon 提供的广告功能</li>
+<li>构建现代 Web 应用：单页面应用异步加载</li>
+<li>开发智能手机应用</li>
+<li>开发社交游戏</li>
+<li>公司内部多个系统的集成<a id="more"></a>
+</li>
+</ul>
+<h4 id="应该通过-API-公开什么"><a href="#应该通过-API-公开什么" class="headerlink" title="应该通过 API 公开什么"></a>应该通过 API 公开什么</h4><ul>
+<li>公开所有能公开的</li>
+<li>公开 API 不会有风险 即使不公开也可以使用爬虫抓取数据</li>
+<li>公开 API 能得到什么</li>
+</ul>
+<h4 id="设计优美的-Web-API-的重要性"><a href="#设计优美的-Web-API-的重要性" class="headerlink" title="设计优美的 Web API 的重要性"></a>设计优美的 Web API 的重要性</h4><ul>
+<li>设计优美的 Web API 易于使用</li>
+<li>设计优美的 Web API 便于更改</li>
+<li>设计优美的 Web API 健壮性好</li>
+<li>设计优美的 Web API 不怕公之于众</li>
+</ul>
+<h4 id="如何美化-Web-API"><a href="#如何美化-Web-API" class="headerlink" title="如何美化 Web API"></a>如何美化 Web API</h4><ul>
+<li>设计规范明确的内容必须遵守相关规范</li>
+<li>没有设计规范的内容必须遵守相关事实标准</li>
+</ul>
+<h4 id="REST-与-Web-API"><a href="#REST-与-Web-API" class="headerlink" title="REST 与 Web API"></a>REST 与 Web API</h4><h4 id="作为目标对象的开发人员数量与-API-的设计思想"><a href="#作为目标对象的开发人员数量与-API-的设计思想" class="headerlink" title="作为目标对象的开发人员数量与 API 的设计思想"></a>作为目标对象的开发人员数量与 API 的设计思想</h4><ul>
+<li>LSUD（Large Set of Unknown Developers）：尽可能设计的普适与通用</li>
+<li>SSKD（Small Set of Known Developers）：易于上手</li>
+</ul>
+<h3 id="端点的设计与请求的形式"><a href="#端点的设计与请求的形式" class="headerlink" title="端点的设计与请求的形式"></a>端点的设计与请求的形式</h3><h4 id="设计通过-API-公开的功能"><a href="#设计通过-API-公开的功能" class="headerlink" title="设计通过 API 公开的功能"></a>设计通过 API 公开的功能</h4><p><strong>SNS聊天功能为例</strong></p>
 <ul>
-<li>神秘命名(Mysterious Name)<ul>
-<li>总结<ul>
-<li>命名需要清晰表明意图</li>
-<li>想不出一个好名字可能说明设计问题</li>
-</ul>
-</li>
-<li>手法<ul>
-<li>改变函数声明</li>
-<li>变量改名</li>
-<li>字段改名</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>重复代码(Duplicated Code)<ul>
-<li>总结<ul>
-<li>重复不好</li>
-</ul>
-</li>
-<li>手法<ul>
-<li>提炼函数</li>
-<li>移动语句</li>
-<li>函数上移</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>过长函数(Long Function)<ul>
-<li>总结<ul>
-<li>好函数应该更短</li>
-</ul>
-</li>
-<li>手法<ul>
-<li>提炼函数</li>
-<li>以查询取代临时变量</li>
-<li>引入参数对象</li>
-<li>保持对象完整</li>
-<li>以命令取代函数</li>
-<li>分解条件表达式</li>
-<li>以多态取代条件表达式</li>
-<li>拆分循环</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>过长参数列表(Long Parameter List)<ul>
-<li>总结<ul>
-<li>参数应该尽量少</li>
-</ul>
-</li>
-<li>手法<ul>
-<li>以查询取代参数</li>
-<li>保持对象完整</li>
-<li>引入参数对象</li>
-<li>移除标记参数</li>
-<li>函数组合成类</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>全局数据(Global Data)<ul>
-<li>总结<ul>
-<li>全局数据是恶魔</li>
-<li>限制全局数据的作用域</li>
-</ul>
-</li>
-<li>手法<ul>
-<li>封装变量</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>可变数据(Mutable Data)<ul>
-<li>总结<ul>
-<li>尽量少使用可变数据</li>
-<li>限制可变数据的作用域</li>
-</ul>
-</li>
-<li>手法<ul>
-<li>封装变量</li>
-<li>拆分变量</li>
-<li>移动语句</li>
-<li>提炼函数</li>
-<li>将查询函数和修改函数分离</li>
-<li>移除设值函数</li>
-<li>以查询取代派生变量</li>
-<li>函数组合成类</li>
-<li>函数组合成变换</li>
-<li>将引用对象改为值对象</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>发散式变化(Divergent Change)<ul>
-<li>总结<ul>
-<li>经常因为不同的原因在不同的方向上发生变化</li>
-</ul>
-</li>
-<li>手法<ul>
-<li>拆分阶段</li>
-<li>搬移函数</li>
-<li>提炼函数</li>
-<li>提炼类</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>霰弹式修改(Shotgun Surgery)<ul>
-<li>总结<ul>
-<li>某种变化需要在不同类/模块/函数内做出许多小修改</li>
-</ul>
-</li>
-<li>手法<ul>
-<li>搬移函数</li>
-<li>搬移字段</li>
-<li>函数组合成类</li>
-<li>函数组合成变换</li>
-<li>拆分阶段</li>
-<li>内联函数</li>
-<li>内联类</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>依恋情结(Feature Envy)<ul>
-<li>总结<ul>
-<li>一个函数跟另一个模块中的函数或者数据交流格外频繁，远胜于在自己所处模块内部的交流</li>
-<li>策略(Strategy)模式和访问者(Visitor)模式是例外</li>
-</ul>
-</li>
-<li>手法<ul>
-<li>搬移函数</li>
-<li>提炼函数</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>数据泥团(Data Clumps)<ul>
-<li>总结<ul>
-<li>几个数据项（字段、参数）总是一起出现</li>
-</ul>
-</li>
-<li>手法<ul>
-<li>提炼类</li>
-<li>引入参数对象</li>
-<li>保持对象完整</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>基本类型偏执(Primitive Obsession)<ul>
-<li>总结<ul>
-<li>太执着于使用原生基本类型</li>
-</ul>
-</li>
-<li>手法<ul>
-<li>以对象取代基本类型</li>
-<li>以子类取代类型码</li>
-<li>以多态取代条件表达式</li>
-<li>提炼类</li>
-<li>引入参数对象</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>重复的switch (Repeated Switches)<ul>
-<li>总结<ul>
-<li>多次出现类似的switch</li>
-</ul>
-</li>
-<li>手法<ul>
-<li>以多态取代条件表达式</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>循环语句(Loops)<ul>
-<li>总结<ul>
-<li>函数式编程可以简化循环</li>
-</ul>
-</li>
-<li>手法<ul>
-<li>以管道（map/filter）取代循环</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>冗赘的元素(Lazy Element)<ul>
-<li>总结<ul>
-<li>有些元素过于简单，没有存在的必要</li>
-</ul>
-</li>
-<li>手法<ul>
-<li>内联函数</li>
-<li>内联类</li>
-<li>折叠继承体系</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>夸夸其谈通用性(Speculative Generality)<ul>
-<li>总结<ul>
-<li>过度/过早设计</li>
-</ul>
-</li>
-<li>手法<ul>
-<li>折叠继承体系</li>
-<li>内联函数</li>
-<li>内联类</li>
-<li>改变函数声明</li>
-<li>移除死代码</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>临时字段(Temporary Field)<ul>
-<li>总结<ul>
-<li>其内部某个字段仅为某种特定情况而设</li>
-</ul>
-</li>
-<li>手法<ul>
-<li>提炼类</li>
-<li>搬移函数</li>
-<li>引入特例</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>过长的消息链(Message Chains)<ul>
-<li>总结<ul>
-<li>向一个对象请求另一个对象，然后再向后者请求另一个对象，然后再请求另一个对象</li>
-</ul>
-</li>
-<li>手法<ul>
-<li>隐藏委托关系</li>
-<li>提炼函数</li>
-<li>搬移函数</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>中间人(Middle Man)<ul>
-<li>总结<ul>
-<li>过度运用委托</li>
-</ul>
-</li>
-<li>手法<ul>
-<li>移除中间人</li>
-<li>内联函数</li>
-<li>以委托取代超类</li>
-<li>以委托取代子类</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>内幕交易(Insider Trading)<ul>
-<li>总结<ul>
-<li>减少模块间的数据交换</li>
-<li>子类对超类的了解总是超过后者的主观愿望</li>
-</ul>
-</li>
-<li>手法<ul>
-<li>搬移函数</li>
-<li>搬移字段</li>
-<li>隐藏委托关系</li>
-<li>以委托取代子类</li>
-<li>以委托取代超类</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>过大的类(Large Class)<ul>
-<li>总结<ul>
-<li>单个类做太多的事情</li>
-</ul>
-</li>
-<li>手法<ul>
-<li>提炼类</li>
-<li>提炼超类</li>
-<li>以子类取代类型码</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>异曲同工的类(Alternative Classes with Different Interfaces)<ul>
-<li>总结<ul>
-<li>不同类做的事情类似，但接口不一致</li>
-</ul>
-</li>
-<li>手法<ul>
-<li>改变函数声明</li>
-<li>搬移函数</li>
-<li>提炼超类</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>纯数据类(Data Class)<ul>
-<li>总结<ul>
-<li>只有字段和用于访问这些字段的函数的类</li>
-</ul>
-</li>
-<li>手法<ul>
-<li>封装记录</li>
-<li>移除设值函数</li>
-<li>搬移函数</li>
-<li>提炼函数</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>被拒绝的遗赠(Refused Bequest)<ul>
-<li>总结<ul>
-<li>子类不想继承超类的函数和数据</li>
-</ul>
-</li>
-<li>手法<ul>
-<li>函数下移</li>
-<li>字段下移</li>
-<li>以委托取代子类</li>
-<li>以委托取代超类</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>注释(Comments)<ul>
-<li>总结<ul>
-<li>不要给糟糕的代码注释</li>
-</ul>
-</li>
-<li>手法<ul>
-<li>提炼函数</li>
-<li>改变函数声明</li>
-<li>引入断言<br>代码坏味道一句话总结</li>
-</ul>
-</li>
-</ul>
-</li>
+<li>用户注册与编辑</li>
+<li>搜索，添加，删除好友</li>
+<li>好友之间的消息交互</li>
+</ul>
+<h4 id="API-端点的设计思想"><a href="#API-端点的设计思想" class="headerlink" title="API 端点的设计思想"></a>API 端点的设计思想</h4><h5 id="端口的设计"><a href="#端口的设计" class="headerlink" title="端口的设计"></a>端口的设计</h5><p>容易记忆，URI 包含的功能一目了然</p>
+<p><strong>短小便于输入的 URI</strong></p>
+<ul>
+<li><a href="http://api.example.com/service/api/search" target="_blank" rel="noopener">http://api.example.com/service/api/search</a></li>
+<li><a href="http://api.example.com/search" target="_blank" rel="noopener">http://api.example.com/search</a></li>
+</ul>
+<p><strong>人可以读懂的 URI</strong></p>
+<ul>
+<li><a href="http://api.example.com/sv/u" target="_blank" rel="noopener">http://api.example.com/sv/u</a></li>
+<li><a href="http://api.example.com/products/12345" target="_blank" rel="noopener">http://api.example.com/products/12345</a></li>
+</ul>
+<p><strong>没有大小写的混用的 URI</strong><br><strong>修改方便的 URI</strong><br><strong>不会暴露服务端架构的 URI</strong></p>
+<ul>
+<li><a href="http://api.example.com/cgi-bin/get_user.php?user=100" target="_blank" rel="noopener">http://api.example.com/cgi-bin/get_user.php?user=100</a></li>
+</ul>
+<p><strong>规则统一的 URI</strong></p>
+<h4 id="HTTP-方法与端口"><a href="#HTTP-方法与端口" class="headerlink" title="HTTP 方法与端口"></a>HTTP 方法与端口</h4><p><strong>GET</strong>获取资源</p>
+<p><strong>POST</strong>新增资源</p>
+<p><strong>PUT</strong>更新已有资源</p>
+<p><strong>DELETE</strong>删除资源</p>
+<p><strong>PATCH</strong>更新资源的部分属性</p>
+<p><strong>HEAD</strong>获取资源的元信息</p>
+<p><strong>在不支持其他有些 HTTP 方法时解决方法</strong></p>
+<ul>
+<li>使用 _method参数</li>
+<li>使用 X-Http-Method_Override 头部</li>
+<li>请求时统一使用 POST 方法</li>
+</ul>
+<h4 id="API-端点的设计"><a href="#API-端点的设计" class="headerlink" title="API 端点的设计"></a>API 端点的设计</h4><p><strong>基本设计</strong></p>
+<ul>
+<li>获取用户信息列表 GET <a href="http://api.example.com/v1/users" target="_blank" rel="noopener">http://api.example.com/v1/users</a></li>
+<li>新用户注册 POST <a href="http://api.example.com/v1/users" target="_blank" rel="noopener">http://api.example.com/v1/users</a></li>
+<li>更新用户信息 PUT/PATCH <a href="http://api.example.com/v1/users/:id" target="_blank" rel="noopener">http://api.example.com/v1/users/:id</a></li>
+<li>删除用户信息 DELETE <a href="http://api.example.com/v1/users/:id" target="_blank" rel="noopener">http://api.example.com/v1/users/:id</a></li>
+</ul>
+<p><strong>好友关系</strong></p>
+<ul>
+<li>获取当前用户的好友列表 GET <a href="http://api.example.com/v1/users/:id/friends" target="_blank" rel="noopener">http://api.example.com/v1/users/:id/friends</a></li>
+<li>添加好友 POST <a href="http://api.example.com/v1/users/:id/friends" target="_blank" rel="noopener">http://api.example.com/v1/users/:id/friends</a></li>
+<li>删除好友 DELETE <a href="http://api.example.com/v1/users/:id/friends/:id" target="_blank" rel="noopener">http://api.example.com/v1/users/:id/friends/:id</a></li>
+</ul>
+<p><strong>动态相关的端点</strong></p>
+<ul>
+<li>编辑动态信息 PUT <a href="http://api.example.com/v1/updates/:id" target="_blank" rel="noopener">http://api.example.com/v1/updates/:id</a></li>
+<li>删除动态信息 DELETE <a href="http://api.example.com/v1/updates/:id" target="_blank" rel="noopener">http://api.example.com/v1/updates/:id</a></li>
+<li>发表动态信息 POST <a href="http://api.example.com/v1/updates" target="_blank" rel="noopener">http://api.example.com/v1/updates</a></li>
+<li>获取特定用户的动态信息 GET <a href="http://api.example.com/v1/users/:id/updates" target="_blank" rel="noopener">http://api.example.com/v1/users/:id/updates</a></li>
+<li>获取好友的动态列表 GET <a href="http://api.example.com/v1/users/:id/friends/updates" target="_blank" rel="noopener">http://api.example.com/v1/users/:id/friends/updates</a></li>
+</ul>
+<p><strong>访问资源的端点设计的注意事项</strong></p>
+<ul>
+<li>使用名词复数形式</li>
+<li>注意所用的单词</li>
+<li>不使用空格及需要编码的字符</li>
+<li>使用连接符’_’或者’-‘来连接多个单词</li>
+</ul>
+<h4 id="搜索与查询参数的设计"><a href="#搜索与查询参数的设计" class="headerlink" title="搜索与查询参数的设计"></a>搜索与查询参数的设计</h4><p><strong>获取数据量与获取位置的查询参数</strong></p>
+<ul>
+<li>limit 与 offset</li>
+<li>per_page 与 page</li>
+<li>since_id</li>
+</ul>
+<p><strong>参数过滤</strong></p>
+<ul>
+<li><a href="http://api.example.com/v1/users?name=ken" target="_blank" rel="noopener">http://api.example.com/v1/users?name=ken</a></li>
+<li><a href="http://api.example.com/v1/users?q=ken" target="_blank" rel="noopener">http://api.example.com/v1/users?q=ken</a></li>
+</ul>
+<h4 id="登录与-OAuth-2-0"><a href="#登录与-OAuth-2-0" class="headerlink" title="登录与 OAuth 2.0"></a>登录与 OAuth 2.0</h4><p><strong>Authorization Code</strong>适用于在服务器端进行大量处理的 Web 应用</p>
+<p><strong>Implicit</strong>适用于智能手机应用与使用 JavaScript 客户端进行大量处理的应用</p>
+<p><strong>Resource Owner Password Credentials</strong>适用于不使用服务器端的应用，直接使用用户名与密码</p>
+<ul>
+<li>grant_type: password</li>
+<li>username</li>
+<li>password</li>
+<li>scope 指定允许访问的权限范围</li>
+</ul>
+<p><strong>Client Credentials</strong></p>
+<p><strong>端点设计</strong>/oauth2/token</p>
+<p><strong>刷新 token</strong>获取token的时候返回一个用于刷新token的refresh_token</p>
+<h4 id="主机名和端点共有部分"><a href="#主机名和端点共有部分" class="headerlink" title="主机名和端点共有部分"></a>主机名和端点共有部分</h4><p><strong><a href="http://api.example.com/" target="_blank" rel="noopener">api.example.com</a> 最为合适</strong></p>
+<h4 id="SSKDs-与-API-设计"><a href="#SSKDs-与-API-设计" class="headerlink" title="SSKDs 与 API 设计"></a>SSKDs 与 API 设计</h4><p><strong>尽量使用少的 API</strong><br><strong>一个屏幕的内容只使用一次 API 调用</strong></p>
+<h4 id="HATEOAS-和-REST-LEVEL3-API"><a href="#HATEOAS-和-REST-LEVEL3-API" class="headerlink" title="HATEOAS 和 REST LEVEL3 API"></a>HATEOAS 和 REST LEVEL3 API</h4><p><strong>返回的数据中加入超链接</strong></p>
+<h3 id="响应数据的设计"><a href="#响应数据的设计" class="headerlink" title="响应数据的设计"></a>响应数据的设计</h3><h4 id="数据格式"><a href="#数据格式" class="headerlink" title="数据格式"></a>数据格式</h4><p><strong>LSUD</strong>：JSON和XML</p>
+<p><strong>SSKD</strong>高效序列化方式，例如：thrift、protobuf、messagepack</p>
+<p><strong>数据格式指定方法</strong></p>
+<ul>
+<li>URI添加查询参数 format=json</li>
+<li>在请求头指定媒体类型 Accept: application/json</li>
+</ul>
+<h4 id="使用JSONP"><a href="#使用JSONP" class="headerlink" title="使用JSONP"></a>使用JSONP</h4><p><strong>不一定非要实现JSONP，可能会有安全问题</strong><br><strong>支持JSONP的操作方法</strong> 查询参数 callback<br><strong>JSONP与错误处理</strong></p>
+<ul>
+<li>发生了错误依然需要返回200状态码</li>
+<li>在响应的数据中添加真正的响应码</li>
+</ul>
+<h4 id="数据内部结构的思考方法"><a href="#数据内部结构的思考方法" class="headerlink" title="数据内部结构的思考方法"></a>数据内部结构的思考方法</h4><p><strong>让用户来选择响应的内容</strong></p>
+<ul>
+<li>查询参数 fields=name,age</li>
+<li>指定响应群<ul>
+<li>small</li>
+<li>medium</li>
+<li>large</li>
+</ul>
+</li>
+</ul>
+<p><strong>封装是否必要</strong>，一般情况都是否<br><strong>数据是否应该扁平化</strong></p>
+<ul>
+<li>层级</li>
+<li>扁平化</li>
+<li>只有遇到层级结构有绝对优势时才使用层级</li>
+</ul>
+<p><strong>序列与格式</strong>推荐使用对象来封装数据（如果返回是列表，再在外面加一层对像封装）</p>
+<ul>
+<li>更容易理解响应数据表示什么</li>
+<li>响应数据通过对像的封装实现了结构统一</li>
+<li>可以避免安全方面的风险</li>
+</ul>
+<p><strong>该如何返回序列的个数以及是否还有后续数据</strong></p>
+<ul>
+<li>服务端要返回20条数据时，可以试着获取21条数据，如果能获取成功，说明至少存在1条后续数据</li>
+<li>在返回给客户端的对像中添加还有后续的字段标识 hasNext: true</li>
+</ul>
+<h4 id="各个数据的格式"><a href="#各个数据的格式" class="headerlink" title="各个数据的格式"></a>各个数据的格式</h4><p><strong>各个数据的名称</strong>推荐使用蛇形法<br><strong>描述性别使用</strong> gender值为male和female</p>
+<p><strong>日期格式</strong>一般采用RFC 3339 例如：2015-10-12T11:30:22+09:00<br><strong>大整数时JSON</strong>同时传输id和id_str</p>
+<h4 id="响应数据的设计-1"><a href="#响应数据的设计-1" class="headerlink" title="响应数据的设计"></a>响应数据的设计</h4><p><strong>API没有必要如实反映DB的数据表结构</strong></p>
+<h4 id="出错信息的表示"><a href="#出错信息的表示" class="headerlink" title="出错信息的表示"></a>出错信息的表示</h4><p><strong>通过状态码来表示出错信息</strong></p>
+<ul>
+<li>1字头 消息</li>
+<li>2字头 成功</li>
+<li>3字头 重定向</li>
+<li>4字头 客户端原因引起的错误</li>
+<li>5字头 服务端原因引起的错误</li>
+<li>当找不到合适的状态码的时候，使用’200’，’400’，’500’这些以’00’结尾的状态码</li>
+</ul>
+<p><strong>向客户端返回详细的出错信息</strong>，把详细的出错信息放入消息体</p>
+<ul>
+<li>code 内部定义的错误码</li>
+<li>message 出错信息</li>
+<li>info 帮助文档的URL</li>
+</ul>
+<p><strong>如何填写详细的出错信息？</strong>，可以同时提供面向开发人员和非开发人员的信息提示</p>
+<ul>
+<li>developerMessage</li>
+<li>userMessage</li>
+<li>code</li>
+<li>info</li>
+</ul>
+<p><strong>发生错误时防止返回HTML</strong>，某些API在发生错误时会把HTML信息写入消息体，尤其是发生500，503以及404等错误时</p>
+<p><strong>维护与状态码</strong></p>
+<ul>
+<li>当维护时应该返回503状态码</li>
+<li>如果能够预测服务何时能够重启可以添加 Retry-After 头</li>
+</ul>
+<p><strong>需要返回意义不明确的信息</strong></p>
+<ul>
+<li>有时出于安全考虑或其它原因需要返回模棱两可的信息</li>
+<li>比如当用户被屏蔽时，如果访问可以返回404，如果返回403对方可能就知道是被屏蔽了</li>
+<li>用户登录时，如果明确指出哪一个字段错误，可能会给恶意用户破解的机会</li>
+</ul>
+<h3 id="最大程度地利用-HTTP-协议规范"><a href="#最大程度地利用-HTTP-协议规范" class="headerlink" title="最大程度地利用 HTTP 协议规范"></a>最大程度地利用 HTTP 协议规范</h3><h4 id="正确使用状态码"><a href="#正确使用状态码" class="headerlink" title="正确使用状态码"></a>正确使用状态码</h4><p><strong>1字头 消息</strong><br><strong>2字头 成功</strong></p>
+<ul>
+<li>200 OK 请求成功</li>
+<li>201 Created 请求成功，新的资源已创建</li>
+<li>202 Accepted 请求成功，请求的操作已接受</li>
+<li>204 No Content 没有内容</li>
+</ul>
+<p><strong>3字头 重定向</strong></p>
+<ul>
+<li>300 Multiple Choices 存在多个资源</li>
+<li>301 Moved Permanently 资源被永久转移</li>
+<li>302 Found 请求的资源被暂时转移</li>
+<li>303 See Other 引用他处</li>
+<li>304 Not Modified 自上一次访问后没有发生更新</li>
+<li>307 Temporary Redirect 请求的资源被暂时转移</li>
+</ul>
+<p><strong>4字头 客户端原因引起的错误</strong></p>
+<ul>
+<li>400 Bad Request 请求不正确，一般是数据格式不正确</li>
+<li>401 Unauthorized 需要认证</li>
+<li>403 Forbidden 禁止访问，一般是没有权限</li>
+<li>404 Not Found 没有找到指定的资源</li>
+<li>405 Method Not Allowed 没有找到指定的方法</li>
+<li>406 Not Acceptable 同Accept相关联的首部里含有无法处理的内容</li>
+<li>408 Request Timeout 请求在规定时间内没有处理结束</li>
+<li>409 Conflict 资源存在冲突</li>
+<li>410 Gone 指定的资源已不存在</li>
+<li>413 Request Entity Too Large 请求消息体太大</li>
+<li>414 Request-URI Too Long 请求的URI太长</li>
+<li>415 Unsupported Media Type 不支持所指定的媒体类型</li>
+<li>429 Too Many Requests 请求次数过多，一般用于API请求速度控制</li>
+</ul>
+<p><strong>5字头 服务端原因引起的错误</strong></p>
+<ul>
+<li>500 Internal Server Error 服务器端发生错误</li>
+<li>503 Service Unavailable 服务器暂时停止运行</li>
+</ul>
+<h4 id="缓存与HTTP协议规范"><a href="#缓存与HTTP协议规范" class="headerlink" title="缓存与HTTP协议规范"></a>缓存与HTTP协议规范</h4><p><strong>过期模型</strong></p>
+<ul>
+<li>Cache-Control有更多控制方法</li>
+<li>Expires使用绝对时间来表示到期</li>
+</ul>
+<p><strong>验证模型</strong>可以使用Last-Modified和Etag</p>
+<p><strong>启发式过期</strong>，当服务器端没有给出过期时间时，客户端可以决定大约缓存数据多久</p>
+<p><strong>不希望实施缓存的情况</strong>Cache-Control: no-cache</p>
+<p><strong>使用Vary来指定缓存单位</strong></p>
+<ul>
+<li>在实施缓存时可能需要同时指定Vary首部</li>
+<li>Vary用于指定除URI外使用哪个请求首部来确定唯一的数据</li>
+<li>Vary: Accept-Encoding,User-Agent,Accept-Language</li>
+</ul>
+<p><strong>Cache-Control首部</strong></p>
+<ul>
+<li>public 代理服务器处保存的缓存可以在不同用户之间共享</li>
+<li>private 每个用户的缓存数据必须各不相同</li>
+<li>no-cache 缓存数据需要通过验证模式来确认</li>
+<li>no-store 不需要进行缓存</li>
+<li>no-transform 代理服务器不可变更响应数据的媒体类型或其他相关内容</li>
+<li>must-revalidate 不管何时都需要向原始服务器再次验证</li>
+<li>proxy-revalidate 代理服务器需要向原始服务器再次验证</li>
+<li>max-age 表示缓存数据处于新鲜状态的时间</li>
+<li>s-maxage 和max-age一样，但只用于中继服务器</li>
+<li>stable-while-revalidate 指定的max-age过期后，缓存会异步刷新，但此时缓存依然可以使用</li>
+</ul>
+<h4 id="媒体类型的指定"><a href="#媒体类型的指定" class="headerlink" title="媒体类型的指定"></a>媒体类型的指定</h4><p>请求数据与媒体类型Content-Type与Accept</p>
+<h4 id="同源策略和跨域资源共享"><a href="#同源策略和跨域资源共享" class="headerlink" title="同源策略和跨域资源共享"></a>同源策略和跨域资源共享</h4><p>Origin与Access-Control-Allow-Origin<br>预先使用OPTIONS方法<br>认证时使用Access-Control-Allow-Credentials: true</p>
+<h4 id="定义私有的HTTP首部"><a href="#定义私有的HTTP首部" class="headerlink" title="定义私有的HTTP首部"></a>定义私有的HTTP首部</h4><p>一般以x-作为前缀</p>
+<h3 id="开发方便更改设计的-Web-API"><a href="#开发方便更改设计的-Web-API" class="headerlink" title="开发方便更改设计的 Web API"></a>开发方便更改设计的 Web API</h3><h4 id="方便更改设计的重要性"><a href="#方便更改设计的重要性" class="headerlink" title="方便更改设计的重要性"></a>方便更改设计的重要性</h4><p>公开发布的API（LSUD）<br>面向移动应用的API（SSKD）<br>Web服务中使用的API</p>
+<h4 id="通过版本信息来管理API"><a href="#通过版本信息来管理API" class="headerlink" title="通过版本信息来管理API"></a>通过版本信息来管理API</h4><p>推荐在URI中嵌入版本信息<br>通过媒体类型来指定版本信息Accept: applicaton/vnd.example.v2+json</p>
+<h3 id="开发牢固的-Web-API"><a href="#开发牢固的-Web-API" class="headerlink" title="开发牢固的 Web API"></a>开发牢固的 Web API</h3><h4 id="让Web-API变得安全"><a href="#让Web-API变得安全" class="headerlink" title="让Web API变得安全"></a>让Web API变得安全</h4><p>使用HTTPS加密通信<br>XSRF在表单里嵌入一次性令牌</p>
+<h4 id="防范恶意访问的对策"><a href="#防范恶意访问的对策" class="headerlink" title="防范恶意访问的对策"></a>防范恶意访问的对策</h4><p>篡改参数获取没有权限的资源<br>重放攻击发送</p>
+<h4 id="同安全相关的HTTP首部"><a href="#同安全相关的HTTP首部" class="headerlink" title="同安全相关的HTTP首部"></a>同安全相关的HTTP首部</h4><p>X-Content-Type-Options: nosniff<br>X-XSS-Protection<br>X-Frame-Options<br>Content-Security-Policy<br>Strict-Transport-Security<br>Public-Key-Pins<br>Set-Cookie: HttpOnly</p>
+<h4 id="应用大规模访问的对策"><a href="#应用大规模访问的对策" class="headerlink" title="应用大规模访问的对策"></a>应用大规模访问的对策</h4><p><strong>限制每个用户的访问，超出上限值的情况响应429 Too Many Requests</strong></p>
+<p><strong>向用户告知访问限制的信息</strong></p>
+<ul>
+<li>X-RateLimit-Limit 单位时间访问上限</li>
+<li>X-RateLimit-Remaining 剩余的访问次数</li>
+<li>X-RateLimit-Reset 访问次数重置的时间</li>
+</ul>
+<h3 id="附录-A-开发-Web-API-的准备工作"><a href="#附录-A-开发-Web-API-的准备工作" class="headerlink" title="附录 A 开发 Web API 的准备工作"></a>附录 A 开发 Web API 的准备工作</h3><ul>
+<li>提供API文档</li>
+<li>提供沙盒API（涉及金钱交易）</li>
+<li>API Console：能够在浏览器上尝试实际操作API的工具</li>
+<li>提供SDK</li>
+</ul>
+<h3 id="附录-B-Web-API-确认清单"><a href="#附录-B-Web-API-确认清单" class="headerlink" title="附录 B Web API 确认清单"></a>附录 B Web API 确认清单</h3><ul>
+<li>URI是否短小且容易输入</li>
+<li>URI是否能让人一眼看懂</li>
+<li>URI是否只有小写字母组成</li>
+<li>URI是否容易修改</li>
+<li>URI是否反映了服务端架构</li>
+<li>URI规则是否统一</li>
+<li>有没有使用合适的HTTP方法</li>
+<li>URI里用到的单词所表示的意思是否和大部分API相同</li>
+<li>URI里用到的名词是否采用了复数形式</li>
+<li>URI里有没有空格及需要编码的字符</li>
+<li>URI里的单词和单词之间有没有使用连接符</li>
+<li>分页的设计是否恰当</li>
+<li>登录有没有使用OAuth 2.0</li>
+<li>响应数据格式有没有使用JSON作为默认的格式</li>
+<li>是否支持通过查询参数来指定数据格式</li>
+<li>是否支持不必要的JSONP</li>
+<li>响应数据的内容能不能从客户端指定</li>
+<li>响应数据中是否存在不必要的封装</li>
+<li>响应数据的结构有没有尽量做到扁平化</li>
+<li>响应数据有没有用对像来描述，而不是用数组</li>
+<li>响应数据的名称所选用的单词的意思是不是和大部分API相同</li>
+<li>响应数据的名称有没有用尽可能少的单词来描述</li>
+<li>响应数据的名称由多个单词连接而成时，连接方式在整个API里是否一致</li>
+<li>响应数据的名称有没有使用奇怪的缩写形式</li>
+<li>响应数据的名称的单复数形式是否和数据内容相一致</li>
+<li>出错时响应数据中是不是包含有助于客户端剖析原因的信息</li>
+<li>出错时有没有返回HTML数据</li>
+<li>有没有返回合适的状态码</li>
+<li>服务器端在维护时有没有返回503状态码</li>
+<li>有没有返回合适的媒体类型</li>
+<li>必要时能不能支持CORS</li>
+<li>有没有返回Cache-Control,Etag, Last-Modified,Vary等首部以便客户端采用合适的缓存策略</li>
+<li>不想缓存的数据有没有添加Cache-Control: no-cache首部信息</li>
+<li>有没有对API进行版本管理</li>
+<li>API版本的命名有没有遵循语义化的版本控制规范</li>
+<li>有没有在URI里嵌入主版本编号，并且能够让人一目了然</li>
+<li>有没有考虑API终止提供时的相关事项</li>
+<li>有没有在文档里明确注明API的最低提供期限</li>
+<li>有没有使用HTTPS来提供API</li>
+<li>有没有认真执行JSON转义</li>
+<li>能不能识别X-Requested-With首部，让浏览器无法通过SCRIPT元素读取JSON数据</li>
+<li>通过浏览器访问的API有没有使用XSRF token</li>
+<li>API在接受参数时有没有仔细检查非法的参数（负数等）</li>
+<li>有没有做到即使请求重复发送，数据也不会多次更新</li>
+<li>有没有在响应消息里添加各种增强安全性的首部</li>
+<li>有没有实施访问限速</li>
+<li>对预想的用例来说限速的次数有没有设置得过少</li>
 </ul>
 
       
@@ -766,7 +757,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/refactor/" rel="tag"># refactor</a>
+            <a href="/tags/develop/" rel="tag"># develop</a>
           
         </div>
       
@@ -779,8 +770,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/posts/65/" rel="next" title="重构手法一句话总结">
-                <i class="fa fa-chevron-left"></i> 重构手法一句话总结
+              <a href="/posts/65/" rel="next" title="Effective Go笔记">
+                <i class="fa fa-chevron-left"></i> Effective Go笔记
               </a>
             
           </div>
@@ -838,8 +829,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -912,6 +912,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是-Web-API"><span class="nav-number">1.</span> <span class="nav-text">什么是 Web API</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Web-API-的重要性"><span class="nav-number">1.1.</span> <span class="nav-text">Web API 的重要性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#各种各样的-API-模式"><span class="nav-number">1.2.</span> <span class="nav-text">各种各样的 API 模式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#应该通过-API-公开什么"><span class="nav-number">1.3.</span> <span class="nav-text">应该通过 API 公开什么</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设计优美的-Web-API-的重要性"><span class="nav-number">1.4.</span> <span class="nav-text">设计优美的 Web API 的重要性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#如何美化-Web-API"><span class="nav-number">1.5.</span> <span class="nav-text">如何美化 Web API</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#REST-与-Web-API"><span class="nav-number">1.6.</span> <span class="nav-text">REST 与 Web API</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#作为目标对象的开发人员数量与-API-的设计思想"><span class="nav-number">1.7.</span> <span class="nav-text">作为目标对象的开发人员数量与 API 的设计思想</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#端点的设计与请求的形式"><span class="nav-number">2.</span> <span class="nav-text">端点的设计与请求的形式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#设计通过-API-公开的功能"><span class="nav-number">2.1.</span> <span class="nav-text">设计通过 API 公开的功能</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#API-端点的设计思想"><span class="nav-number">2.2.</span> <span class="nav-text">API 端点的设计思想</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#端口的设计"><span class="nav-number">2.2.1.</span> <span class="nav-text">端口的设计</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HTTP-方法与端口"><span class="nav-number">2.3.</span> <span class="nav-text">HTTP 方法与端口</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#API-端点的设计"><span class="nav-number">2.4.</span> <span class="nav-text">API 端点的设计</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#搜索与查询参数的设计"><span class="nav-number">2.5.</span> <span class="nav-text">搜索与查询参数的设计</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#登录与-OAuth-2-0"><span class="nav-number">2.6.</span> <span class="nav-text">登录与 OAuth 2.0</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#主机名和端点共有部分"><span class="nav-number">2.7.</span> <span class="nav-text">主机名和端点共有部分</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SSKDs-与-API-设计"><span class="nav-number">2.8.</span> <span class="nav-text">SSKDs 与 API 设计</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HATEOAS-和-REST-LEVEL3-API"><span class="nav-number">2.9.</span> <span class="nav-text">HATEOAS 和 REST LEVEL3 API</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#响应数据的设计"><span class="nav-number">3.</span> <span class="nav-text">响应数据的设计</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#数据格式"><span class="nav-number">3.1.</span> <span class="nav-text">数据格式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用JSONP"><span class="nav-number">3.2.</span> <span class="nav-text">使用JSONP</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据内部结构的思考方法"><span class="nav-number">3.3.</span> <span class="nav-text">数据内部结构的思考方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#各个数据的格式"><span class="nav-number">3.4.</span> <span class="nav-text">各个数据的格式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#响应数据的设计-1"><span class="nav-number">3.5.</span> <span class="nav-text">响应数据的设计</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#出错信息的表示"><span class="nav-number">3.6.</span> <span class="nav-text">出错信息的表示</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最大程度地利用-HTTP-协议规范"><span class="nav-number">4.</span> <span class="nav-text">最大程度地利用 HTTP 协议规范</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#正确使用状态码"><span class="nav-number">4.1.</span> <span class="nav-text">正确使用状态码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#缓存与HTTP协议规范"><span class="nav-number">4.2.</span> <span class="nav-text">缓存与HTTP协议规范</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#媒体类型的指定"><span class="nav-number">4.3.</span> <span class="nav-text">媒体类型的指定</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#同源策略和跨域资源共享"><span class="nav-number">4.4.</span> <span class="nav-text">同源策略和跨域资源共享</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#定义私有的HTTP首部"><span class="nav-number">4.5.</span> <span class="nav-text">定义私有的HTTP首部</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开发方便更改设计的-Web-API"><span class="nav-number">5.</span> <span class="nav-text">开发方便更改设计的 Web API</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#方便更改设计的重要性"><span class="nav-number">5.1.</span> <span class="nav-text">方便更改设计的重要性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#通过版本信息来管理API"><span class="nav-number">5.2.</span> <span class="nav-text">通过版本信息来管理API</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开发牢固的-Web-API"><span class="nav-number">6.</span> <span class="nav-text">开发牢固的 Web API</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#让Web-API变得安全"><span class="nav-number">6.1.</span> <span class="nav-text">让Web API变得安全</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#防范恶意访问的对策"><span class="nav-number">6.2.</span> <span class="nav-text">防范恶意访问的对策</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#同安全相关的HTTP首部"><span class="nav-number">6.3.</span> <span class="nav-text">同安全相关的HTTP首部</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#应用大规模访问的对策"><span class="nav-number">6.4.</span> <span class="nav-text">应用大规模访问的对策</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#附录-A-开发-Web-API-的准备工作"><span class="nav-number">7.</span> <span class="nav-text">附录 A 开发 Web API 的准备工作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#附录-B-Web-API-确认清单"><span class="nav-number">8.</span> <span class="nav-text">附录 B Web API 确认清单</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
