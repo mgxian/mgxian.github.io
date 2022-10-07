@@ -400,12 +400,8 @@
 
       
         
-          <h3 id="持续交付2-0"><a href="#持续交付2-0" class="headerlink" title="持续交付2.0"></a>持续交付2.0</h3><h4 id="软件产品开发中的活动浪费"><a href="#软件产品开发中的活动浪费" class="headerlink" title="软件产品开发中的活动浪费"></a>软件产品开发中的活动浪费</h4><p><img src="https://api2.mubu.com/v3/document_image/89717ef5-acba-41e8-a576-6e4ac96f7157-156946.jpg" alt=""></p>
-<h4 id="双环模型"><a href="#双环模型" class="headerlink" title="双环模型"></a>双环模型</h4><p><img src="https://api2.mubu.com/v3/document_image/a53e13e6-0a91-4e16-b625-1f6e87aab037-156946.jpg" alt=""></p>
-<h4 id="4个核心原则"><a href="#4个核心原则" class="headerlink" title="4个核心原则"></a>4个核心原则</h4><p><strong>坚持少做</strong></p>
-<ul>
-<li>少做，先做简单的事情</li>
-<li>想办法对新创意尽早验证</li></ul>
+          <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>作者重新定义了<code>持续交付</code>，增补了组织管理和系统架构两个维度，并辅助以真实案例，对诸多持续交付原则与实践加以解读，并对持续交付过程中的实践取舍之道加以论述。</p>
+<p><code>持续交付2.0</code>是一种产品研发管理思维框架。 融合了<code>持续交付</code>和<code>精益创业</code>的理念，强调业务和IT的快速闭环，以<code>精益思想</code>为指导，全面贯彻识别和消除一切浪费的理念，通过一系列工作原则与实践，帮助企业以一种可持续方式，高质量、低成本、无风险地快速交付客户价值。</p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/posts/77/#more" rel="contents">
@@ -826,12 +822,7 @@
           <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>服务稳定性就是我们常说的几个9如 99，99.9，99.99。用来衡量一个服务的稳定性。衡量服务可用性通常有如下两种方式：</p>
 <p><strong>时间维度：Availability = Uptime / (Uptime + Downtime)</strong></p>
 <p><strong>请求维度：Availability = Successful request / Total request</strong></p>
-<p>SRE 通常选择以请求维度来衡量服务稳定性</p>
-<p><strong>常用术语</strong></p>
-<p>SLA（Service Level Agreement）服务等级协议，通常以几个 9 的形式出现，一般用于对客户的承诺</p>
-<p>SLI（Service Level Indicator）服务等级对象，qps、响应时间、请求成功率</p>
-<p>SLO（Service Level Objective）服务等级目标，对服务等级对象设定的目标，如 qps &gt; 100、响应时间 &lt; 100ms</p>
-<p>SLI 可以理解为我们用于衡量服务稳定性的监控指标，SLO 则是针对 SLI 设定的目标，比如 SLI 可能是异常响应码占比，那对应的 SLO 可能是异常响应码占比小于 0.5%</p>
+<p>SRE 通常选择以请求维度来衡量服务稳定性<br></p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/posts/74/#more" rel="contents">
@@ -969,36 +960,18 @@
 
       
         
-          <ul>
-<li>什么是 Web API<ul>
-<li>Web API 的重要性<ul>
+          <h3 id="什么是-Web-API"><a href="#什么是-Web-API" class="headerlink" title="什么是 Web API"></a>什么是 Web API</h3><h4 id="Web-API-的重要性"><a href="#Web-API-的重要性" class="headerlink" title="Web API 的重要性"></a>Web API 的重要性</h4><ul>
 <li>通过 API 才能使用的在线服务出现</li>
 <li>移动应用与 API</li>
 <li>API 的经济学</li>
 </ul>
-</li>
-<li>各种各样的 API 模式<ul>
+<h4 id="各种各样的-API-模式"><a href="#各种各样的-API-模式" class="headerlink" title="各种各样的 API 模式"></a>各种各样的 API 模式</h4><ul>
 <li>将已发布的 Web 在线服务的数据或功能通过 API 公开</li>
-<li>将附加在其他网页上的微件公开<ul>
-<li>Amazon 提供的广告功能</li>
-</ul>
-</li>
-<li>构建现代 Web 应用<ul>
-<li>单页面应用 异步加载</li>
-</ul>
-</li>
+<li>将附加在其他网页上的微件公开：例如 Amazon 提供的广告功能</li>
+<li>构建现代 Web 应用：单页面应用异步加载</li>
 <li>开发智能手机应用</li>
 <li>开发社交游戏</li>
-<li>公司内部多个系统的集成</li>
-</ul>
-</li>
-<li>应该通过 API 公开什么<ul>
-<li>公开所有能公开的</li>
-<li>公开 API 是否会带来风险<ul>
-<li>不会有风险 即使不公开也可以使用爬虫抓取数据</li>
-</ul>
-</li>
-<li>公开 API 能得到什么</li></ul></li></ul></li></ul>
+<li>公司内部多个系统的集成</li></ul>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/posts/73/#more" rel="contents">
@@ -1136,37 +1109,12 @@
 
       
         
-          <ul>
-<li><strong>格式</strong><ul>
-<li>使用gofmt格式化</li>
-<li>go没有行长的限制，如果觉得长可以折成几行，并使用一个tab缩进</li>
-</ul>
-</li>
-<li><strong>注释</strong><ul>
-<li>提供两种风格<ul>
+          <h3 id="格式"><a href="#格式" class="headerlink" title="格式"></a><strong>格式</strong></h3><p>使用gofmt格式化<br>go没有行长的限制，如果觉得长可以折成几行，并使用一个tab缩进</p>
+<h3 id="注释"><a href="#注释" class="headerlink" title="注释"></a><strong>注释</strong></h3><p>提供两种风格</p>
+<ul>
 <li>/<em> comment </em>/</li>
-<li>// comment</li>
+<li>// comment<br>每个包都应该有一个注释，位于package子句之前<br>程序中每一个被导出的（大写的）的变量，函数都应该有一个注释，并且以函数或者变量开头</li>
 </ul>
-</li>
-<li>每个包都应该有一个注释，位于package子句之前</li>
-<li>程序中每一个被导出的（大写的）的变量，函数都应该有一个注释，并且以函数或者变量开头</li>
-</ul>
-</li>
-<li><strong>命名</strong><ul>
-<li>程序包名<ul>
-<li>程序包名应该使用小写的一个单词，要为求简短 bytes, encoding/base64</li>
-<li>清晰，简明的名字 bufio.Reader,io.Reader</li>
-<li>ring.Ring 创建一个新实例的函数，go中定义构造器会被叫做 NewRing，但由于Ring是程序包的唯一类型，可以只叫做 ring.New</li>
-</ul>
-</li>
-<li>Get方法<ul>
-<li>Get方法的名字中添加Get是不符合语言习惯的，并且没有必要。GetOwner–&gt;Owner</li>
-<li>Set方法 SetOwner</li>
-</ul>
-</li>
-<li>接口<ul>
-<li>如果接口只有单个方法，方法上应该加上’er’后缀</li>
-<li>String方法而不是ToString</li></ul></li></ul></li></ul>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/posts/72/#more" rel="contents">
@@ -1304,13 +1252,11 @@
 
       
         
-          <ul>
-<li>整洁代码<ul>
+          <h3 id="整洁代码"><a href="#整洁代码" class="headerlink" title="整洁代码"></a>整洁代码</h3><ul>
 <li>代码整洁重要性</li>
 <li>让营地比你来时更干净</li>
 </ul>
-</li>
-<li>有意义的命名<ul>
+<h3 id="有意义的命名"><a href="#有意义的命名" class="headerlink" title="有意义的命名"></a>有意义的命名</h3><ul>
 <li>名副其实<ul>
 <li>命名宁愿长也要能准确表达意义，不要贪图使用简短命名</li>
 </ul>
@@ -1322,7 +1268,7 @@
 </ul>
 </li>
 <li>做有意义的区分<ul>
-<li>如money与moneyAmount没有区别，customer与customerInfo没有区别</li></ul></li></ul></li></ul>
+<li>如money与moneyAmount没有区别，customer与customerInfo没有区别</li></ul></li></ul>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/posts/71/#more" rel="contents">
@@ -1460,11 +1406,11 @@
 
       
         
-          <ul>
-<li>测试类型<img src="https://api2.mubu.com/v3/document_image/9b9c938a-975e-47be-b698-473dbbbc6983-156946.jpg" alt=""><ul>
+          <h3 id="测试类型"><a href="#测试类型" class="headerlink" title="测试类型"></a>测试类型</h3><p><img src="https://api2.mubu.com/v3/document_image/9b9c938a-975e-47be-b698-473dbbbc6983-156946.jpg" alt=""></p>
+<ul>
 <li>unit tests</li>
 <li>end-to-end tests</li>
-<li>snapshot tests</li></ul></li></ul>
+<li>snapshot tests</li></ul>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/posts/70/#more" rel="contents">
@@ -1602,49 +1548,8 @@
 
       
         
-          <ul>
-<li>本书的作用<ul>
-<li>如何编写别人能懂的代码</li>
-</ul>
-</li>
-<li>一种编程理论<ul>
-<li>价值观<ul>
-<li>沟通<ul>
-<li>让代码更容易与人沟通</li>
-<li>多为读这段代码的人考虑</li>
-</ul>
-</li>
-<li>简单</li>
-<li>灵活</li>
-</ul>
-</li>
-<li>原则<ul>
-<li>局部化影响<ul>
-<li>保证变化只会产生局部影响</li>
-</ul>
-</li>
-<li>最小化重复</li>
-<li>将逻辑与数据捆绑<ul>
-<li>把逻辑与逻辑要处理的数据放在一起</li>
-</ul>
-</li>
-<li>对称性<ul>
-<li>程序中处处充满了对称性。比如add()方法总会伴随着remove()方法，一组方法会接受同样的参数，一个对象中所有的字段都具有相同的生命周期</li>
-<li>这是一个缺少对称性的例子<img src="https://api2.mubu.com/v3/document_image/462297ec-8541-4c27-9532-0859715c2519-156946.jpg" alt=""></li>
-</ul>
-</li>
-<li>声明式表达<ul>
-<li>实现模式背后的另一条原则是尽可能声明式地表达出意图。命令式的编程语言功能强大灵活，但是在阅读时需要跟随着代码的执行流程。我必须在大脑中建起一个程序状态、控制流和数据流的模型。对于那些只是陈述简单事实，不需要一系列条件语句的程序片断，如果用简单的声明方式写出来，读着就容易多了</li>
-</ul>
-</li>
-<li>变化率<ul>
-<li>把具有相同变化率的逻辑、数据放在一起，把具有不同变化率的逻辑、数据分离。变化率具有时间上的对称性</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>模式<ul>
-<li>具体的编程技巧</li></ul></li></ul></li></ul>
+          <p>本书的作用主要是介绍如何编写别人能懂的代码</p>
+<h3 id="一种编程理论"><a href="#一种编程理论" class="headerlink" title="一种编程理论"></a>一种编程理论</h3><h4 id="价值观"><a href="#价值观" class="headerlink" title="价值观"></a>价值观</h4><p><strong>沟通</strong><br>让代码更容易与人沟通，多为读这段代码的人考虑<br></p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/posts/69/#more" rel="contents">

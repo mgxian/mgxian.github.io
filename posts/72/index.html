@@ -93,13 +93,13 @@
 
 
 
-<meta name="description" content="格式 使用gofmt格式化 go没有行长的限制，如果觉得长可以折成几行，并使用一个tab缩进   注释 提供两种风格 / comment / // comment   每个包都应该有一个注释，位于package子句之前 程序中每一个被导出的（大写的）的变量，函数都应该有一个注释，并且以函数或者变量开头   命名 程序包名 程序包名应该使用小写的一个单词，要为求简短 bytes, encoding">
+<meta name="description" content="格式使用gofmt格式化go没有行长的限制，如果觉得长可以折成几行，并使用一个tab缩进 注释提供两种风格  / comment / // comment每个包都应该有一个注释，位于package子句之前程序中每一个被导出的（大写的）的变量，函数都应该有一个注释，并且以函数或者变量开头">
 <meta name="keywords" content="develop">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Effective Go笔记">
 <meta property="og:url" content="https://mgxian.dev/posts/72/index.html">
 <meta property="og:site_name" content="mgxian&#39;s blog">
-<meta property="og:description" content="格式 使用gofmt格式化 go没有行长的限制，如果觉得长可以折成几行，并使用一个tab缩进   注释 提供两种风格 / comment / // comment   每个包都应该有一个注释，位于package子句之前 程序中每一个被导出的（大写的）的变量，函数都应该有一个注释，并且以函数或者变量开头   命名 程序包名 程序包名应该使用小写的一个单词，要为求简短 bytes, encoding">
+<meta property="og:description" content="格式使用gofmt格式化go没有行长的限制，如果觉得长可以折成几行，并使用一个tab缩进 注释提供两种风格  / comment / // comment每个包都应该有一个注释，位于package子句之前程序中每一个被导出的（大写的）的变量，函数都应该有一个注释，并且以函数或者变量开头">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://api2.mubu.com/v3/document_image/f1dc24c0-d4f9-45a6-a75d-7521567ce2f6.jpg">
 <meta property="og:image" content="https://api2.mubu.com/v3/document_image/3f192095-9af5-476e-9d28-1c0f1e5b022c.jpg">
@@ -122,10 +122,10 @@
 <meta property="og:image" content="https://api2.mubu.com/v3/document_image/51fdb064-22f9-4594-9ae1-eb6d4c7ce79e.jpg">
 <meta property="og:image" content="https://api2.mubu.com/v3/document_image/84c97d9d-521f-452b-bab1-00bdd4ae6e9d.jpg">
 <meta property="og:image" content="https://api2.mubu.com/v3/document_image/da7078fe-24b3-4441-a12c-514aa1166a8b.jpg">
-<meta property="og:updated_time" content="2022-10-06T10:31:17.046Z">
+<meta property="og:updated_time" content="2022-10-07T09:03:56.720Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Effective Go笔记">
-<meta name="twitter:description" content="格式 使用gofmt格式化 go没有行长的限制，如果觉得长可以折成几行，并使用一个tab缩进   注释 提供两种风格 / comment / // comment   每个包都应该有一个注释，位于package子句之前 程序中每一个被导出的（大写的）的变量，函数都应该有一个注释，并且以函数或者变量开头   命名 程序包名 程序包名应该使用小写的一个单词，要为求简短 bytes, encoding">
+<meta name="twitter:description" content="格式使用gofmt格式化go没有行长的限制，如果觉得长可以折成几行，并使用一个tab缩进 注释提供两种风格  / comment / // comment每个包都应该有一个注释，位于package子句之前程序中每一个被导出的（大写的）的变量，函数都应该有一个注释，并且以函数或者变量开头">
 <meta name="twitter:image" content="https://api2.mubu.com/v3/document_image/f1dc24c0-d4f9-45a6-a75d-7521567ce2f6.jpg">
 
 
@@ -419,159 +419,67 @@
       
 
       
-        <ul>
-<li><strong>格式</strong><ul>
-<li>使用gofmt格式化</li>
-<li>go没有行长的限制，如果觉得长可以折成几行，并使用一个tab缩进</li>
-</ul>
-</li>
-<li><strong>注释</strong><ul>
-<li>提供两种风格<ul>
+        <h3 id="格式"><a href="#格式" class="headerlink" title="格式"></a><strong>格式</strong></h3><p>使用gofmt格式化<br>go没有行长的限制，如果觉得长可以折成几行，并使用一个tab缩进</p>
+<h3 id="注释"><a href="#注释" class="headerlink" title="注释"></a><strong>注释</strong></h3><p>提供两种风格</p>
+<ul>
 <li>/<em> comment </em>/</li>
-<li>// comment</li>
+<li>// comment<br>每个包都应该有一个注释，位于package子句之前<br>程序中每一个被导出的（大写的）的变量，函数都应该有一个注释，并且以函数或者变量开头</li>
 </ul>
-</li>
-<li>每个包都应该有一个注释，位于package子句之前</li>
-<li>程序中每一个被导出的（大写的）的变量，函数都应该有一个注释，并且以函数或者变量开头</li>
-</ul>
-</li>
-<li><strong>命名</strong><ul>
-<li>程序包名<ul>
+<a id="more"></a>
+<h3 id="命名"><a href="#命名" class="headerlink" title="命名"></a><strong>命名</strong></h3><p>程序包名</p>
+<ul>
 <li>程序包名应该使用小写的一个单词，要为求简短 bytes, encoding/base64</li>
 <li>清晰，简明的名字 bufio.Reader,io.Reader</li>
-<li>ring.Ring 创建一个新实例的函数，go中定义构造器会被叫做 NewRing，但由于Ring是程序包的唯一类型，可以只叫做 ring.New</li>
-</ul>
-</li>
-<li>Get方法<ul>
+<li>ring.Ring 创建一个新实例的函数，go中定义构造器会被叫做 NewRing，但由于Ring是程序包的唯一类型，可以只叫做 ring.New<br>Get方法</li>
 <li>Get方法的名字中添加Get是不符合语言习惯的，并且没有必要。GetOwner–&gt;Owner</li>
-<li>Set方法 SetOwner</li>
-</ul>
-</li>
-<li>接口<ul>
+<li>Set方法 SetOwner<br>接口</li>
 <li>如果接口只有单个方法，方法上应该加上’er’后缀</li>
-<li>String方法而不是ToString<a id="more"></a></li>
+<li>String方法而不是ToString</li>
 </ul>
-</li>
-</ul>
-</li>
-<li><strong>分号</strong><ul>
-<li>几乎用不到显示的分号</li>
-</ul>
-</li>
-<li><strong>控制结构</strong><ul>
-<li>if<ul>
+<h3 id="分号"><a href="#分号" class="headerlink" title="分号"></a><strong>分号</strong></h3><p>几乎用不到显示的分号</p>
+<h3 id="控制结构"><a href="#控制结构" class="headerlink" title="控制结构"></a><strong>控制结构</strong></h3><p>if</p>
+<ul>
 <li><img src="https://api2.mubu.com/v3/document_image/f1dc24c0-d4f9-45a6-a75d-7521567ce2f6.jpg" alt=""></li>
-<li><img src="https://api2.mubu.com/v3/document_image/3f192095-9af5-476e-9d28-1c0f1e5b022c.jpg" alt=""></li>
-</ul>
-</li>
-<li>rune 是Go的术语，用于指定一个单独的Unicode编码点，有中文的时候使用，可以取到整个汉字</li>
-<li>重新声明和重新赋值<ul>
+<li><img src="https://api2.mubu.com/v3/document_image/3f192095-9af5-476e-9d28-1c0f1e5b022c.jpg" alt=""><br>rune 是Go的术语，用于指定一个单独的Unicode编码点，有中文的时候使用，可以取到整个汉字<br>重新声明和重新赋值</li>
 <li>声明中至少有其它一个变量将被声明为一个新的变量</li>
-<li>这种不寻常的属性纯粹是从实用主义方面来考虑的。例如，这会使得在一个长的if-else 链中，很容易地使用单个err 值。</li>
-</ul>
-</li>
-<li>for<ul>
-<li><img src="https://api2.mubu.com/v3/document_image/1b0b8ab2-6e4f-4238-b797-82f08f3e140e.jpg" alt=""></li>
-</ul>
-</li>
-<li>Switch<ul>
+<li>这种不寻常的属性纯粹是从实用主义方面来考虑的。例如，这会使得在一个长的if-else 链中，很容易地使用单个err 值。<br>for</li>
+<li><img src="https://api2.mubu.com/v3/document_image/1b0b8ab2-6e4f-4238-b797-82f08f3e140e.jpg" alt=""><br>Switch</li>
 <li>case可以使用逗号分隔的列表<ul>
 <li><img src="https://api2.mubu.com/v3/document_image/492f111e-9f83-4509-b2a5-4416d73c5822.jpg" alt=""></li>
 </ul>
 </li>
 </ul>
-</li>
-</ul>
-</li>
-<li><strong>函数</strong><ul>
-<li>多个返回值</li>
-<li>命名的返回值参数</li>
-<li>Go的defer 语句用来调度一个函数调用（被延期的函数），使其在执行defer 的函数即将返回之前才被运行</li>
-</ul>
-</li>
-<li><strong>数据</strong><ul>
-<li>使用new 进行分配<ul>
-<li>new 是一个用来分配内存的内建函数</li>
-</ul>
-</li>
-<li>使用make 进行分配<ul>
-<li>它只用来创建slice，map和channel，并且返回一个初始化的(而不是置零)，类型为T 的值（而不是*T ）</li>
-</ul>
-</li>
-<li>记住make 只用于map，slice和channel，并且不返回指针。要获得一个显式的指针，使用new 进行分配，或者显式地使用一个变量的地址。</li>
-<li>数组<ul>
+<h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a><strong>函数</strong></h3><p>多个返回值<br>命名的返回值参数<br>Go的defer 语句用来调度一个函数调用（被延期的函数），使其在执行defer 的函数即将返回之前才被运行</p>
+<h3 id="数据"><a href="#数据" class="headerlink" title="数据"></a><strong>数据</strong></h3><p>使用new 进行分配</p>
+<ul>
+<li>new 是一个用来分配内存的内建函数<br>使用make 进行分配</li>
+<li>它只用来创建slice，map和channel，并且返回一个初始化的(而不是置零)，类型为T 的值（而不是*T ）<br>记住make 只用于map，slice和channel，并且不返回指针。要获得一个显式的指针，使用new 进行分配，或者显式地使用一个变量的地址。<br>数组</li>
 <li>数组的大小是其类型的一部分。类型[10]int 和[20]int 是不同的。</li>
-<li>数组是值。将一个数组赋值给另一个，会拷贝所有的元素。</li>
-</ul>
-</li>
-<li>切片<ul>
-<li>切片（slice）对数组进行封装，提供了一个针对串行数据，更加通用，强大和方便的接口。</li>
-</ul>
-</li>
-<li>二维切片<ul>
+<li>数组是值。将一个数组赋值给另一个，会拷贝所有的元素。<br>切片</li>
+<li>切片（slice）对数组进行封装，提供了一个针对串行数据，更加通用，强大和方便的接口。<br>二维切片</li>
 <li>Go的数组和切片都是一维的。要创建等价的二维数组或者切片，需要定义一个数组的数组或者切片的切片，类似这样：<img src="https://api2.mubu.com/v3/document_image/e51912c6-11d0-4182-9b1c-fe9783c65db0.jpg" alt=""></li>
 <li>因为切片是可变长度的，所以可以将每个内部的切片具有不同的长度。<img src="https://api2.mubu.com/v3/document_image/f0559e66-be6b-4fac-aba5-d82c725e19f1.jpg" alt=""></li>
 </ul>
-</li>
-</ul>
-</li>
-<li><strong>初始化</strong><ul>
-<li>常量<ul>
-<li>在Go中，枚举常量使用iota 枚举器来创建。由于iota 可以为表达式的一部分，并且表达式可以被隐式的重复，所以很容易创建复杂的值集。<img src="https://api2.mubu.com/v3/document_image/bd32f7d2-745e-4573-9367-b77aef792bfe.jpg" alt=""></li>
-</ul>
-</li>
-<li>init函数<ul>
+<h3 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a><strong>初始化</strong></h3><p>常量</p>
+<ul>
+<li>在Go中，枚举常量使用iota 枚举器来创建。由于iota 可以为表达式的一部分，并且表达式可以被隐式的重复，所以很容易创建复杂的值集。<img src="https://api2.mubu.com/v3/document_image/bd32f7d2-745e-4573-9367-b77aef792bfe.jpg" alt=""><br>init函数</li>
 <li>每个源文件可以定义自己的不带参数的 init 函数，来设置它所需的状态。（实际上每个文件可以有多个init 函数） init 是在程序包中所有变量声明都被初始化，以及所有被导入的程序包中的变量初始化之后才被调用。除了用于无法通过声明来表示的初始化以外， init 函数的一个常用法是在真正执行之前进行验证或者修复程序状态的正确性。<img src="https://api2.mubu.com/v3/document_image/bfff525a-cd51-4b4a-a867-ef77ac69a056.jpg" alt=""></li>
 </ul>
-</li>
-</ul>
-</li>
-<li><strong>方法</strong><ul>
-<li>指针 vs. 值<img src="https://api2.mubu.com/v3/document_image/21ea67f7-4385-42a4-93e8-769121a1662e.jpg" alt=""><img src="https://api2.mubu.com/v3/document_image/1166773e-b2c1-41e1-8618-3e50332c5608.jpg" alt=""><img src="https://api2.mubu.com/v3/document_image/8b4cbe39-7044-4d93-98f8-c371f18a059c.jpg" alt=""><img src="https://api2.mubu.com/v3/document_image/79f23c6a-9a3c-4bbc-b412-e19f114b02a7.jpg" alt=""></li>
-</ul>
-</li>
-<li><strong>接口和其它类型</strong><ul>
-<li>转换<img src="https://api2.mubu.com/v3/document_image/8a7ef090-a002-4ecf-81ac-2706402ffa23.jpg" alt=""></li>
-</ul>
-</li>
-<li><strong>空白标识符</strong><ul>
-<li>空白标识符在多赋值语句中的使用<img src="https://api2.mubu.com/v3/document_image/96a6d86c-fab4-4af0-92c4-ac872a39c983.jpg" alt=""></li>
-<li>副作用式导入<img src="https://api2.mubu.com/v3/document_image/56bb19bb-ed68-40f3-a1d1-8bc334d20c3d.jpg" alt=""></li>
-<li>未使用的导入和变量<img src="https://api2.mubu.com/v3/document_image/2f8e745a-de85-48f6-be56-d461e931de8e.jpg" alt=""></li>
-<li>接口检查（只检查，不需要转换）<img src="https://api2.mubu.com/v3/document_image/3489d0a7-b894-446e-a581-cb80e9fcad28.jpg" alt=""></li>
-</ul>
-</li>
-<li><strong>内嵌（Embedding）</strong><ul>
-<li>Go没有提供经典的类型驱动式的派生类概念，但却可以通过内嵌其他类型或接口代码的方式来实现类似的功能。</li>
-<li>“内嵌”还可以用一种更简单的方式表达<img src="https://api2.mubu.com/v3/document_image/c4e1e57b-f108-468b-b729-437358d20793.jpg" alt=""></li>
-</ul>
-</li>
-<li><strong>并发</strong><ul>
-<li>以通信实现共享<ul>
-<li>勿以共享方式通信，以通信实现共享。</li>
-</ul>
-</li>
-<li>Goroutines<ul>
+<h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a><strong>方法</strong></h3><p>指针 vs. 值<img src="https://api2.mubu.com/v3/document_image/21ea67f7-4385-42a4-93e8-769121a1662e.jpg" alt=""><img src="https://api2.mubu.com/v3/document_image/1166773e-b2c1-41e1-8618-3e50332c5608.jpg" alt=""><img src="https://api2.mubu.com/v3/document_image/8b4cbe39-7044-4d93-98f8-c371f18a059c.jpg" alt=""><img src="https://api2.mubu.com/v3/document_image/79f23c6a-9a3c-4bbc-b412-e19f114b02a7.jpg" alt=""></p>
+<h3 id="接口和其它类型"><a href="#接口和其它类型" class="headerlink" title="接口和其它类型"></a><strong>接口和其它类型</strong></h3><p>转换<img src="https://api2.mubu.com/v3/document_image/8a7ef090-a002-4ecf-81ac-2706402ffa23.jpg" alt=""></p>
+<h3 id="空白标识符"><a href="#空白标识符" class="headerlink" title="空白标识符"></a><strong>空白标识符</strong></h3><p>空白标识符在多赋值语句中的使用<img src="https://api2.mubu.com/v3/document_image/96a6d86c-fab4-4af0-92c4-ac872a39c983.jpg" alt=""><br>副作用式导入<img src="https://api2.mubu.com/v3/document_image/56bb19bb-ed68-40f3-a1d1-8bc334d20c3d.jpg" alt=""><br>未使用的导入和变量<img src="https://api2.mubu.com/v3/document_image/2f8e745a-de85-48f6-be56-d461e931de8e.jpg" alt=""><br>接口检查（只检查，不需要转换）<img src="https://api2.mubu.com/v3/document_image/3489d0a7-b894-446e-a581-cb80e9fcad28.jpg" alt=""></p>
+<h3 id="内嵌（Embedding）"><a href="#内嵌（Embedding）" class="headerlink" title="内嵌（Embedding）"></a><strong>内嵌（Embedding）</strong></h3><p>Go没有提供经典的类型驱动式的派生类概念，但却可以通过内嵌其他类型或接口代码的方式来实现类似的功能。<br>“内嵌”还可以用一种更简单的方式表达<img src="https://api2.mubu.com/v3/document_image/c4e1e57b-f108-468b-b729-437358d20793.jpg" alt=""></p>
+<h3 id="并发"><a href="#并发" class="headerlink" title="并发"></a><strong>并发</strong></h3><p>以通信实现共享</p>
+<ul>
+<li>勿以共享方式通信，以通信实现共享。<br>Goroutines</li>
 <li>之所以称之为Goroutine，主要是由于现有的一些概念—“线程”、“协程” 以及 “进程” 等—都不足以准确描述其内涵。每个Goroutine都对应一个非常简单的模型：它是一个并发的函数执行线索，并且在多个并发的Goroutine间，资 源是共享的。Goroutine非常轻量，创建的开销不会比栈空间分配的开销大多少。并且其初始栈空间很小 —— 这也就是它轻量的原因 —— 在后续执行中，会根据需要在堆空间分配（或释放）额外的栈空间。</li>
-<li>Goroutine与操作系统线程间采用“多到多”的映射方式，因此假设一个Goroutine因某种原因阻塞其他Goroutine可以继续执行</li>
-</ul>
-</li>
-<li>Channels<ul>
+<li>Goroutine与操作系统线程间采用“多到多”的映射方式，因此假设一个Goroutine因某种原因阻塞其他Goroutine可以继续执行<br>Channels</li>
 <li>无缓冲channel</li>
 <li>缓冲channel</li>
 <li>Channel类型的Channel</li>
 </ul>
-</li>
-</ul>
-</li>
-<li><strong>错误</strong><ul>
-<li>严重故障（Panic）<img src="https://api2.mubu.com/v3/document_image/51fdb064-22f9-4594-9ae1-eb6d4c7ce79e.jpg" alt=""></li>
-<li>恢复（Recover）<img src="https://api2.mubu.com/v3/document_image/84c97d9d-521f-452b-bab1-00bdd4ae6e9d.jpg" alt=""></li>
-</ul>
-</li>
-<li><strong>一个web服务示例</strong><img src="https://api2.mubu.com/v3/document_image/da7078fe-24b3-4441-a12c-514aa1166a8b.jpg" alt=""></li>
-</ul>
-
+<h3 id="错误"><a href="#错误" class="headerlink" title="错误"></a><strong>错误</strong></h3><p>严重故障（Panic）<img src="https://api2.mubu.com/v3/document_image/51fdb064-22f9-4594-9ae1-eb6d4c7ce79e.jpg" alt=""><br>恢复（Recover）<img src="https://api2.mubu.com/v3/document_image/84c97d9d-521f-452b-bab1-00bdd4ae6e9d.jpg" alt=""></p>
+<h3 id="一个web服务示例"><a href="#一个web服务示例" class="headerlink" title="一个web服务示例"></a><strong>一个web服务示例</strong><img src="https://api2.mubu.com/v3/document_image/da7078fe-24b3-4441-a12c-514aa1166a8b.jpg" alt=""></h3>
       
     </div>
 
@@ -672,8 +580,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -746,6 +663,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#格式"><span class="nav-number">1.</span> <span class="nav-text">格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注释"><span class="nav-number">2.</span> <span class="nav-text">注释</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#命名"><span class="nav-number">3.</span> <span class="nav-text">命名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分号"><span class="nav-number">4.</span> <span class="nav-text">分号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#控制结构"><span class="nav-number">5.</span> <span class="nav-text">控制结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#函数"><span class="nav-number">6.</span> <span class="nav-text">函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据"><span class="nav-number">7.</span> <span class="nav-text">数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#初始化"><span class="nav-number">8.</span> <span class="nav-text">初始化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法"><span class="nav-number">9.</span> <span class="nav-text">方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#接口和其它类型"><span class="nav-number">10.</span> <span class="nav-text">接口和其它类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#空白标识符"><span class="nav-number">11.</span> <span class="nav-text">空白标识符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内嵌（Embedding）"><span class="nav-number">12.</span> <span class="nav-text">内嵌（Embedding）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#并发"><span class="nav-number">13.</span> <span class="nav-text">并发</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#错误"><span class="nav-number">14.</span> <span class="nav-text">错误</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一个web服务示例"><span class="nav-number">15.</span> <span class="nav-text">一个web服务示例</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

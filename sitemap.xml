@@ -2,9 +2,51 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://mgxian.dev/posts/74/</loc>
+    
+    <lastmod>2022-10-07T09:04:43.836Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://mgxian.dev/posts/69/</loc>
+    
+    <lastmod>2022-10-07T09:04:22.160Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://mgxian.dev/posts/72/</loc>
+    
+    <lastmod>2022-10-07T09:03:56.720Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://mgxian.dev/posts/71/</loc>
+    
+    <lastmod>2022-10-07T09:01:05.111Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://mgxian.dev/posts/70/</loc>
+    
+    <lastmod>2022-10-07T09:00:01.683Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://mgxian.dev/posts/73/</loc>
+    
+    <lastmod>2022-10-07T08:41:45.291Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://mgxian.dev/posts/77/</loc>
     
-    <lastmod>2022-10-07T04:50:36.790Z</lastmod>
+    <lastmod>2022-10-07T07:45:53.256Z</lastmod>
     
   </url>
   
@@ -19,13 +61,6 @@
     <loc>https://mgxian.dev/posts/75/</loc>
     
     <lastmod>2022-10-06T11:07:37.402Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://mgxian.dev/posts/74/</loc>
-    
-    <lastmod>2022-10-06T10:58:52.177Z</lastmod>
     
   </url>
   
@@ -47,13 +82,6 @@
     <loc>https://mgxian.dev/posts/64/</loc>
     
     <lastmod>2022-10-06T10:45:14.832Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://mgxian.dev/posts/71/</loc>
-    
-    <lastmod>2022-10-06T10:38:33.246Z</lastmod>
     
   </url>
   
@@ -86,37 +114,9 @@
   </url>
   
   <url>
-    <loc>https://mgxian.dev/posts/69/</loc>
-    
-    <lastmod>2022-10-06T10:31:17.758Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://mgxian.dev/posts/68/</loc>
     
     <lastmod>2022-10-06T10:31:17.515Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://mgxian.dev/posts/72/</loc>
-    
-    <lastmod>2022-10-06T10:31:17.046Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://mgxian.dev/posts/70/</loc>
-    
-    <lastmod>2022-10-06T10:31:16.774Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://mgxian.dev/posts/73/</loc>
-    
-    <lastmod>2022-10-06T10:27:41.607Z</lastmod>
     
   </url>
   
@@ -184,14 +184,14 @@
   </url>
   
   <url>
-    <loc>https://mgxian.dev/tags/index.html</loc>
+    <loc>https://mgxian.dev/categories/index.html</loc>
     
     <lastmod>2019-12-08T08:10:24.732Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://mgxian.dev/categories/index.html</loc>
+    <loc>https://mgxian.dev/tags/index.html</loc>
     
     <lastmod>2019-12-08T08:10:24.732Z</lastmod>
     
@@ -289,14 +289,14 @@
   </url>
   
   <url>
-    <loc>https://mgxian.dev/posts/23/</loc>
+    <loc>https://mgxian.dev/posts/45/</loc>
     
     <lastmod>2019-12-08T08:10:24.679Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://mgxian.dev/posts/45/</loc>
+    <loc>https://mgxian.dev/posts/23/</loc>
     
     <lastmod>2019-12-08T08:10:24.679Z</lastmod>
     
@@ -338,14 +338,14 @@
   </url>
   
   <url>
-    <loc>https://mgxian.dev/posts/43/</loc>
+    <loc>https://mgxian.dev/posts/48/</loc>
     
     <lastmod>2019-12-08T08:10:24.662Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://mgxian.dev/posts/48/</loc>
+    <loc>https://mgxian.dev/posts/43/</loc>
     
     <lastmod>2019-12-08T08:10:24.662Z</lastmod>
     
@@ -408,14 +408,14 @@
   </url>
   
   <url>
-    <loc>https://mgxian.dev/posts/5/</loc>
+    <loc>https://mgxian.dev/posts/40/</loc>
     
     <lastmod>2019-12-08T08:10:24.637Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://mgxian.dev/posts/40/</loc>
+    <loc>https://mgxian.dev/posts/5/</loc>
     
     <lastmod>2019-12-08T08:10:24.637Z</lastmod>
     
@@ -429,14 +429,14 @@
   </url>
   
   <url>
-    <loc>https://mgxian.dev/posts/47/</loc>
+    <loc>https://mgxian.dev/posts/13/</loc>
     
     <lastmod>2019-12-08T08:10:24.625Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://mgxian.dev/posts/13/</loc>
+    <loc>https://mgxian.dev/posts/47/</loc>
     
     <lastmod>2019-12-08T08:10:24.625Z</lastmod>
     
@@ -457,14 +457,14 @@
   </url>
   
   <url>
-    <loc>https://mgxian.dev/posts/14/</loc>
+    <loc>https://mgxian.dev/posts/7/</loc>
     
     <lastmod>2019-12-08T08:10:24.623Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://mgxian.dev/posts/7/</loc>
+    <loc>https://mgxian.dev/posts/14/</loc>
     
     <lastmod>2019-12-08T08:10:24.623Z</lastmod>
     
@@ -485,14 +485,14 @@
   </url>
   
   <url>
-    <loc>https://mgxian.dev/posts/11/</loc>
+    <loc>https://mgxian.dev/posts/8/</loc>
     
     <lastmod>2019-12-08T08:10:24.621Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://mgxian.dev/posts/8/</loc>
+    <loc>https://mgxian.dev/posts/11/</loc>
     
     <lastmod>2019-12-08T08:10:24.621Z</lastmod>
     
@@ -541,14 +541,14 @@
   </url>
   
   <url>
-    <loc>https://mgxian.dev/posts/3/</loc>
+    <loc>https://mgxian.dev/posts/32/</loc>
     
     <lastmod>2019-12-08T08:10:24.617Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://mgxian.dev/posts/32/</loc>
+    <loc>https://mgxian.dev/posts/3/</loc>
     
     <lastmod>2019-12-08T08:10:24.617Z</lastmod>
     
